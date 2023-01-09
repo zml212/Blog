@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>纯css实现跑马灯效果 | 海绵宝宝个人博客</title>
+  <meta name="description" content="纯CSS实现跑马灯效果又是一个安静的晚上，又是没有灵感的一天，又只能去逛逛codepen。看到一个流光的边框效果，我就想如何通过自己的方式来现这样一个效果。 突然又想起路边夜市的招牌，不就是一个流光效果加一个广告词吗。这下我的兴趣一下就激发起来了。 首先上一个效果图  那这里的广告词就写我的名字吧，这都不重要，接下来让我们看看是怎么实现的吧。 结构分析首先很明显我们使用了一个盒子将文字装起来，并且">
+<meta property="og:type" content="article">
+<meta property="og:title" content="纯css实现跑马灯效果">
+<meta property="og:url" content="http://example.com/2022/12/03/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="纯CSS实现跑马灯效果又是一个安静的晚上，又是没有灵感的一天，又只能去逛逛codepen。看到一个流光的边框效果，我就想如何通过自己的方式来现这样一个效果。 突然又想起路边夜市的招牌，不就是一个流光效果加一个广告词吗。这下我的兴趣一下就激发起来了。 首先上一个效果图  那这里的广告词就写我的名字吧，这都不重要，接下来让我们看看是怎么实现的吧。 结构分析首先很明显我们使用了一个盒子将文字装起来，并且">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7bd3aa2a13e4bf1be984a32560e72e7~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32d4a7803a2e4520904bc5cd03ecfdfe~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c902a90d4444931a0dae4dd13fc3c91~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14c2f986d6f74376bd515021cf4ec0b4~tplv-k3u1fbpfcp-watermark.image">
+<meta property="article:published_time" content="2022-12-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-08T11:11:48.375Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7bd3aa2a13e4bf1be984a32560e72e7~tplv-k3u1fbpfcp-watermark.image">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2022/12/03/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>记录我的学习笔记</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/JSON%E5%AF%B9%E8%B1%A1/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:55.198Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.112Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/fs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.108Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/fs%E4%B8%AD%E8%B7%AF%E5%BE%84%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5%E9%97%AE%E9%A2%98/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.103Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/eventEmitter/" class="title">EventEmitter类</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.099Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-纯CSS实现跑马灯效果" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      纯css实现跑马灯效果
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/03/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C/" class="article-date">
+	  <time datetime="2022-12-02T16:00:00.000Z" itemprop="datePublished">2022-12-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/css/">css</a>►<a class="article-category-link" href="/categories/css/html/">html</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/03/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="纯CSS实现跑马灯效果"><a href="#纯CSS实现跑马灯效果" class="headerlink" title="纯CSS实现跑马灯效果"></a>纯CSS实现跑马灯效果</h1><p>又是一个安静的晚上，又是没有灵感的一天，又只能去逛逛<code>codepen</code>。看到一个流光的边框效果，我就想如何通过自己的方式来现这样一个效果。</p>
+<p>突然又想起路边夜市的招牌，不就是一个流光效果加一个广告词吗。这下我的兴趣一下就激发起来了。</p>
+<p>首先上一个效果图</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7bd3aa2a13e4bf1be984a32560e72e7~tplv-k3u1fbpfcp-watermark.image" alt="跑马灯.gif"></p>
+<p>那这里的广告词就写我的名字吧，这都不重要，接下来让我们看看是怎么实现的吧。</p>
+<h2 id="结构分析"><a href="#结构分析" class="headerlink" title="结构分析"></a>结构分析</h2><p>首先很明显我们使用了一个盒子将文字装起来，并且将文字进行了居中，然后我们看到这盒子的周围围绕了两条光带，那么这两条光带是怎么实现的呢？</p>
+<p>其实这是用四个小盒子实现的，就是我们将这四个小盒子分别放在大盒子的周围（紧贴这大盒子的内壁），然后使用这几个小盒子实现跑马灯效果。</p>
+<p>接下来我们就看看具体的实现效果</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="外部大盒子"><a href="#外部大盒子" class="headerlink" title="外部大盒子"></a>外部大盒子</h3><p>首先准备一个<code>div</code>盒子，用来装我们的广告语，还有跑马灯的四个小盒子。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        海绵宝宝</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个盒子就准备好了  我们给这个何止设置一点样式，让他在浏览器中可以被我们看到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.main&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 40px;</span><br><span class="line">    background-color: transparent;</span><br><span class="line">    /* 盒子居中 */</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    margin-top: -20px;</span><br><span class="line">    left: 50%;</span><br><span class="line">    margin-left: -50px;</span><br><span class="line">    /* 文字居中 */</span><br><span class="line">    text-align: center;</span><br><span class="line">    line-height: 40px;</span><br><span class="line">    font-family: &#x27;宋体&#x27;;</span><br><span class="line">    color: aquamarine;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们给这个大盒子设置了宽高，以及背景颜色，这样使得我们的盒子在浏览器中显得不那么突兀，并且我们将盒子在浏览器中居中，并且将盒子里面的文字也进行居中，不要问我为什么一定要居中，纯属我的强迫症。</p>
+<p>到现在为止，我们就已经把大盒子准备好了，效果就是这样的：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32d4a7803a2e4520904bc5cd03ecfdfe~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>接下来我们给大盒子设置灯光效果。</p>
+<h3 id="内部灯光效果"><a href="#内部灯光效果" class="headerlink" title="内部灯光效果"></a>内部灯光效果</h3><p>既然是灯光效果，那颜色就必须得亮，这里我选着<code>#0FF</code>配色，在效果图上，我们可以看到灯光尾部的颜色比较淡，展现出一种过渡效果，组件从头部慢慢过渡到小盒子的原本颜色。</p>
+<p>那这样的效果是怎么实现的呢？</p>
+<p>这里就需要用到<code>background</code>的一个新的属性值:<code>linear-gradient</code>,通过这个属性，我们可以将多个颜色设置为一个盒子的背景颜色，并且还有过渡效果，更强大的地方在于，这个属性值可以设置渐变的方向。</p>
+<p>语法：</p>
+<p><code>linear-gradient(渐变方向,color1,color2,color3...)</code></p>
+<p>那就开始使用这个属性值，我们写其中一个小盒子的效果，其他的效果实现方法都类似。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> <span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, transparent , <span class="number">#0FF</span>);</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们这里设置的是顶部的灯光效果，这里我们使用<code>top</code>和<code>left</code>的属性，设置这个盒子的位置；使用<code>width:100%</code>，使得这个盒子的宽度与大盒子保持一致，然后使用<code>height:1px</code>,将灯光条的宽度设置为1px,当然你也可以根据实际需求，改变灯光条的宽度。</p>
+<p>接着剩下三条灯光的实现原理基本相同，只有位置和背景颜色不同。</p>
+<p>剩下背景颜色的渐变方向分别是<code>to bottom</code>、<code>to left</code>、<code>to top</code>。</p>
+<p>最后的效果就是这样：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c902a90d4444931a0dae4dd13fc3c91~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>是不是离我们最终的效果越来越像了，对的，我们还差最后一部，给灯光加上动画效果。</p>
+<h3 id="灯光的动画效果"><a href="#灯光的动画效果" class="headerlink" title="灯光的动画效果"></a>灯光的动画效果</h3><p>说道动画效果，那必定离不开<code>@keyframes</code>,我们使用该属性为我们的灯光添加动画效果。</p>
+<p>同样我们也设置顶部的灯光效果作为示范：</p>
+<p>动画：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> run1&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">200px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">200px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>盒子：</p>
+<p>给盒子加上动画</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> <span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="attribute">animation</span>: run1 <span class="number">1s</span> linear infinite;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前面我们没有设置动画之前，可以看到颜色最深的部分在最右边，但是跑马灯的实现需求是需要颜色最什么部分从左边出现，然后移动到右边，所有我们这里将动画的初识位置向左移整个盒子的长度。这样就实现了需求。</p>
+<p>其他几个小盒子实现的方式大同小异。</p>
+<p>接下来我们来看看效果：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14c2f986d6f74376bd515021cf4ec0b4~tplv-k3u1fbpfcp-watermark.image" alt="跑马灯.gif"></p>
+<p>此时我们看到该动画显得有点乱，我们通过使用动画延时来实现我们想要的动画效果。</p>
+<p>我们从第二个小盒子开始添加延时：每个盒子比前一个盒子多<code>0.5</code>的延时。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> <span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="attribute">animation-delay</span>: .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main</span> <span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1s</span>;   </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main</span> <span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>)&#123;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1.5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后效果就出来了。</p>
+<p>接下来放上码上掘金的地址，这里有全部代码：↓</p>
+<p><a target="_blank" rel="noopener" href="https://code.juejin.cn/pen/7172800105433530400">代码片段</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2022/12/03/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E8%B7%91%E9%A9%AC%E7%81%AF%E6%95%88%E6%9E%9C/" title="纯css实现跑马灯效果" target="_blank" rel="external">http://example.com/2022/12/03/纯CSS实现跑马灯效果/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/01/01/%E9%97%AD%E5%8C%85/" title="闭包"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/11/15/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/" title="一个商务简约的登陆界面"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

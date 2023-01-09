@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>海绵宝宝个人博客</title>
+  <meta name="description" content="一个商务简约的登陆界面前几天在逛codepen的时候，发现了一个很有意思的登陆界面，于是就想着自己实现一下，于是就有了这个demo。顺便将接下来网站的登陆界面也改成这个样式了。 先上一个效果图：  在效果图里面我们看到有两个输入框，一个为文本输入框，一个为密码输入框。由于两个输入框的样式大体差不多，所以我们只讲述第一个输入框的实现。 1.输入框结构实际上，这个输入框有两部分组成：分别是输入框的提示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海绵宝宝">
+<meta property="og:url" content="http://example.com/2023/01/08/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="一个商务简约的登陆界面前几天在逛codepen的时候，发现了一个很有意思的登陆界面，于是就想着自己实现一下，于是就有了这个demo。顺便将接下来网站的登陆界面也改成这个样式了。 先上一个效果图：  在效果图里面我们看到有两个输入框，一个为文本输入框，一个为密码输入框。由于两个输入框的样式大体差不多，所以我们只讲述第一个输入框的实现。 1.输入框结构实际上，这个输入框有两部分组成：分别是输入框的提示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/608aaa31d43b449c9fe46394d8da333d~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20a7e84995e24015bfe6b8ed95a0408e~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74f378810fa248c6a5de236917b7af40~tplv-k3u1fbpfcp-watermark.image">
+<meta property="article:published_time" content="2023-01-08T08:47:53.730Z">
+<meta property="article:modified_time" content="2022-11-15T05:56:53.707Z">
+<meta property="article:author" content="赵明亮">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/608aaa31d43b449c9fe46394d8da333d~tplv-k3u1fbpfcp-watermark.image">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/01/08/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>记录我的学习笔记</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">59</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/JSON%E5%AF%B9%E8%B1%A1/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:55.198Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.112Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/fs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.108Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/fs%E4%B8%AD%E8%B7%AF%E5%BE%84%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5%E9%97%AE%E9%A2%98/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.103Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/08/node%E5%AD%A6%E4%B9%A0/eventEmitter/" class="title">EventEmitter类</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T08:47:54.099Z" itemprop="datePublished">2023-01-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-一个商务简约的登陆界面" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/01/08/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/" class="article-date">
+	  <time datetime="2023-01-08T08:47:53.730Z" itemprop="datePublished">2023-01-08</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/08/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="一个商务简约的登陆界面"><a href="#一个商务简约的登陆界面" class="headerlink" title="一个商务简约的登陆界面"></a>一个商务简约的登陆界面</h1><p>前几天在逛codepen的时候，发现了一个很有意思的登陆界面，于是就想着自己实现一下，于是就有了这个demo。<br>顺便将接下来网站的登陆界面也改成这个样式了。</p>
+<p>先上一个效果图：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/608aaa31d43b449c9fe46394d8da333d~tplv-k3u1fbpfcp-watermark.image" alt="登陆动画1.gif"></p>
+<p>在效果图里面我们看到有两个输入框，一个为文本输入框，一个为密码输入框。<br>由于两个输入框的样式大体差不多，所以我们只讲述第一个输入框的实现。</p>
+<h2 id="1-输入框结构"><a href="#1-输入框结构" class="headerlink" title="1.输入框结构"></a>1.输入框结构</h2><p>实际上，这个输入框有两部分组成：<br>分别是输入框的提示内容和输输入框本体。</p>
+<p>我们将输入框的提示内容放进<code>label</code>标签中，并且给<code>label</code>标签添加一个<code>for</code>属性，值为输入框的<code>id</code>属性值。</p>
+<p>这样用户在点击提示语句时，光标会自动聚焦到输入框中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;user_name&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;userName&quot;</span> <span class="attr">class</span>=<span class="string">&quot;userNameTip&quot;</span>&gt;</span>请输入您的用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;userName&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>到此为止，我们输入框的结构就搭建好了。</p>
+<h2 id="2-输入框样式"><a href="#2-输入框样式" class="headerlink" title="2.输入框样式"></a>2.输入框样式</h2><p>我们先给整个大盒子添加一个相对定位，方便后续我们对里面元素的位置调整。顺便设置一个整个盒子的大小。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.user_name</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们就给输入框改变一个样式，毕竟这样一个默认的框框实在太难看了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.user_name</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们首先给整个输入框的整体调整一个位置，然后设置一个字体大小，这样我们的输入框就有了一个基本的样式。</p>
+<p>下面就开始设置输入框的样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#userName</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#0FF</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0px</span> transparent;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">2px</span> solid <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">54</span>, <span class="number">54</span>, <span class="number">54</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里我们设置了输入框的宽度，高度，字体颜色，字体大小，边框，背景颜色。</p>
+<p>因为我此时整个大背景颜色为<code>rgb(54, 54, 54)</code>,为了不让这个输入框这么突出没所以我设置了输入框的背景颜色与大背景颜色为一样的颜色。</p>
+<p>但是这样还不够，因为在输入框获得焦点的时候，输入框外边还有一个边框，这样会使得输入框很丑。</p>
+<p>通过<code>outline</code>属性我们可以设置输入框获得焦点时的边框样式。<br>在效果图中，我们可以看见输入框获得焦点时，输入框下边有一个蓝色的边框，这个边框的宽度为2px，颜色为<code>#0FF</code>。</p>
+<p>我们我们这样给输入框来一个样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#userName</span><span class="selector-pseudo">:focus</span>&#123;</span><br><span class="line">    <span class="attribute">outline</span>: none;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">2px</span> solid <span class="number">#0FF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样输入框的样式就出来了：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20a7e84995e24015bfe6b8ed95a0408e~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h2 id="3-输入框提示语"><a href="#3-输入框提示语" class="headerlink" title="3.输入框提示语"></a>3.输入框提示语</h2><p>在效果图里面输入框还未获得焦点的时候，提示语句在输入框里面的，这个就是我们使用绝对定位来实现的，调整到合适的位置，将提示语句放在输入框里面。<br>并且此时文字的颜色为白色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.userNameTip</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后这整个输入框的样式就是这样：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74f378810fa248c6a5de236917b7af40~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>当然现在这是一个静态的输入框，没有任何的交互，我们接下来就来实现这个输入框的交互。</p>
+<h2 id="4-输入框交互"><a href="#4-输入框交互" class="headerlink" title="4.输入框交互"></a>4.输入框交互</h2><p>交互肯定需要一个动画来实现，这里我们发现在输入框获得焦点之后，提示文字会变小，颜色也会随之改变，然后移动到输入框的上方，这个就是我们需要实现的效果。</p>
+<p>失去焦点之后,我们就会判断，这个输入框里面是否有内容：<br>如果有内容的话，动画就不移除，一直保持动画的结束状态；如果没有内容，就移除动画回到初识状态。</p>
+<p>那么我们定义一个动画：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> user &#123;</span><br><span class="line">    <span class="selector-tag">from</span>&#123;</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">0px</span>;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">top</span>: -<span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">        <span class="attribute">color</span>: <span class="number">#0FF</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在有一个问题，我们点击输入框，最后将这个动画添加到输入框的提示语句上，那么我们如何将动画添加上去呢？</p>
+<p>我这里使用的jquery中对<code>class</code>的操作来实现，也就是利用<code>jQuery</code>中的<code>addClass()</code>和<code>removeClass()</code>方法来实现。</p>
+<p>那么在此之前，我们就需要先将动画写进一个类里面，然后通过<code>jQuery</code>来操作这个类。</p>
+<p>我这里简单的写了一个<code>class</code>，然后将动画写进去：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.userNameTipA</span>&#123;</span><br><span class="line">    <span class="attribute">animation</span>: user <span class="number">0.3s</span> linear normal forwards;</span><br><span class="line">    <span class="attribute">animation-iteration-count</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以通过<code>jQuery</code>来操作这个类了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#userName&#x27;</span>).<span class="title function_">focus</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    $(<span class="string">&#x27;.userNameTip&#x27;</span>).<span class="title function_">addClass</span>(<span class="string">&#x27;userNameTipA&#x27;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;点击了&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="string">&#x27;#userName&#x27;</span>).<span class="title function_">blur</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> val = $(<span class="string">&#x27;#userName&#x27;</span>).<span class="title function_">val</span>();</span><br><span class="line">    <span class="keyword">if</span> (val) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $(<span class="string">&#x27;.userNameTip&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;userNameTipA&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>最后点击保存，运行，就可以看到效果了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这个demo还是很简单的，就是利用一些定位来调整输入框的位置，然后针对输入框的聚焦样式和失焦样式来实现动画，最后通过<code>jQuery</code>来操作这个动画。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/01/08/%E4%B8%80%E4%B8%AA%E5%95%86%E5%8A%A1%E7%AE%80%E7%BA%A6%E7%9A%84%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2/" title="" target="_blank" rel="external">http://example.com/2023/01/08/一个商务简约的登陆界面/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/01/08/Vue%E4%B8%AD%E7%9A%84%E5%88%97%E8%A1%A8%E5%BE%AA%E7%8E%AF/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/01/08/%E6%88%91%E7%9A%842020%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" title="(no title)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
