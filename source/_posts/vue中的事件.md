@@ -1,3 +1,9 @@
+---
+title: vue中的事件
+date: 2022-10-9
+tags: [前端]
+categories: [Vue]
+---
 # vue中的事件
 
 ## 1. 事件绑定

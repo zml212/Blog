@@ -1,3 +1,9 @@
+---
+title: MATH常用方法
+date: 2022-9-28
+tags: [前端]
+categories: [JavaScript]
+---
 # MATH常用方法
 
 我们知道在js中有很多的内置对象，使用这些对象可以极大的提高我们的工作效率。

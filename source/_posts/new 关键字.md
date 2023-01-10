@@ -1,3 +1,9 @@
+---
+title: new关键字
+date: 2022-8-30
+tags: [前端]
+categories: [JavaScript]
+---
 # new 关键字
 
 在JavaScript中使用构造函数的时候，我们就会用到`new`关键字。

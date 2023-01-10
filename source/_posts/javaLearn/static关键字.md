@@ -1,3 +1,9 @@
+---
+title: static关键字
+date: 2023-1-4
+tags: [后端]
+categories: [Java]
+---
 # static关键字
 
 static 表示静态，是java当中的一个修饰符，可以修饰成员方法，成员变量。

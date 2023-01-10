@@ -1,3 +1,9 @@
+---
+title: 什么是path路径模块
+date: 2022-12-17
+tags: [前端]
+categories: [node]
+---
 # path路径模块
 
 ## 什么是path路径模块

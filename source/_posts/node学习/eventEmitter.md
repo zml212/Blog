@@ -1,5 +1,8 @@
 ---
 title: EventEmitter类
+date: 2022-12-16
+tags: [前端]
+categories: [node]
 ---
 # EventEmitter 类
 

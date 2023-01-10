@@ -1,5 +1,8 @@
 ---
 title: Vue数据驱动
+date: 2022-12-11
+tags: [前端]
+categories: [Vue]
 ---
 # Vue中数据驱动
 

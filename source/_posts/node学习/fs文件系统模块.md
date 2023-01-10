@@ -1,3 +1,9 @@
+---
+title: fs文件系统模块
+date: 2022-12-17
+tags: [前端]
+categories: [node]
+---
 # fs文件系统模块
 
 ## 什么是fs文件系统模块
