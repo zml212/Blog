@@ -6,14 +6,14 @@ categories: [BOM]
 ---
 # BOM常见的方法
 
-## window对象常见的事件（11）
+## window对象常见的事件
 
 ### 窗口加载事件`onload`
 
     window.onload = function(){}
-
+    
     或者
-
+    
     window.addEventListener('load', function(){})
 
 window.onload是窗口（页面）加载事件，党文档内容（图像、脚本文件、css、文件）完全加载完成之后，才会触发该函数。
@@ -39,9 +39,9 @@ window.onload是窗口（页面）加载事件，党文档内容（图像、脚�
 ### 窗口大小改变事件`onresize`
 
     window.onresize = function(){}
-
+    
     或者
-
+    
     window.addEventListener('resize', function(){})
 
 当浏览器的窗口大小发生变化的时候，就会触发该事件（函数处理）。
@@ -85,4 +85,4 @@ setTimeout()调用的这个函数我们称作`回调函数`，普通的函数，
 ```
     window.clearInterval(定时器名字)// 清除定时器
     (window可以省略)
-``` 
+```
