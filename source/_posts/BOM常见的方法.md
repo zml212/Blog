@@ -6,7 +6,7 @@ categories: [BOM]
 ---
 # BOM常见的方法
 
-## window对象常见的事件
+## window对象常见的事件（11）
 
 ### 窗口加载事件`onload`
 
