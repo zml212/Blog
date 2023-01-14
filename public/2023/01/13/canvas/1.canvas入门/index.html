@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>海绵宝宝个人博客</title>
+  <meta name="description" content="canvas[TOC] 使用canvascanvas其实是html里面的一个标签，所以要是用canvas,必须先在html文档里面写一个canvas标签。 1234&lt;!-- canvas在低版本浏览器中有兼容性问题，需要提示用户 --&gt;   &lt;canvas width&#x3D;&quot;500px&quot; height&#x3D;&quot;400px&quot;&gt;       您的浏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海绵宝宝">
+<meta property="og:url" content="http://example.com/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="canvas[TOC] 使用canvascanvas其实是html里面的一个标签，所以要是用canvas,必须先在html文档里面写一个canvas标签。 1234&lt;!-- canvas在低版本浏览器中有兼容性问题，需要提示用户 --&gt;   &lt;canvas width&#x3D;&quot;500px&quot; height&#x3D;&quot;400px&quot;&gt;       您的浏">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d553a403ac14cc3bbecb30819e045f4~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ecb0d7291a0541cdbc739930ddf5b392~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0985341f21fc450082fb70a497722658~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e84bb0461fe4ba2b9717523136cc5be~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/abab78de59954407959887d1c0d978f2~tplv-k3u1fbpfcp-watermark.image">
+<meta property="article:published_time" content="2023-01-13T09:56:50.715Z">
+<meta property="article:modified_time" content="2023-01-14T06:39:29.753Z">
+<meta property="article:author" content="赵明亮">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d553a403ac14cc3bbecb30819e045f4~tplv-k3u1fbpfcp-watermark.image">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">67</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.5px;">后端</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-13T09:56:50.715Z" itemprop="datePublished">2023-01-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/10/javaLearn/%E5%86%85%E9%83%A8%E7%B1%BB/" class="title">内部类</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-09T16:00:00.000Z" itemprop="datePublished">2023-01-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/10/javaLearn/%E5%B8%B8%E7%94%A8API-Math/" class="title">常用API-Math</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-09T16:00:00.000Z" itemprop="datePublished">2023-01-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/09/%E6%88%91%E7%9A%842020%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="title">我的2022年终总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-09T14:00:27.961Z" itemprop="datePublished">2023-01-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/09/%E5%8F%AF%E9%80%89%E9%93%BE/" class="title">可选链</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-09T14:00:27.949Z" itemprop="datePublished">2023-01-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-canvas/1.canvas入门" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2023-01-13T09:56:50.715Z" itemprop="datePublished">2023-01-13</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h1><p>[TOC]</p>
+<h2 id="使用canvas"><a href="#使用canvas" class="headerlink" title="使用canvas"></a>使用canvas</h2><p>canvas其实是html里面的一个标签，所以要是用canvas,必须先在html文档里面写一个canvas标签。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- canvas在低版本浏览器中有兼容性问题，需要提示用户 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">&quot;500px&quot;</span> <span class="attr">height</span>=<span class="string">&quot;400px&quot;</span>&gt;</span></span><br><span class="line">       您的浏览器版本过低，无法使用canvas</span><br><span class="line">   <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在canvas标签里面，我们可以直接设置canvas元素的大小，这是canvas元素自带的属性，虽然我们也可以在css里面进行更改，但是不推荐，这样会导致一些奇奇怪怪的bug。</p>
+<p>但是canvas是HTML5才有的标签，所以就会存在一个兼容性问题，这个时候我们就需要提示用户：在canvas标签里面写上提示信息。</p>
+<p>这样如果该浏览器不支持canvas就会显示我们的提示信息，但是如果该浏览器支持canvas就不会显示该提示信息。</p>
+<h3 id="使用canvas画一条直线"><a href="#使用canvas画一条直线" class="headerlink" title="使用canvas画一条直线"></a>使用canvas画一条直线</h3><p>这里需要使用到JavaScript。</p>
+<p>分为下面这几步：</p>
+<ul>
+<li>获取到canvas元素</li>
+<li>获取到canvas元素的上下文</li>
+<li>开启一条路径</li>
+<li>设置路径的起点</li>
+<li>设置路径的终点</li>
+<li>给直线上色</li>
+<li>关闭路径</li>
+</ul>
+<p>下面用代码来实现一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取到canvas元素</span></span><br><span class="line">   <span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">   <span class="comment">// 获取到canvas操作权限（获取画布的上下文）</span></span><br><span class="line">   <span class="keyword">var</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">   <span class="comment">// 开启一条路径</span></span><br><span class="line">   c.<span class="title function_">beginPath</span>();</span><br><span class="line">   <span class="comment">// 设置路径的起点</span></span><br><span class="line">   c.<span class="title function_">moveTo</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">   <span class="comment">// 设置路径终点</span></span><br><span class="line">   c.<span class="title function_">lineTo</span>(<span class="number">500</span>, <span class="number">400</span>);</span><br><span class="line">   <span class="comment">// 进行上色</span></span><br><span class="line">   c.<span class="title function_">stroke</span>();</span><br><span class="line">   <span class="comment">// 关闭路径</span></span><br><span class="line">   c.<span class="title function_">closePath</span>();</span><br></pre></td></tr></table></figure>
+<p>结果如下图：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d553a403ac14cc3bbecb30819e045f4~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>这里注意，对canvas操作的时候，只能使用原生的JavaScript，不能使用jQuery等js库。</p>
+<h2 id="常用的方法和属性"><a href="#常用的方法和属性" class="headerlink" title="常用的方法和属性"></a>常用的方法和属性</h2><h3 id="1-画直线"><a href="#1-画直线" class="headerlink" title="1.画直线"></a>1.画直线</h3><ul>
+<li>beginPath()   开启一个路径</li>
+<li>closePath()   关闭一个路径</li>
+<li>moveTo(x,y)  定义线条的开始坐标（x为横坐标，y为纵坐标）</li>
+<li>lineTo(x,y)  定义线条的结束坐标  （x为横坐标，y为纵坐标）</li>
+<li>strokeStyle  属性设置或者返回用于笔触的颜色、渐变或者模式</li>
+<li>stroke  绘制一条路径</li>
+<li>lineWidth  设置线宽</li>
+</ul>
+<p>注意：设置颜色和线宽的时候，需要在上色之前进行。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取到canvas元素</span></span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">    <span class="comment">// 获取到canvas操作权限（获取画布的上下文）</span></span><br><span class="line">    <span class="keyword">var</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启一条路径</span></span><br><span class="line">    c.<span class="title function_">beginPath</span>();</span><br><span class="line">    <span class="comment">// 设置路径的起点</span></span><br><span class="line">    c.<span class="title function_">moveTo</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 设置路径终点</span></span><br><span class="line">    c.<span class="title function_">lineTo</span>(<span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">// 设置直线颜色宽度</span></span><br><span class="line">    c.<span class="property">strokeStyle</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">    c.<span class="property">lineWidth</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 进行上色</span></span><br><span class="line">    c.<span class="title function_">stroke</span>();</span><br><span class="line">    <span class="comment">// 关闭路径</span></span><br><span class="line">    c.<span class="title function_">closePath</span>();</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ecb0d7291a0541cdbc739930ddf5b392~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>在给直线设置颜色的时候需要加上引号，我们可以按照css设置颜色的当时进行设置：可以写颜色名、十六进制、rgb等等。</p>
+<p>同时设置线宽的时候不要加上单位，也不需要加上引号。</p>
+<h3 id="2-画圆"><a href="#2-画圆" class="headerlink" title="2.画圆"></a>2.画圆</h3><p>画圆需要用到的方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">beginPath()</td>
+<td align="center">开启一条路径</td>
+</tr>
+<tr>
+<td align="center">arc(x,y,r,startDeg,endDeg,direction)</td>
+<td align="center">画圆的方法，参数解释在下面</td>
+</tr>
+<tr>
+<td align="center">strokeStyle</td>
+<td align="center">描边颜色</td>
+</tr>
+<tr>
+<td align="center">fillStyle</td>
+<td align="center">填充颜色</td>
+</tr>
+<tr>
+<td align="center">stroke()</td>
+<td align="center">结束描边</td>
+</tr>
+<tr>
+<td align="center">fill()</td>
+<td align="center">结束填充</td>
+</tr>
+<tr>
+<td align="center">closePath()</td>
+<td align="center">关闭路径</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>arc(x,y,r,startDeg,endDeg,direction)方法参数：</p>
+<ul>
+<li>x: 圆心所在位置的恒左边</li>
+<li>y:圆心所在位置的纵坐标</li>
+<li>r:所绘制圆的半径</li>
+<li>startDeg:所绘制圆的起始位置（通常用Math.PI来计算）</li>
+<li>endDeg:所绘制圆的结束位置（通常用Math.PI来计算）</li>
+<li>direction:绘制方向，这里只有两个值，false表示顺时针方向绘制；true表示逆时针方向绘制。</li>
+</ul>
+</li>
+<li><p>fill()与stroke()的区别：</p>
+<ul>
+<li>fill():是对整个图形的内部进行填充颜色</li>
+<li>stroke():是对图形的边框进行描边上色</li>
+</ul>
+</li>
+</ul>
+<p>例子时间：</p>
+<ol>
+<li>使用描边：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;canvas&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">   <span class="keyword">var</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">   c.<span class="title function_">beginPath</span>();</span><br><span class="line">   c.<span class="title function_">arc</span>(<span class="number">200</span>, <span class="number">200</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>, <span class="literal">false</span>);</span><br><span class="line">   c.<span class="property">strokeStyle</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">   c.<span class="title function_">stroke</span>();</span><br><span class="line">   c.<span class="title function_">closePath</span>();</span><br></pre></td></tr></table></figure>
+
+<p>为了节约篇幅，此处没有html代码<code>canvas宽高为400*400</code>。css中我设置一个1px的边框以及<code>#ccc</code>的背景颜色</p>
+<p>效果就是这样：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0985341f21fc450082fb70a497722658~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>这里我们圆心位置在（200,200）位置，然后半径为50px，起始点从0度开始（在这里起始点在3点钟方向，下面我们可以验证一下），Math.PI表示180度，所以一个完整的圆是Math.PI*2。</p>
+<p>下面来验证起始点为0的情况，起始点的位置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;canvas&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">   <span class="keyword">var</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">   c.<span class="title function_">beginPath</span>();</span><br><span class="line">   c.<span class="title function_">arc</span>(<span class="number">200</span>, <span class="number">200</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">1</span>, <span class="literal">false</span>);</span><br><span class="line">   c.<span class="property">strokeStyle</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">   c.<span class="title function_">stroke</span>();</span><br><span class="line">   c.<span class="title function_">closePath</span>();</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e84bb0461fe4ba2b9717523136cc5be~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>因为绘制方向我们选择的false,所以是顺时针绘制。在效果图可以看到当起点位置为0的时候，起始点就是在3点钟方向。</p>
+<h3 id="3-画矩形"><a href="#3-画矩形" class="headerlink" title="3.画矩形"></a>3.画矩形</h3><p>绘制矩形的方法：</p>
+<p>开始路径与结束路径以及描边填充颜色都与上面的一样，我这里就不再赘述了。</p>
+<p>绘制矩形同样也有两个方法，一种只有边框，一种直接填充。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">fillStyle&#x2F;strokeStyle</td>
+<td align="center">设置填充或者描边颜色</td>
+</tr>
+<tr>
+<td align="center">fillRect(x,y,width,height)</td>
+<td align="center">绘制矩形（填充）</td>
+</tr>
+<tr>
+<td align="center">storkeRect(x,y,width,height)</td>
+<td align="center">绘制矩形（描边）</td>
+</tr>
+</tbody></table>
+<p>参数解释：</p>
+<ul>
+<li>在fillRect(x,y,width,height)&#x2F;strokeRect(x,y,width,height)方法中有四个参数，x:代表</li>
+</ul>
+<p>注意：fillStyle&#x2F;strokeStyle一定要写在fillRect&#x2F;strokeRect之前，否则不起作用。</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;canvas&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">   <span class="keyword">var</span> c = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">   c.<span class="title function_">beginPath</span>();</span><br><span class="line">   c.<span class="property">fillStyle</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">   c.<span class="title function_">fillRect</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   c.<span class="title function_">closePath</span>();</span><br><span class="line"></span><br><span class="line">   c.<span class="title function_">beginPath</span>();</span><br><span class="line">   c.<span class="property">strokeStyle</span> = <span class="string">&quot;orange&quot;</span>;</span><br><span class="line">   c.<span class="title function_">strokeRect</span>(<span class="number">50</span>, <span class="number">160</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   c.<span class="title function_">closePath</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这里为了节约篇幅，此处没有html代码<code>canvas宽高为400*400</code>。css中我设置一个1px的边框以及<code>#ccc</code>的背景颜色</p>
+<p>效果图：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/abab78de59954407959887d1c0d978f2~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/01/13/canvas/1.canvas%E5%85%A5%E9%97%A8/" title="" target="_blank" rel="external">http://example.com/2023/01/13/canvas/1.canvas入门/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/01/10/javaLearn/%E5%86%85%E9%83%A8%E7%B1%BB/" title="内部类"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
