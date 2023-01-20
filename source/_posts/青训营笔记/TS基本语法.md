@@ -2,8 +2,9 @@
 title: TS基本语法
 date: 2023-1-19
 tags: [前端]
-categories： [青训营]
+categories: [青训营]
 ---
+
 # TS基本语法
 
 ## 基础数据类型

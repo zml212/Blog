@@ -2,7 +2,7 @@
 title: Vue3当中的一些基本指令
 date: 2023-1-19
 tags: [前端]
-categories： [Vue3]
+categories: [Vue3]
 ---
 # Vue3当中的一些基本指令
 
@@ -24,8 +24,45 @@ categories： [Vue3]
 	- 当属局发生变化的时候，元素或者组件以及其所有的子元素，都会被视为静态内容并且跳过。
 	- 该指令可以用于性能优化
 	- 如果是里面的子节点也只会被渲染一次：
-```js
+```html
 	<div v-once>
 		<h2>{{counter}}</h2>
 	</div>
 ```
+
+## v-text指令
+
+用于更新元素的textContent:
+
+```html
+<div v-text = "msg"></div>
+// 等价于
+<div>{{msg}}</div>
+```
+
+## v-html指令
+
+默认情况下，如果我们展示的内容本身是html的，那么vue并不会对其进行特殊的解析。
+
+如果我们希望这个html内容可以被vue解析出来，那么我们可以使用v-html来展示。
+
+用法：
+
+```html
+	 <div>{{msg}}</div>
+     <div v-html="msg"></div>
+```
+
+## v-pre指令
+
+v-pre用于跳过元素和他的子元素的编译过程，显示原始的Mustache标签。
+
+跳过不需要编译的节点，加快编译的速度。
+
+`<div v-pre>{{message}}</div>`这样的运行效果就是只会出现message。
+
+## v-cloak指令
+
+这个指令保持在元素上直到关联组件实例结束编译
+
+和css规则如[v-cloak]{display:none}一起使用时，这个指令可以隐藏未编译的Mustache标签知道组件实例准备完毕。
