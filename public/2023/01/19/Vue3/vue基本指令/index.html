@@ -18,15 +18,15 @@
   
   
   <title>Vue3当中的一些基本指令 | 海绵宝宝个人博客</title>
-  <meta name="description" content="Vue3当中的一些基本指令插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三元表达式。">
+  <meta name="description" content="Vue3当中的一些基本语法[TOC] 插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue3当中的一些基本指令">
 <meta property="og:url" content="http://example.com/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="海绵宝宝">
-<meta property="og:description" content="Vue3当中的一些基本指令插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三元表达式。">
+<meta property="og:description" content="Vue3当中的一些基本语法[TOC] 插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-20T13:40:48.856Z">
+<meta property="article:modified_time" content="2023-01-20T14:42:28.297Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -256,10 +256,10 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                <a class="category-link" href="/categories/Vue3/">Vue3</a>
               </p>
               <p class="item-title">
-                <a href="/2023/01/19/%E9%9D%92%E8%AE%AD%E8%90%A5%E7%AC%94%E8%AE%B0/TS%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="title">TS基本语法</a>
+                <a href="/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="title">Vue3当中的一些基本指令</a>
               </p>
               <p class="item-date">
                 <time datetime="2023-01-18T16:00:00.000Z" itemprop="datePublished">2023-01-19</time>
@@ -271,10 +271,10 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Vue3/">Vue3</a>
+                <a class="category-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
               </p>
               <p class="item-title">
-                <a href="/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="title">Vue3当中的一些基本指令</a>
+                <a href="/2023/01/19/%E9%9D%92%E8%AE%AD%E8%90%A5%E7%AC%94%E8%AE%B0/TS%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="title">TS基本语法</a>
               </p>
               <p class="item-date">
                 <time datetime="2023-01-18T16:00:00.000Z" itemprop="datePublished">2023-01-19</time>
@@ -380,7 +380,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Vue3当中的一些基本指令"><a href="#Vue3当中的一些基本指令" class="headerlink" title="Vue3当中的一些基本指令"></a>Vue3当中的一些基本指令</h1><h2 id="插值语法"><a href="#插值语法" class="headerlink" title="插值语法"></a>插值语法</h2><p>在vue的模板里面，我们可以使用花括号来实现一个插值语法：</p>
+        <h1 id="Vue3当中的一些基本语法"><a href="#Vue3当中的一些基本语法" class="headerlink" title="Vue3当中的一些基本语法"></a>Vue3当中的一些基本语法</h1><p>[TOC]</p>
+<h2 id="插值语法"><a href="#插值语法" class="headerlink" title="插值语法"></a>插值语法</h2><p>在vue的模板里面，我们可以使用花括号来实现一个插值语法：</p>
 <p><code>&lt;div&gt;&#123;&#123;count&#125;&#125;&lt;/div&gt;</code></p>
 <p>在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！</p>
 <p>里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三元表达式。</p>
@@ -406,6 +407,35 @@
 <p><code>&lt;div v-pre&gt;&#123;&#123;message&#125;&#125;&lt;/div&gt;</code>这样的运行效果就是只会出现message。</p>
 <h2 id="v-cloak指令"><a href="#v-cloak指令" class="headerlink" title="v-cloak指令"></a>v-cloak指令</h2><p>这个指令保持在元素上直到关联组件实例结束编译</p>
 <p>和css规则如[v-cloak]{display:none}一起使用时，这个指令可以隐藏未编译的Mustache标签知道组件实例准备完毕。</p>
+<h2 id="v-bind的绑定属性"><a href="#v-bind的绑定属性" class="headerlink" title="v-bind的绑定属性"></a>v-bind的绑定属性</h2><p>在实际开发当中,除了会动态绑定一些内容之外，我们可能还会需要动态绑定一些属性。这个时候就需要用到v-bind这个属性。</p>
+<ul>
+<li>我们可以动态绑定某个标签的class属性，或者a标签的href属性。</li>
+</ul>
+<p>绑定属性我们使用v-bind：</p>
+<ul>
+<li>缩写：：</li>
+<li>预期： any(with argument)|Object(without argument)</li>
+<li>参数： attr Or Prop(optional)</li>
+<li>修饰符：camel –&gt; 将kebab-case attribute 名转换为camelCase</li>
+<li>用法: 动态地绑定一个或者多个attribute，或者一个组件prop到表达式</li>
+</ul>
+<p>例子：</p>
+<p><code>&lt;a v-bind:href=&quot;url&quot;&gt;&#123;&#123;msg&#125;&#125;&lt;/a&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">msg</span>: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&quot;https://www.zmlblog.top&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就把url与超链接的地址给绑定起来了。</p>
+<p>上面是v-bind 的基础使用，也就是原始的写法，但是这样写起来有点麻烦，vue给我们提供了一个语法糖：</p>
+<p><code>&lt;a :href=&quot;url&quot;&gt;&#123;&#123;msg&#125;&#125;&lt;/a&gt;</code></p>
+<p>也就是在v-bind可以直接简写为一个<code>:</code>。</p>
+<h3 id="v-bind绑定class属性"><a href="#v-bind绑定class属性" class="headerlink" title="v-bind绑定class属性"></a>v-bind绑定class属性</h3><p>在实际开发当中，可能某个元素的class是动态的，处于某个状态的时候，字体颜色为黑色；处于另一个状态的时候，字体颜色为红色。</p>
+<p>这个时候就需要使用v-bind来绑定class，绑定class有两种方式：</p>
+<ul>
+<li>对象语法</li>
+<li>数组语法</li>
+</ul>
+<p>对象语法：<code>&#123;&#39;active&#39;:boolean&#125;</code></p>
+<p>可以看到在对象语法当中前面用引号括起来的就是可以绑定的类名，后面跟上了一个布尔值，当这个布尔值为真的时候，该类名就会被绑定到该元素；如果布尔值为假，那么这个类名就不会被绑定到这个元素上。</p>
+<p>既然是一个对象，那么里面也可以是多个键值对，就像这样：<code>&lt;div v-bind:class=&quot;&#123;&#39;fontColor&#39;:isTrue,&#39;title&#39;:isTrue&#125;&quot;&gt;哈哈哈哈哈哈哈&lt;/div&gt;</code>。<br>示例代码地址：<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/02_v-bind%E7%BB%91%E5%AE%9Aclass-%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95.html">这里</a></p>
 
       
     </div>
@@ -461,13 +491,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2023/01/19/%E9%9D%92%E8%AE%AD%E8%90%A5%E7%AC%94%E8%AE%B0/TS%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="TS基本语法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2023/01/15/%E9%9D%92%E8%AE%AD%E8%90%A5%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E4%B8%8EHTML/" title="前端与HTML"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2023/01/19/%E9%9D%92%E8%AE%AD%E8%90%A5%E7%AC%94%E8%AE%B0/TS%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="TS基本语法"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

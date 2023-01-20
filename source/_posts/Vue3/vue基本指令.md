@@ -4,7 +4,8 @@ date: 2023-1-19
 tags: [前端]
 categories: [Vue3]
 ---
-# Vue3当中的一些基本指令
+# Vue3当中的一些基本语法
+[TOC]
 
 ## 插值语法
 
@@ -66,3 +67,54 @@ v-pre用于跳过元素和他的子元素的编译过程，显示原始的Mustac
 这个指令保持在元素上直到关联组件实例结束编译
 
 和css规则如[v-cloak]{display:none}一起使用时，这个指令可以隐藏未编译的Mustache标签知道组件实例准备完毕。
+
+## v-bind的绑定属性 
+
+在实际开发当中,除了会动态绑定一些内容之外，我们可能还会需要动态绑定一些属性。这个时候就需要用到v-bind这个属性。
+
+- 我们可以动态绑定某个标签的class属性，或者a标签的href属性。 
+
+绑定属性我们使用v-bind：
+
+- 缩写：：
+- 预期： any(with argument)|Object(without argument)
+- 参数： attr Or Prop(optional)
+- 修饰符：camel --> 将kebab-case attribute 名转换为camelCase
+- 用法: 动态地绑定一个或者多个attribute，或者一个组件prop到表达式
+
+例子：
+
+`<a v-bind:href="url">{{msg}}</a>`
+
+```js
+data: function () {
+        return {
+            msg: '我的博客',
+            url: "https://www.zmlblog.top"
+        }
+    },
+```
+
+这样我们就把url与超链接的地址给绑定起来了。
+
+上面是v-bind 的基础使用，也就是原始的写法，但是这样写起来有点麻烦，vue给我们提供了一个语法糖：
+
+`<a :href="url">{{msg}}</a>`
+
+也就是在v-bind可以直接简写为一个`:`。
+
+### v-bind绑定class属性
+
+在实际开发当中，可能某个元素的class是动态的，处于某个状态的时候，字体颜色为黑色；处于另一个状态的时候，字体颜色为红色。
+
+这个时候就需要使用v-bind来绑定class，绑定class有两种方式：
+
+- 对象语法
+- 数组语法
+
+对象语法：`{'active':boolean}`
+
+可以看到在对象语法当中前面用引号括起来的就是可以绑定的类名，后面跟上了一个布尔值，当这个布尔值为真的时候，该类名就会被绑定到该元素；如果布尔值为假，那么这个类名就不会被绑定到这个元素上。
+
+既然是一个对象，那么里面也可以是多个键值对，就像这样：`<div v-bind:class="{'fontColor':isTrue,'title':isTrue}">哈哈哈哈哈哈哈</div>`。
+示例代码地址：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/02_v-bind%E7%BB%91%E5%AE%9Aclass-%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95.html)
