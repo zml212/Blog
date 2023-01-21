@@ -112,9 +112,60 @@ data: function () {
 - 对象语法
 - 数组语法
 
-对象语法：`{'active':boolean}`
+**对象语法：`{'active':boolean}`**
 
 可以看到在对象语法当中前面用引号括起来的就是可以绑定的类名，后面跟上了一个布尔值，当这个布尔值为真的时候，该类名就会被绑定到该元素；如果布尔值为假，那么这个类名就不会被绑定到这个元素上。
 
 既然是一个对象，那么里面也可以是多个键值对，就像这样：`<div v-bind:class="{'fontColor':isTrue,'title':isTrue}">哈哈哈哈哈哈哈</div>`。
 示例代码地址：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/02_v-bind%E7%BB%91%E5%AE%9Aclass-%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95.html)
+
+在对象语法里面`{'active':boolean}`,active是用引号括起来的，当然我们也可以不使用引号，这样的话这个类名就会去data里面寻找，看在data里面有没有active这个变量，然后找到里面存放的类名。
+
+我们使用v-bind绑定class还可以与静态的class进行结合：
+
+```js
+<div class="abc" :class="{'fontColor':isTrue,'title':isTrue}">
+    123123
+</div>
+```
+
+最后渲染出来的结果就是类名有：abc fontColor  title
+
+**数组语法：[className,className,三元表达式.....]**
+
+`<div :class="['fontColor','title']">hhhhhhh</div>`
+
+这样绑定的就是两个类名：fontColor  title
+
+当然我们也可以去data里面寻找我们需要的类名：
+
+`<div :class="['fontColor',title]">hhhhhhh</div>`
+
+这段代码其中第二个值中代表的类名就需要在data里面寻找
+
+我们还可以使用三元运算符：
+
+```js
+<div :class="['fontColor',isTrue?'title':'']">
+    hhhhhhh
+</div>
+
+```
+
+在这里我们就会去判断isTrue是否为真，如果为真，那么就把title这个类名绑定到元素上，否则就绑定一个空的类名（也就是不绑定任何类名）。
+
+但是这样写三元表达式，代码不优雅，更优雅的方式是，在数组里面我们写上一个对象，就像这样：
+
+```js
+<div :class="['fontColor',{title:isTrue}]">
+    hhhhhhh
+</div>
+```
+
+这样是不是就更加优雅了呢？
+
+示例代码在：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/03_v-bind%E7%BB%91%E5%AE%9Aclass%E6%95%B0%E7%BB%84%E8%AF%AD%E6%B3%95.html)
+
+### v-bind绑定style
+
+CSS Property名可以使用驼峰式(camelCase)或者短横线分隔(kebab-case,记得用引号括起来)的方式来命名。
