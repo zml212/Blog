@@ -1,6 +1,6 @@
 ---
 title: Vue3当中的一些基本指令
-date: 2023-1-19
+date: 2023-1-23
 tags: [前端]
 categories: [Vue3]
 ---
@@ -103,6 +103,8 @@ data: function () {
 
 也就是在v-bind可以直接简写为一个`:`。
 
+实例在这里：[这里]()
+
 ### v-bind绑定class属性
 
 在实际开发当中，可能某个元素的class是动态的，处于某个状态的时候，字体颜色为黑色；处于另一个状态的时候，字体颜色为红色。
@@ -169,3 +171,96 @@ data: function () {
 ### v-bind绑定style
 
 CSS Property名可以使用驼峰式(camelCase)或者短横线分隔(kebab-case,记得用引号括起来)的方式来命名。
+
+同样的绑定方式也有两种：
+- 对象语法
+- 数组语法
+
+**对象语法：**
+
+用法：`:style="{属性名:'属性值'}"`
+
+可以看到在css属性值哪里有一个单引号，这是必须的，不然vue就会将属性值看做一个变量来解析。
+
+命名方式：
+
+- 驼峰： fontSize
+- 短横线：font-size,使用短横线这种方式的时候，必须将属性名用引号引起来。
+
+实例代码：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/04_v-bind%E7%BB%91%E5%AE%9Astyle-%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95.html)
+
+**数组语法：**
+
+在开发当中，我们想要把多个对象里面的css属性写到一起，我们就可以使用数组的方式，将前面的对象作为数组的元素写到一起：`<div :style="[styleObj,styleObj2]">哈哈哈哈</div>`
+
+注意：
+
+如果使用数组语法的时候，如果数组里面对象的css属性有重复的，那么浏览器会根据最后一个（最右边的）属性来渲染。
+
+示例代码在：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/05_v-bind%E7%BB%91%E5%AE%9Astyle%E6%95%B0%E7%BB%84%E8%AF%AD%E6%B3%95.html)
+
+## 动态绑定属性
+
+在某些情况下，我们属性的名称可能也是不固定的：
+
+- 前端我们无论绑定src,href,class,style属性名都是固定的。如果属性名称不是固定，我们可以使用<font color=red>:[属性值]='值'</font>的格式来定义，这种绑定的方式，我们称之为动态绑定属性。 
+
+就像这样：
+
+`div :[name]="styleObj">hhhhhh</div>`
+```js
+name: 'style',
+styleObj: {
+color: 'red',
+fontSize: '40px',
+    },
+```
+
+里面的`name`可以换成其他的变量。
+
+示例代码在:[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/06_v-bind%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7.html)
+
+还有一个v-bind直接绑定一个对象：示例看[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/07_v-bind%E7%9B%B4%E6%8E%A5%E7%BB%91%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1.html)
+
+## v-on指令
+
+**v-on绑定事件：**
+
+前面我们学习了这么多的指令，但是都是一些静态的，在前端开发当中，一个重要的特性就是与用户的交互。这个时候我们就需要用到v-on指令。
+
+用来监听胡勇大声的时间，比如点击、拖拽、键盘点击事件等等
+
+- v-on的使用：
+  - 简写：@
+  - 预期：Function|Inline Statement | Object
+  - 参数： event
+  - 修饰符：
+    - .stop  调用event.stopPropagation()
+    - .prevent  调用 event.preventDefault()
+    - .capture  添加事件侦听器时使用capture模式
+    - .self  只当事件是从侦听器绑定的元素本身触发时才触发回调
+    - .{keyAlias}  仅当事件是从特定触发时才触发回调
+    - .once   只触发一次回调
+    - .left  只当鼠标点击左键时触发
+    - .right  只当鼠标点击右键时触发
+    - .middle  只当鼠标点击中键时触发
+    - .passive  {passive:true} 模式添加侦听器
+  - 绑定事件监听
+
+### v-on基本使用
+
+一个简单的例子：
+
+`<button v-on:click="add">点我加一</button>`
+
+这个时候就是一个完整的v-on写法了，在v-on后面加上一个冒号，然后加上事件的类型（此时我们添加的点击事件），然后在后面加上事件要调用的事件函数。
+
+也有语法糖：
+
+`<button @click="add">点我加一</button>`:也就是将v-on简写为`@`.
+
+如果我们要处理的事件不是很复杂，我们可以直接写一个表达式在等号后面：`<button @click="this.count++">点我加一</button>`
+
+我们还可以绑定一个对象:
+
+示例在[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/08_v-on%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html)

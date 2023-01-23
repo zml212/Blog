@@ -21,17 +21,17 @@
   <meta name="description" content="Vue3当中的一些基本语法[TOC] 插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue3当中的一些基本指令">
-<meta property="og:url" content="http://example.com/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:url" content="http://example.com/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="海绵宝宝">
 <meta property="og:description" content="Vue3当中的一些基本语法[TOC] 插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-21T03:00:09.058Z">
+<meta property="article:published_time" content="2023-01-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-23T14:01:41.657Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/index.html">
+  <link rel="canonical" href="http://example.com/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/index.html">
   
     <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
   
@@ -259,10 +259,10 @@
                 <a class="category-link" href="/categories/Vue3/">Vue3</a>
               </p>
               <p class="item-title">
-                <a href="/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="title">Vue3当中的一些基本指令</a>
+                <a href="/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="title">Vue3当中的一些基本指令</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-01-18T16:00:00.000Z" itemprop="datePublished">2023-01-19</time>
+                <time datetime="2023-01-22T16:00:00.000Z" itemprop="datePublished">2023-01-23</time>
               </p>
             </div>
           </li>
@@ -355,8 +355,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="article-date">
-	  <time datetime="2023-01-18T16:00:00.000Z" itemprop="datePublished">2023-01-19</time>
+	<a href="/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" class="article-date">
+	  <time datetime="2023-01-22T16:00:00.000Z" itemprop="datePublished">2023-01-23</time>
 	</a>
 </span>
         
@@ -374,7 +374,7 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
@@ -427,6 +427,7 @@
 <p>上面是v-bind 的基础使用，也就是原始的写法，但是这样写起来有点麻烦，vue给我们提供了一个语法糖：</p>
 <p><code>&lt;a :href=&quot;url&quot;&gt;&#123;&#123;msg&#125;&#125;&lt;/a&gt;</code></p>
 <p>也就是在v-bind可以直接简写为一个<code>:</code>。</p>
+<p>实例在这里：<a href="">这里</a></p>
 <h3 id="v-bind绑定class属性"><a href="#v-bind绑定class属性" class="headerlink" title="v-bind绑定class属性"></a>v-bind绑定class属性</h3><p>在实际开发当中，可能某个元素的class是动态的，处于某个状态的时候，字体颜色为黑色；处于另一个状态的时候，字体颜色为红色。</p>
 <p>这个时候就需要使用v-bind来绑定class，绑定class有两种方式：</p>
 <ul>
@@ -457,6 +458,69 @@
 <p>这样是不是就更加优雅了呢？</p>
 <p>示例代码在：<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/03_v-bind%E7%BB%91%E5%AE%9Aclass%E6%95%B0%E7%BB%84%E8%AF%AD%E6%B3%95.html">这里</a></p>
 <h3 id="v-bind绑定style"><a href="#v-bind绑定style" class="headerlink" title="v-bind绑定style"></a>v-bind绑定style</h3><p>CSS Property名可以使用驼峰式(camelCase)或者短横线分隔(kebab-case,记得用引号括起来)的方式来命名。</p>
+<p>同样的绑定方式也有两种：</p>
+<ul>
+<li>对象语法</li>
+<li>数组语法</li>
+</ul>
+<p><strong>对象语法：</strong></p>
+<p>用法：<code>:style=&quot;&#123;属性名:&#39;属性值&#39;&#125;&quot;</code></p>
+<p>可以看到在css属性值哪里有一个单引号，这是必须的，不然vue就会将属性值看做一个变量来解析。</p>
+<p>命名方式：</p>
+<ul>
+<li>驼峰： fontSize</li>
+<li>短横线：font-size,使用短横线这种方式的时候，必须将属性名用引号引起来。</li>
+</ul>
+<p>实例代码：<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/04_v-bind%E7%BB%91%E5%AE%9Astyle-%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95.html">这里</a></p>
+<p><strong>数组语法：</strong></p>
+<p>在开发当中，我们想要把多个对象里面的css属性写到一起，我们就可以使用数组的方式，将前面的对象作为数组的元素写到一起：<code>&lt;div :style=&quot;[styleObj,styleObj2]&quot;&gt;哈哈哈哈&lt;/div&gt;</code></p>
+<p>注意：</p>
+<p>如果使用数组语法的时候，如果数组里面对象的css属性有重复的，那么浏览器会根据最后一个（最右边的）属性来渲染。</p>
+<p>示例代码在：<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/05_v-bind%E7%BB%91%E5%AE%9Astyle%E6%95%B0%E7%BB%84%E8%AF%AD%E6%B3%95.html">这里</a></p>
+<h2 id="动态绑定属性"><a href="#动态绑定属性" class="headerlink" title="动态绑定属性"></a>动态绑定属性</h2><p>在某些情况下，我们属性的名称可能也是不固定的：</p>
+<ul>
+<li>前端我们无论绑定src,href,class,style属性名都是固定的。如果属性名称不是固定，我们可以使用<font color=red>:[属性值]&#x3D;’值’</font>的格式来定义，这种绑定的方式，我们称之为动态绑定属性。</li>
+</ul>
+<p>就像这样：</p>
+<p><code>div :[name]=&quot;styleObj&quot;&gt;hhhhhh&lt;/div&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name</span>: <span class="string">&#x27;style&#x27;</span>,</span><br><span class="line"><span class="attr">styleObj</span>: &#123;</span><br><span class="line"><span class="attr">color</span>: <span class="string">&#x27;red&#x27;</span>,</span><br><span class="line"><span class="attr">fontSize</span>: <span class="string">&#x27;40px&#x27;</span>,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>里面的<code>name</code>可以换成其他的变量。</p>
+<p>示例代码在:<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/06_v-bind%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7.html">这里</a></p>
+<p>还有一个v-bind直接绑定一个对象：示例看<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/07_v-bind%E7%9B%B4%E6%8E%A5%E7%BB%91%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1.html">这里</a></p>
+<h2 id="v-on指令"><a href="#v-on指令" class="headerlink" title="v-on指令"></a>v-on指令</h2><p><strong>v-on绑定事件：</strong></p>
+<p>前面我们学习了这么多的指令，但是都是一些静态的，在前端开发当中，一个重要的特性就是与用户的交互。这个时候我们就需要用到v-on指令。</p>
+<p>用来监听胡勇大声的时间，比如点击、拖拽、键盘点击事件等等</p>
+<ul>
+<li>v-on的使用：<ul>
+<li>简写：@</li>
+<li>预期：Function|Inline Statement | Object</li>
+<li>参数： event</li>
+<li>修饰符：<ul>
+<li>.stop  调用event.stopPropagation()</li>
+<li>.prevent  调用 event.preventDefault()</li>
+<li>.capture  添加事件侦听器时使用capture模式</li>
+<li>.self  只当事件是从侦听器绑定的元素本身触发时才触发回调</li>
+<li>.{keyAlias}  仅当事件是从特定触发时才触发回调</li>
+<li>.once   只触发一次回调</li>
+<li>.left  只当鼠标点击左键时触发</li>
+<li>.right  只当鼠标点击右键时触发</li>
+<li>.middle  只当鼠标点击中键时触发</li>
+<li>.passive  {passive:true} 模式添加侦听器</li>
+</ul>
+</li>
+<li>绑定事件监听</li>
+</ul>
+</li>
+</ul>
+<h3 id="v-on基本使用"><a href="#v-on基本使用" class="headerlink" title="v-on基本使用"></a>v-on基本使用</h3><p>一个简单的例子：</p>
+<p><code>&lt;button v-on:click=&quot;add&quot;&gt;点我加一&lt;/button&gt;</code></p>
+<p>这个时候就是一个完整的v-on写法了，在v-on后面加上一个冒号，然后加上事件的类型（此时我们添加的点击事件），然后在后面加上事件要调用的事件函数。</p>
+<p>也有语法糖：</p>
+<p><code>&lt;button @click=&quot;add&quot;&gt;点我加一&lt;/button&gt;</code>:也就是将v-on简写为<code>@</code>.</p>
+<p>如果我们要处理的事件不是很复杂，我们可以直接写一个表达式在等号后面：<code>&lt;button @click=&quot;this.count++&quot;&gt;点我加一&lt;/button&gt;</code></p>
+<p>我们还可以绑定一个对象:</p>
+<p>示例在<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/08_v-on%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html">这里</a></p>
 
       
     </div>
@@ -466,7 +530,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2023/01/19/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" title="Vue3当中的一些基本指令" target="_blank" rel="external">http://example.com/2023/01/19/Vue3/vue基本指令/</a>
+      <a href="http://example.com/2023/01/23/Vue3/vue%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" title="Vue3当中的一些基本指令" target="_blank" rel="external">http://example.com/2023/01/23/Vue3/vue基本指令/</a>
     </li>
     
     <li class="post-copyright-license">
