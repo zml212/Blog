@@ -230,22 +230,24 @@ fontSize: '40px',
 
 用来监听胡勇大声的时间，比如点击、拖拽、键盘点击事件等等
 
-- v-on的使用：
-  - 简写：@
-  - 预期：Function|Inline Statement | Object
-  - 参数： event
-  - 修饰符：
-    - .stop  调用event.stopPropagation()
-    - .prevent  调用 event.preventDefault()
-    - .capture  添加事件侦听器时使用capture模式
-    - .self  只当事件是从侦听器绑定的元素本身触发时才触发回调
-    - .{keyAlias}  仅当事件是从特定触发时才触发回调
-    - .once   只触发一次回调
-    - .left  只当鼠标点击左键时触发
-    - .right  只当鼠标点击右键时触发
-    - .middle  只当鼠标点击中键时触发
-    - .passive  {passive:true} 模式添加侦听器
-  - 绑定事件监听
+**v-on的使用：**
+- 简写：@
+- 预期：Function|Inline Statement | Object
+- 参数： event
+- <div id="v-on修饰符">修饰符：</div>
+```
+ .stop  调用event.stopPropagation()
+ .prevent  调用 event.preventDefault()
+ .capture  添加事件侦听器时使用capture模式
+ .self  只当事件是从侦听器绑定的元素本身触发时才触发回调
+ .{keyAlias}  仅当事件是从特定触发时才触发回调
+ .once   只触发一次回调
+ .left  只当鼠标点击左键时触发
+ .right  只当鼠标点击右键时触发
+ .middle  只当鼠标点击中键时触发
+ .passive  {passive:true} 模式添加侦听器
+```
+- 绑定事件监听
 
 ### v-on基本使用
 
@@ -263,4 +265,47 @@ fontSize: '40px',
 
 我们还可以绑定一个对象:
 
+在绑定对象的时候，语法是这样的：`v-on={'事件类型':'事件函数',......}`
+
 示例在[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/08_v-on%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html)
+
+### v-on的参数传递
+
+在函数事件当中，可能会需要传递一些参数，这个时候就需要使用到v-on的参数传递。
+
+在获取事件对象的时候，如果一个事件函数不需要传入其他参数，可以直接不写参数，在事件函数里面可以直接获取到事件对象，就像这样：
+
+```html
+    <button @click="btn1Click">按钮1</button>
+```
+```js
+btn1Click: function (event) {
+                console.log(event);
+        },
+```
+
+这样就可以拿到事件对象。如果需要传入多个参数，那么这样就不行了。
+
+就需要像下面这样写：
+
+```html
+<button @click="btn2Click($event,'海绵宝宝')">按钮2</button>
+```
+```js
+btn2Click: function (event, name) {
+    console.log(event);
+    console.log(name);
+}
+```
+
+可以看到在模板里面我们获取事件对象使用的是`$event`，这是一个固定写法。
+
+示例代码在:[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/09_v-on%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.html)
+
+### v-on修饰符
+
+v-on支持修饰符，修饰符相当于对事件进行了一些特殊处理：
+
+具体修饰符见[上面](#v-on修饰符)
+
+示例代码在[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/10_v-on%E4%BF%AE%E9%A5%B0%E7%AC%A6.html)

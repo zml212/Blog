@@ -26,7 +26,7 @@
 <meta property="og:description" content="Vue3当中的一些基本语法[TOC] 插值语法在vue的模板里面，我们可以使用花括号来实现一个插值语法： &lt;div&gt;&amp;#123;&amp;#123;count&amp;#125;&amp;#125;&lt;&#x2F;div&gt; 在插值语法里面可以使用vue实例对象data里面的数据，并且可以写一些基本的表达式，不是语句！ 里面可以只是一个变量，也可以对变量进行一些运算（加减乘除等等），也可以使用函数，还可以使用三">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-23T14:01:41.657Z">
+<meta property="article:modified_time" content="2023-01-24T05:37:33.035Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -491,27 +491,14 @@
 <h2 id="v-on指令"><a href="#v-on指令" class="headerlink" title="v-on指令"></a>v-on指令</h2><p><strong>v-on绑定事件：</strong></p>
 <p>前面我们学习了这么多的指令，但是都是一些静态的，在前端开发当中，一个重要的特性就是与用户的交互。这个时候我们就需要用到v-on指令。</p>
 <p>用来监听胡勇大声的时间，比如点击、拖拽、键盘点击事件等等</p>
+<p><strong>v-on的使用：</strong></p>
 <ul>
-<li>v-on的使用：<ul>
 <li>简写：@</li>
 <li>预期：Function|Inline Statement | Object</li>
 <li>参数： event</li>
-<li>修饰符：<ul>
-<li>.stop  调用event.stopPropagation()</li>
-<li>.prevent  调用 event.preventDefault()</li>
-<li>.capture  添加事件侦听器时使用capture模式</li>
-<li>.self  只当事件是从侦听器绑定的元素本身触发时才触发回调</li>
-<li>.{keyAlias}  仅当事件是从特定触发时才触发回调</li>
-<li>.once   只触发一次回调</li>
-<li>.left  只当鼠标点击左键时触发</li>
-<li>.right  只当鼠标点击右键时触发</li>
-<li>.middle  只当鼠标点击中键时触发</li>
-<li>.passive  {passive:true} 模式添加侦听器</li>
-</ul>
-</li>
+<li><div id="v-on修饰符">修饰符：</div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.stop  调用event.stopPropagation()</span><br><span class="line">.prevent  调用 event.preventDefault()</span><br><span class="line">.capture  添加事件侦听器时使用capture模式</span><br><span class="line">.self  只当事件是从侦听器绑定的元素本身触发时才触发回调</span><br><span class="line">.&#123;keyAlias&#125;  仅当事件是从特定触发时才触发回调</span><br><span class="line">.once   只触发一次回调</span><br><span class="line">.left  只当鼠标点击左键时触发</span><br><span class="line">.right  只当鼠标点击右键时触发</span><br><span class="line">.middle  只当鼠标点击中键时触发</span><br><span class="line">.passive  &#123;passive:true&#125; 模式添加侦听器</span><br></pre></td></tr></table></figure></li>
 <li>绑定事件监听</li>
-</ul>
-</li>
 </ul>
 <h3 id="v-on基本使用"><a href="#v-on基本使用" class="headerlink" title="v-on基本使用"></a>v-on基本使用</h3><p>一个简单的例子：</p>
 <p><code>&lt;button v-on:click=&quot;add&quot;&gt;点我加一&lt;/button&gt;</code></p>
@@ -520,7 +507,23 @@
 <p><code>&lt;button @click=&quot;add&quot;&gt;点我加一&lt;/button&gt;</code>:也就是将v-on简写为<code>@</code>.</p>
 <p>如果我们要处理的事件不是很复杂，我们可以直接写一个表达式在等号后面：<code>&lt;button @click=&quot;this.count++&quot;&gt;点我加一&lt;/button&gt;</code></p>
 <p>我们还可以绑定一个对象:</p>
+<p>在绑定对象的时候，语法是这样的：<code>v-on=&#123;&#39;事件类型&#39;:&#39;事件函数&#39;,......&#125;</code></p>
 <p>示例在<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/08_v-on%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html">这里</a></p>
+<h3 id="v-on的参数传递"><a href="#v-on的参数传递" class="headerlink" title="v-on的参数传递"></a>v-on的参数传递</h3><p>在函数事件当中，可能会需要传递一些参数，这个时候就需要使用到v-on的参数传递。</p>
+<p>在获取事件对象的时候，如果一个事件函数不需要传入其他参数，可以直接不写参数，在事件函数里面可以直接获取到事件对象，就像这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;btn1Click&quot;</span>&gt;</span>按钮1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">btn1Click</span>: <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(event);</span><br><span class="line">        &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以拿到事件对象。如果需要传入多个参数，那么这样就不行了。</p>
+<p>就需要像下面这样写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;btn2Click($event,&#x27;海绵宝宝&#x27;)&quot;</span>&gt;</span>按钮2<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">btn2Click</span>: <span class="keyword">function</span> (<span class="params">event, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到在模板里面我们获取事件对象使用的是<code>$event</code>，这是一个固定写法。</p>
+<p>示例代码在:<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/09_v-on%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.html">这里</a></p>
+<h3 id="v-on修饰符"><a href="#v-on修饰符" class="headerlink" title="v-on修饰符"></a>v-on修饰符</h3><p>v-on支持修饰符，修饰符相当于对事件进行了一些特殊处理：</p>
+<p>具体修饰符见<a href="#v-on%E4%BF%AE%E9%A5%B0%E7%AC%A6">上面</a></p>
+<p>示例代码在<a target="_blank" rel="noopener" href="https://github.com/zml212/vue3_learn/blob/master/learn_vue3/03_v-bind%E5%92%8Cv-on%E7%9A%84%E4%BD%BF%E7%94%A8/10_v-on%E4%BF%AE%E9%A5%B0%E7%AC%A6.html">这里</a></p>
 
       
     </div>
