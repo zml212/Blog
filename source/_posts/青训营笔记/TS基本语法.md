@@ -1,6 +1,6 @@
 ---
 title: TS基本语法
-date: 2023-1-19
+date: 2023-1-25
 tags: [前端]
 categories: [青训营]
 ---
@@ -10,3 +10,16 @@ categories: [青训营]
 ## 基础数据类型
 
 给一个变量定义类型的时候，我们经常在变量名的后面加上一个":",再加上类型的一个名称。
+
+例如：
+
+```ts
+let str:string = 'string';
+let num:number = 12;
+let isTrue:boolean = true;
+let n:null = null;
+let un:undefined = undefined;
+```
+
+## 对象数据类型
+
