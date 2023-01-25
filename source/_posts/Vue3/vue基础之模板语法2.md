@@ -70,3 +70,103 @@ v-show与v-if的用法看起来是一样的，同样也是根据一个条件决�
 在实际的开发当中，我们可能会从服务器拿到一些数据，需要用列表的形式展示出来，这个时候我们就需要使用列表渲染。
 
 在vue当中，列表渲染需要使用到v-for，v-for就类似于JavaScript中的for循环，可以用来遍历一组数据。
+
+### v-for基本使用
+
+**v-for遍历数组：**
+
+v-for的基本格式是：`item in 数组`
+
+- 数组通常是来自data或者prop，也可以是其他方式
+- item是我们给每项元素起的一个别名，这个别名可以自定义
+
+语法示例：
+
+```html
+<ul>
+    <li v-for="num in arr">{{num}}</li>
+</ul>
+```
+
+这里我们只获取到了数组里面的内容，要是我们还想获取索引怎么办呢？我们可以这样操作：
+
+```html
+<ol>
+    <li v-for="(num,index) in arr">{{num}},{{index}}</li>
+</ol>
+```
+
+就是在前面加上一个括号，括号里面有两个参数，第一个就是我们获取的内容，第二个参数就是我们的索引。
+
+**v-for遍历对象：**
+
+前面我们了解了如何使用v-for遍历一个数组，其实v-for还可以用来遍历对象：
+
+`v-for="item in Obj"`
+
+众所周知，在对象里面有key-value键值对，那么我们v-for第一个参数(item)拿到的是什么呢？
+
+答案是对象里面的value。
+
+想要拿到key，那么我们就可以这样操作：
+
+```html
+<ol>
+    <li v-for="(value,key) in obj">{{key}}:{{value}}</li>
+</ol>
+```
+
+这样就拿到了key，如果想要拿到索引，我们可以接着看：
+
+```html
+<ol>
+    <li v-for="(value,key,index) in obj">{{index}}--{{key}}:{{value}}</li>
+</ol>
+```
+
+这样第一个参数代表值，第二个参数代表键名，第三个参数代表索引。
+
+**v-for遍历数字：**
+
+也就是我们把原来放数组/对象那个位置，换成一个数字，那么v-for就会从1开始，一直遍历到你指定的那个数字：
+
+`<div v-for="number in 10">{{number}}</div>`
+
+这段代码就是从1开始，一直遍历到10结束。
+
+同样的，我们想要获取索引，和之前的方法一样：`<div v-for="(number,index) in 10">{{index}}--{{number}}</div>`
+
+v-for示例代码在这里：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/05_%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/01_v-for%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html)
+
+### v-for里面的template元素
+
+在渲染过程中，我们需要一个父级元素来遍历，然后用子元素来展示内容分，这个时候我们就会把那个父级元素用template来替换：
+
+```html
+<template v-for="(value,key) in message">
+    <div>{{key}}:</div>
+    <div>{{value}}</div>
+    <hr>
+</template>
+```
+
+示例代码：[这里](https://github.com/zml212/vue3_learn/blob/master/learn_vue3/05_%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/02_v-for%E4%B8%8Etamplate.html)
+
+### v-for一些小补充
+
+1. 数组更新检测
+
+在vue中，vue将数组一些方法进行了包裹，也就是说我们在vue中使用了这些方法，vue的视图会自动更新数组，然后重新渲染到页面上。这些被包裹的方法包括：
+
+- push()
+- pop()
+- shift()
+- unshift()
+- splice()
+- sort()
+- reverse()
+
+上面的方法会直接修改原来的数组，但是某些方法不会替换员阿里的数组，而是会生成新的数组，比如：filter()、concat()、slice()
+
+2. v-for中key的作用
+
