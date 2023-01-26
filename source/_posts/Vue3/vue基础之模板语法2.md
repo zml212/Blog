@@ -170,3 +170,37 @@ v-for示例代码在这里：[这里](https://github.com/zml212/vue3_learn/blob/
 
 2. v-for中key的作用
 
+在使用v-for进行列表渲染的时候，我们通常会给元素或者组件绑定一个key属性
+
+首先我们来看什么是VNode：
+
+- 目前我们还没有学习到组件，所以我们现在可以把VNode理解为HTML元素创建出来的VNode。
+- VNode的全称是 Virtual Node，也就是虚拟节点，真实节点就是我们html文档里面DOM
+- 事实上，无论是组件还是元素，他们在vue中表现出来的都是一个一个的VNode。
+- VNode的本质就是一个JavaScript的对象，但是这个对象可以用来描述这个DOM
+- vue中template会先转换成VNode然后在渲染成真实DOM，最后展示到页面上。
+
+再来看看什么是虚拟DOM
+
+- 如果我们vue模板里面不止一个简单的div，还有一些其他的标签，这样一大堆元素，就会形成一个VNode Tree
+
+这里我们来看一个数组插入元素的案例：
+
+我们想在数组中间插入一个元素：
+
+原数组是这样的:`arr: ['a', 'b', 'c', 'd']`，然后我们给数组中间插入一个`f`，我们定义一个方法：
+
+```js
+ insert: function () {
+    this.arr.splice(2, 0, 'f');
+}
+```
+
+vue是如何去更新这个视图的呢？
+
+我们可以猜测一下，是把整个数组重新渲染吗？这样难免太消耗性能了，其实vue使用的是diff算法，就是将旧的VNodes与新的VNodes进行对比，将不同的地方改掉，而不需要将整个数组重新渲染。
+
+在vue中会根据有没有key调用两个不同的方法：
+
+- 有key，那么就使用patchKeyedChildren方法
+- 没有key,那么就使用patchUnKeyedChildren方法
