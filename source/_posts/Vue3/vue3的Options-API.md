@@ -7,6 +7,8 @@ categories: [Vue3]
 
 # Vue3的Options-API
 
+[TOC]
+
 ## 计算属性
 
 在模板当中，我们可以使用插值语`{{}}`法来显示data里面的一些数据
