@@ -141,4 +141,4 @@ v-model有一些修饰符，可以对v-model的值进行修饰。
 
 在这种情况下，我们在输入框输入的除数字之外的字符，一律不会被绑定在number上。
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image?)  
