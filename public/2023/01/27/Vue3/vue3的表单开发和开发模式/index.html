@@ -18,18 +18,20 @@
   
   
   <title>Vue3的表单开发和开发模式 | 海绵宝宝个人博客</title>
-  <meta name="description" content="Vue3的表单开发和开发模式1.表单开发v-model的使用v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。 在官方的说法当中，v-model其实背后有两个操作：  v-bind绑定value属性的值 v-on绑定input事件监听到函数中，函数会获取到最新的值赋值到绑定的属性当中。  v-model语法：">
+  <meta name="description" content="Vue3的表单开发和开发模式[TOC] 1.表单开发v-model的使用v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。 在官方的说法当中，v-model其实背后有两个操作：  v-bind绑定value属性的值 v-on绑定input事件监听到函数中，函数会获取到最新的值赋值到绑定的属性当中。  v-mo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue3的表单开发和开发模式">
 <meta property="og:url" content="http://example.com/2023/01/27/Vue3/vue3%E7%9A%84%E8%A1%A8%E5%8D%95%E5%BC%80%E5%8F%91%E5%92%8C%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="海绵宝宝">
-<meta property="og:description" content="Vue3的表单开发和开发模式1.表单开发v-model的使用v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。 在官方的说法当中，v-model其实背后有两个操作：  v-bind绑定value属性的值 v-on绑定input事件监听到函数中，函数会获取到最新的值赋值到绑定的属性当中。  v-model语法：">
+<meta property="og:description" content="Vue3的表单开发和开发模式[TOC] 1.表单开发v-model的使用v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。 在官方的说法当中，v-model其实背后有两个操作：  v-bind绑定value属性的值 v-on绑定input事件监听到函数中，函数会获取到最新的值赋值到绑定的属性当中。  v-mo">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image">
 <meta property="article:published_time" content="2023-01-27T02:28:03.275Z">
-<meta property="article:modified_time" content="2023-02-07T08:53:34.163Z">
+<meta property="article:modified_time" content="2023-02-09T11:15:13.490Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image">
   <!-- Canonical links -->
   <link rel="canonical" href="http://example.com/2023/01/27/Vue3/vue3%E7%9A%84%E8%A1%A8%E5%8D%95%E5%BC%80%E5%8F%91%E5%92%8C%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/index.html">
   
@@ -380,7 +382,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Vue3的表单开发和开发模式"><a href="#Vue3的表单开发和开发模式" class="headerlink" title="Vue3的表单开发和开发模式"></a>Vue3的表单开发和开发模式</h1><h2 id="1-表单开发"><a href="#1-表单开发" class="headerlink" title="1.表单开发"></a>1.表单开发</h2><h3 id="v-model的使用"><a href="#v-model的使用" class="headerlink" title="v-model的使用"></a>v-model的使用</h3><p>v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。</p>
+        <h1 id="Vue3的表单开发和开发模式"><a href="#Vue3的表单开发和开发模式" class="headerlink" title="Vue3的表单开发和开发模式"></a>Vue3的表单开发和开发模式</h1><p>[TOC]</p>
+<h2 id="1-表单开发"><a href="#1-表单开发" class="headerlink" title="1.表单开发"></a>1.表单开发</h2><h3 id="v-model的使用"><a href="#v-model的使用" class="headerlink" title="v-model的使用"></a>v-model的使用</h3><p>v-model指令可以在表单input textarea select组件上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。</p>
 <p>在官方的说法当中，v-model其实背后有两个操作：</p>
 <ul>
 <li>v-bind绑定value属性的值</li>
@@ -392,6 +395,62 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在这里我们将<code>msg</code>的属性双向绑定，也就是说我们在input输入框中输入的值会实时的显示在div标签中。</p>
+<h3 id="v-model使用场景"><a href="#v-model使用场景" class="headerlink" title="v-model使用场景"></a>v-model使用场景</h3><ol>
+<li>可以在文本框内使用v-model来实现双向数据绑定</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;info&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在下面的data中，我们定义了一个info变量，用来存储文本框中的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">info</span>: <span class="string">&#x27;hello world!&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>此时我们默认在文本框中显示的是hello world!，我们可以在文本框中输入任意内容，此时info的值也会随之改变。</p>
+<ol start="2">
+<li>可以在单选框中使用v-model来实现双向数据绑定</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;isAgree&quot;</span> <span class="attr">name</span>=<span class="string">&quot;1&quot;</span>&gt;</span>同意协议</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;isAgree&quot;</span> <span class="attr">name</span>=<span class="string">&quot;1&quot;</span>&gt;</span>不同意协议</span><br></pre></td></tr></table></figure>
+
+<p>在下面的data中，我们定义了一个isAgree变量，用来存储单选框中的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">isAgree</span>: <span class="literal">false</span>,</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>可以在复选框中使用v-model来实现双向数据绑定</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;hobbies&quot;</span> <span class="attr">value</span>=<span class="string">&quot;篮球&quot;</span>&gt;</span>篮球</span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;b&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;hobbies&quot;</span> <span class="attr">value</span>=<span class="string">&quot;足球&quot;</span>&gt;</span>足球</span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;c&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;hobbies&quot;</span> <span class="attr">value</span>=<span class="string">&quot;羽毛球&quot;</span>&gt;</span>羽毛球</span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在下面的data中，我们定义了一个hobbies数组，用来存储复选框中的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hobbies</span>: [],</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>可以在下拉框中使用v-model来实现双向数据绑定</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;shuiguo&quot;</span> <span class="attr">id</span>=<span class="string">&quot;sg&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;shuiguo&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;juzi&quot;</span>&gt;</span>橘子<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;taozi&quot;</span>&gt;</span>水蜜桃<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;xiangjiao&quot;</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在下面的data中，我们定义了一个shuiguo变量，用来存储下拉框中的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">shuiguo</span>:<span class="string">&#x27;&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<h3 id="v-model的值绑定"><a href="#v-model的值绑定" class="headerlink" title="v-model的值绑定"></a>v-model的值绑定</h3><p>在上面的例子中，我们都是对数据进行写死处理，但是在实际开发中我们需要渲染的数据，往往是从服务器返回回来的数据。</p>
+<p>比如我们有一个下拉框，需要从服务器获取数据，然后渲染到下拉框中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;test&quot;</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">v-for</span>=<span class="string">&quot;item in list&quot;</span> <span class="attr">value</span>=<span class="string">&quot;item.value&quot;</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="v-model的修饰符"><a href="#v-model的修饰符" class="headerlink" title="v-model的修饰符"></a>v-model的修饰符</h3><p>v-model有一些修饰符，可以对v-model的值进行修饰。</p>
+<ol>
+<li>lazy</li>
+</ol>
+<p>在前面的例子中，我们发现，只要输入框的数据一发生变化，这边就会侦听到，然后发生改变。但是我们不希望改变得这么频繁，这个时候我们就需要用到lazy这个修饰符。</p>
+<p>就像这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model.lazy</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>result:&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候我们只有在提交（回车&#x2F;输入框失去焦点时）的时候，数据才会发生改变。</p>
+<p><code>lazy</code>的本质其实是将原来v-model用于双向绑定的事件从<code>input</code>改为<code>change</code>。</p>
+<ol start="2">
+<li>number</li>
+</ol>
+<p>为什么需要这个修饰符呢，这是因为在输入框中，我们输入的是数字，但是v-model进行绑定的时候，他默认是字符串类型。</p>
+<p>这个时候我们就需要用到number这个修饰符。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model.number</span>=<span class="string">&quot;number&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，我们在输入框输入的除数字之外的字符，一律不会被绑定在number上。</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
 
       
     </div>
