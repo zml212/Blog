@@ -142,3 +142,13 @@ v-model有一些修饰符，可以对v-model的值进行修饰。
 在这种情况下，我们在输入框输入的除数字之外的字符，一律不会被绑定在number上。
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0b8ba7b01e4e3b840d67607c480b71~tplv-k3u1fbpfcp-watermark.image?)  
+
+3. trim
+
+在开发当中，我们可能需要将输入框中的内容去掉前后的空格，这个时候我们就需要用到trim这个修饰符。
+
+```html
+<input type="text" v-model.trim="text">
+```
+
+这个时候我们输入的内容，前后的空格都会被去掉。
