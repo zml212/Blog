@@ -1,0 +1,102 @@
+---
+title: Vue3组件化开发（一）
+data: [2023-2-20]
+tags: [前端]
+categories: [Vue3]
+---
+
+# Vue3组件化开发（一）
+
+## 为什么需要组件化开发
+
+在前端工程化中，流行的框架都是使用的组件化开发模式，这是因为在前端开发逻辑中，有许多重复的代码，我们将这些重复的代码封装进一个组件里面，提高代码的复用性。同时，我们也可以将一些公共的代码抽离出来，这样我们在开发的时候，只需要引入这个组件就可以了，这样就可以减少我们的代码量，同时也可以使得我们的代码更加的简洁。
+
+## Vue3中的组件化开发
+
+### 组件的定义
+
+在vue中，我们页面有很多板块，比如一个企业的官网，里面有导航栏，轮播图，新闻列表，底部等等，我们可以将这些板块封装成一个个的组件，然后在页面中引入这些组件，这样就可以实现页面的复用。
+
+这是Vue官网的一幅图：
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fdc39bc668b74022a6dde247f7d3c306~tplv-k3u1fbpfcp-watermark.image?)
+
+可以看到在一个页面中。可以将页面分成很多板块，比如头部、主体部分、侧边栏、或者还可以有底部。在主题部分又可以有子组件等等。
+
+在Vue中，我们可以将这些板块封装成一个个的组件，然后在页面中引入这些组件，这样就可以实现页面的复用。
+
+### 组件的注册
+
+在Vue中注册有两种方式：
+
+- 全局注册
+- 局部注册
+
+首先我们来全局注册：
+
+首先准备一个要挂载的模板：
+
+```html
+<template id="template">
+<!-- <div>{{msg}}</div> -->
+    <my-component></my-component>
+    <compont-b></compont-b>
+</template>
+```
+
+可以看到里面有两个组件，一个是my-component，一个是compont-b。
+
+接下来就是这两个组件的代码：
+
+```html
+<template id="compont-b">
+    <h1>标题</h1>
+    <h2>{{msg}}</h2>
+</template>
+```
+
+```html
+<template id="component">
+    <h2>我是componted组件</h2>
+</template>
+```
+
+下面我们来注册这两个组件：
+
+第一步：创建一个Vue应用
+
+```js
+const app = Vue.createApp({
+    template: '#template',
+})
+```
+
+这时候app就是一个Vue的实例，我们可以把这个实例挂载到html中的某个元素上。比如：`<div id="app"></div>`。
+
+第二步：注册组件
+
+```js
+App.component('my-component',{
+    template: '#component',
+});
+App.component('compont-b',{
+    template: '#compont-b',
+    data(){
+        return {
+            msg: '我是compont-b组件'
+        }
+    }
+});
+```
+
+注册组件的时候，我们使用的是`component`，这个方法有两个参数，第一个参数是组件的名称，第二个参数是组件的配置。组件名称也就是我们等会在页面中使用的组件名称。
+
+在组件的配置里面我们还可以写data,methods等等，这些都是我们平时写的Vue的配置。
+
+第三步：挂载
+
+```js
+App.mount('#app');
+```
+
+这段代码
