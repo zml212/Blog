@@ -99,4 +99,50 @@ App.component('compont-b',{
 App.mount('#app');
 ```
 
-这段代码
+这段代码表示我们将名为app的Vue实例挂载到id为app的元素上。
+
+
+小知识：
+
+- 定义组件名称组件有两种：
+    - 驼峰命名法：`MyComponent`(仅在脚手架中生效)
+    - 中划线命名法：`my-component`
+
+接下来就是局部注册组件：
+
+全局组件有一个缺点，就是在页面一加载的时候，就会将所有的全局组件进行加载，但是有时候我们并不需要将所有组件都加载出来，这样就会造成性能浪费。
+
+并且使用打包工具进行打包的时候，如果该全局组件没有用到，依然会进行打包。导致文件多余。
+
+所以就出现了局部组件来解决这个问题。
+
+在前面进行全局注册的时候，我们使用的是`App.component`，这个方法是全局注册组件的方法，那么局部注册组件的方法是什么呢？
+
+`components`来定义一个组件，这个方法有一个参数，就是组件的配置。
+
+之前我们vue实例里面有`data`，`methods`等等属性，compoments选项是一个对象，里面的键值对是：`组件名称:组件对象`。
+
+就像这样：
+
+```vue
+    const app = {
+        template: "#template",
+        // 注册局部组件
+        components:{
+            // key:value
+            // key:组件名称
+            // value组件对象
+            "component-a":{
+                template:"#component-a",
+                data: function () {
+                    return {
+                        msg:"局部",
+                    }
+                }
+            }
+        }
+    };
+    const App = Vue.createApp(app);
+```
+
+我们在这里注册了一个局部组件，与之前全局注册同的是：全局注册使用的是`App.component`，而局部注册使用的是`components`。也就是在根组件里面使用components选项来注册组件。在里面我们以键值对的形式来注册组件。
