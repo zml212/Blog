@@ -101,4 +101,36 @@ export default {
 </template>
 ```
 
-在使用具名插槽的时候，我们需要将插槽的名字写在`v-slot`里面，然后我们需要将每个插槽的东西
+在使用具名插槽的时候，我们需要将插槽的名字写在`v-slot`里面，然后我们需要将每个插槽的东西写在对应的`template`里面。
+
+## 作用域插槽
+
+Vue.js 中的作用域插槽（scoped slot）是一种特殊类型的插槽，它允许组件在其插槽内部访问来自父组件作用域中的数据。通过作用域插槽，子组件可以使用父组件的数据来自定义渲染逻辑，从而实现更高级别的组件复用和封装。
+
+在 Vue.js 中，通常使用 <slot> 标签在组件模板中定义插槽，例如：
+
+```html
+<!-- 子组件模板 -->
+<template>
+  <div>
+    <h2>{{ title }}</h2>
+    <slot></slot>
+  </div>
+</template>
+```
+
+然后，在父组件中，可以通过在 <template> 标签内使用 <slot> 标签来插入内容，并使用 v-slot 指令来定义作用域插槽，例如：
+
+```html
+<!-- 父组件模板 -->
+<template>
+  <div>
+    <my-component>
+      <template v-slot:default>
+        <p>{{ message }}</p>
+      </template>
+    </my-component>
+  </div>
+</template>
+```
+
