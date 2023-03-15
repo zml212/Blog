@@ -18,15 +18,15 @@
   
   
   <title>Set的基本使用 | 海绵宝宝个人博客</title>
-  <meta name="description" content="Set的基本使用Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，">
+  <meta name="description" content="Set的基本使用Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，并且在Set中，相同的元素只会出现一次。 Set的增删改查Set的创建Set不是原始数据类型，所以我们同样需要使用new关键字来创建。 就像这样： 1let s1 &#x3D; new Set([1, 2, 3, 4, 5]);  在创建Set的时候，我们使用New关键字然后后面跟上Set()在这里面，我们可以选择个IS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Set的基本使用">
 <meta property="og:url" content="http://example.com/2023/03/15/ES6/Set/index.html">
 <meta property="og:site_name" content="海绵宝宝">
-<meta property="og:description" content="Set的基本使用Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，">
+<meta property="og:description" content="Set的基本使用Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，并且在Set中，相同的元素只会出现一次。 Set的增删改查Set的创建Set不是原始数据类型，所以我们同样需要使用new关键字来创建。 就像这样： 1let s1 &#x3D; new Set([1, 2, 3, 4, 5]);  在创建Set的时候，我们使用New关键字然后后面跟上Set()在这里面，我们可以选择个IS">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-15T00:44:37.599Z">
-<meta property="article:modified_time" content="2023-03-15T01:27:00.538Z">
+<meta property="article:modified_time" content="2023-03-15T07:18:32.567Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -211,7 +211,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -221,7 +221,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">86</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">86</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -240,7 +240,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -252,6 +252,21 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled no-thumbnail">
         
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/15/javaLearn/%E5%BC%82%E5%B8%B8/" class="title">Java中的异常</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-15T02:16:54.877Z" itemprop="datePublished">2023-03-15</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-inner">
@@ -312,21 +327,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/ES6/">ES6</a>
-              </p>
-              <p class="item-title">
-                <a href="/2023/03/09/ES6/Symbol/" class="title">Symbol基础</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2023-03-09T12:05:04.855Z" itemprop="datePublished">2023-03-09</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -380,7 +380,41 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Set的基本使用"><a href="#Set的基本使用" class="headerlink" title="Set的基本使用"></a>Set的基本使用</h1><p>Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，</p>
+        <h1 id="Set的基本使用"><a href="#Set的基本使用" class="headerlink" title="Set的基本使用"></a>Set的基本使用</h1><p>Set作为ES6新出的一种数据类型，它是一种特殊的集合，它里面没有键名，并且在Set中，相同的元素只会出现一次。</p>
+<h2 id="Set的增删改查"><a href="#Set的增删改查" class="headerlink" title="Set的增删改查"></a>Set的增删改查</h2><h3 id="Set的创建"><a href="#Set的创建" class="headerlink" title="Set的创建"></a>Set的创建</h3><p>Set不是原始数据类型，所以我们同样需要使用<code>new</code>关键字来创建。</p>
+<p>就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>在创建Set的时候，我们使用<code>New</code>关键字然后后面跟上<code>Set()</code>在这里面，我们可以选择个ISet传入一个参数，当然这个参数一般都是数组类型的，这个传入的数组将被作为Set的初始值，当然，我们也可以不给Set传入参数，此时Set的值为0。</p>
+<h3 id="Set添加元素"><a href="#Set添加元素" class="headerlink" title="Set添加元素"></a>Set添加元素</h3><p>在Map中我们使用<code>map.set(key,value)</code>给Map添加元素，在Set中，我们将会使用<code>set.add(value)</code>。就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s3 = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">s3.<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s3); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>使用这个方法返回的是Set本身。</p>
+<h3 id="Set删除元素"><a href="#Set删除元素" class="headerlink" title="Set删除元素"></a>Set删除元素</h3><p>我们使用<code>set.delete(value)</code>来删除Set中指定的元素，如果Set中存在该元素，那么就返回true，删除成功；否则Set中不存在该元素，删除失败，返回false.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s4 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="keyword">var</span> isTrue = s4.<span class="title function_">delete</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> isTrue2 = s4.<span class="title function_">delete</span>(<span class="number">3</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(isTrue, isTrue2); <span class="comment">// true false</span></span><br></pre></td></tr></table></figure>
+
+<p>在删除<code>1</code>这个元素的时候，找到了该元素，删除成功，返回一个布尔值<code>true</code>，但是在删除<code>3</code>这个元素的时候，在该Set里面并没有，删除失败，返回一个布尔值<code>false</code>。</p>
+<h3 id="判断Set是否含有指定元素"><a href="#判断Set是否含有指定元素" class="headerlink" title="判断Set是否含有指定元素"></a>判断Set是否含有指定元素</h3><p>我们需要判断某个元素是否在Set中时，我们可以使用<code>set.has(value)</code>。它的返回值也是一个布尔值，包含返回<code>true</code>，不包含返回<code>false</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s5 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>]);</span><br><span class="line"><span class="keyword">let</span> flag = s5.<span class="title function_">has</span>(<span class="string">&quot;3&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> flag2 = s5.<span class="title function_">has</span>(<span class="number">3</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(flag,flag2); <span class="comment">// true  false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="清空整个Set"><a href="#清空整个Set" class="headerlink" title="清空整个Set"></a>清空整个Set</h3><p>如果我们需要将整个Set进行清空，那么我们只需要使用<code>set.clear()</code>方法即可，这个使用方法与Map一致。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s6 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s6); <span class="comment">// Set(4) &#123; 1, 2, 3, 4 &#125;</span></span><br><span class="line">s6.<span class="title function_">clear</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s6); <span class="comment">// Set(0) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取Set元素的个数"><a href="#获取Set元素的个数" class="headerlink" title="获取Set元素的个数"></a>获取Set元素的个数</h3><p>我们也可以使用<code>set.size</code>来获取Set元素的个数，这个<code>size</code>是Set的一个属性，而不是方法，所以我们在使用的时候可以不用加上<code>()</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s7 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);</span><br><span class="line"><span class="keyword">var</span> length = s7.<span class="property">size</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(length);  <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Set的迭代"><a href="#Set的迭代" class="headerlink" title="Set的迭代"></a>Set的迭代</h2><p>Set的迭代其实与Map相差不大，Map上面的迭代方法在Set这里也能使用。这里是我写的另一篇<a target="_blank" rel="noopener" href="https://juejin.cn/post/7210301826939764792">Map使用技巧</a>。</p>
+<p>在Set中我们可以使用下面三种方法进行遍历。</p>
+<ul>
+<li>set.keys()： 遍历并返回一个包含所有值的可迭代对象，</li>
+<li>set.values()：所得到的结果与<code>set.keys()</code>一样，这里主要是为了与Map兼容</li>
+<li>set.entries()：遍历并返回一个包含所有的实体 [value, value] 的可迭代对象，它的存在也是为了兼容 Map。</li>
+</ul>
+<h2 id="Set的一个使用场景"><a href="#Set的一个使用场景" class="headerlink" title="Set的一个使用场景"></a>Set的一个使用场景</h2><p>因为Set是不包含重复元素的，所以我们可以使用Set来给数组去重，但是如果数组里面是一些对象类型的数据，比如这样<code>[&#123;&quot;anme&quot;:1&#125;,&#123;&quot;name&quot;:1&#125;]</code>这样并不能通过Set去重，因为在Set看来，这两个是不一样的。</p>
+<p>数组去重：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">9</span>];</span><br><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    set.<span class="title function_">add</span>(i);</span><br><span class="line">&#125;</span><br><span class="line">arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(set);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// [</span></span><br><span class="line"><span class="comment">//   1, 2, 3, 4, 5,</span></span><br><span class="line"><span class="comment">//   6, 7, 8, 9</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure>
+
+<p>这样我们就通过Set成功将数组给去重了。</p>
 
       
     </div>
@@ -435,6 +469,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/03/15/javaLearn/%E5%BC%82%E5%B8%B8/" title="Java中的异常"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
     
     
     <li class="next">
