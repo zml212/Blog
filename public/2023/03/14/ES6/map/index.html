@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Map数据类型 | 海绵宝宝个人博客</title>
+  <meta name="description" content="[TOC] Map在Map这种数据类型里面，我们可以使用各种数据类型作为Map的键名，打破了之前对象只能使用一部分数据类型作为键名的限制。 创建MapMap不是一种原始数据类型，所以我们需要使用new关键字来创建，在创建Map数据类型的时候，需要将Map大写。 1let m &#x3D; new Map();  就像这样，我们创建出了Map对象。 Map的增删改查给Map对象赋值给Map对象赋值，我们使用s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Map数据类型">
+<meta property="og:url" content="http://example.com/2023/03/14/ES6/map/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="[TOC] Map在Map这种数据类型里面，我们可以使用各种数据类型作为Map的键名，打破了之前对象只能使用一部分数据类型作为键名的限制。 创建MapMap不是一种原始数据类型，所以我们需要使用new关键字来创建，在创建Map数据类型的时候，需要将Map大写。 1let m &#x3D; new Map();  就像这样，我们创建出了Map对象。 Map的增删改查给Map对象赋值给Map对象赋值，我们使用s">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-14T07:38:04.707Z">
+<meta property="article:modified_time" content="2023-03-15T01:27:09.646Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/03/14/ES6/map/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">86</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.67px;">后端</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 13.33px;">计算机</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13.33px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ES6/">ES6</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/15/ES6/Set/" class="title">Set的基本使用</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-15T00:44:37.599Z" itemprop="datePublished">2023-03-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/14/ES6/map/" class="title">Map数据类型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-14T07:38:04.707Z" itemprop="datePublished">2023-03-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Vue3/">Vue3</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/13/Vue3/Vue3%E4%B8%AD%E7%9A%84%E5%8A%A8%E7%94%BB/" class="title">Vue3中的过渡动画</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-13T11:01:46.806Z" itemprop="datePublished">2023-03-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/13/javaLearn/%E5%B0%81%E8%A3%85./" class="title">java中的封装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-13T08:13:05.972Z" itemprop="datePublished">2023-03-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ES6/">ES6</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/09/ES6/Symbol/" class="title">Symbol基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-09T12:05:04.855Z" itemprop="datePublished">2023-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-ES6/map" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Map数据类型
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/03/14/ES6/map/" class="article-date">
+	  <time datetime="2023-03-14T07:38:04.707Z" itemprop="datePublished">2023-03-14</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/03/14/ES6/map/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>在Map这种数据类型里面，我们可以使用各种数据类型作为Map的键名，打破了之前对象只能使用一部分数据类型作为键名的限制。</p>
+<h2 id="创建Map"><a href="#创建Map" class="headerlink" title="创建Map"></a>创建Map</h2><p>Map不是一种原始数据类型，所以我们需要使用<code>new</code>关键字来创建，在创建Map数据类型的时候，需要将Map大写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br></pre></td></tr></table></figure>
+
+<p>就像这样，我们创建出了Map对象。</p>
+<h2 id="Map的增删改查"><a href="#Map的增删改查" class="headerlink" title="Map的增删改查"></a>Map的增删改查</h2><h3 id="给Map对象赋值"><a href="#给Map对象赋值" class="headerlink" title="给Map对象赋值"></a>给Map对象赋值</h3><p>给Map对象赋值，我们使用<code>set</code>方法，并且这个方法返回的是Map对象本省，所以如果需要对Map对象赋多个值，我们可以链式赋值。</p>
+<p>就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">set</span>(<span class="string">&quot;2&quot;</span>, <span class="string">&quot;q&quot;</span>)</span><br><span class="line">   .<span class="title function_">set</span>(<span class="string">&quot;3&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">   .<span class="title function_">set</span>(<span class="string">&quot;4&quot;</span>, <span class="string">&quot;e&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们这样就给Map对象赋值了三个。</p>
+<h3 id="获取Map对象指定key的value"><a href="#获取Map对象指定key的value" class="headerlink" title="获取Map对象指定key的value"></a>获取Map对象指定key的value</h3><p>通过get方法可以获取到指定键名的值，<code>map.get(键名)</code>就可以得到对应的值，如果不存在该key,那么就返回undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">get</span>(<span class="string">&quot;2&quot;</span>); <span class="comment">// &quot;q&quot;</span></span><br><span class="line">p.<span class="title function_">get</span>(<span class="string">&quot;-1&quot;</span>); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="判断Map对象是否拥有这个key"><a href="#判断Map对象是否拥有这个key" class="headerlink" title="判断Map对象是否拥有这个key"></a>判断Map对象是否拥有这个<code>key</code></h3><p>我们使用<code>has(key)</code>方法来判断Map对象是否拥有这个<code>key</code>，如果存在那么返回<code>true</code>，如果不存在就返回<code>false</code>。</p>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">has</span>(<span class="string">&quot;2&quot;</span>); <span class="comment">// true</span></span><br><span class="line">p.<span class="title function_">has</span>(<span class="string">&quot;-1&quot;</span>);  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除Map对象指定的键名及其数据"><a href="#删除Map对象指定的键名及其数据" class="headerlink" title="删除Map对象指定的键名及其数据"></a>删除Map对象指定的键名及其数据</h3><p>我们可以使用<code>delete(key)</code>来删除我们指定的<code>key</code>的数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">delete</span>(<span class="string">&quot;2&quot;</span>); <span class="comment">// 删除key值为“2”的元素</span></span><br><span class="line">p.<span class="title function_">has</span>(<span class="string">&quot;2&quot;</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="清空整个Map"><a href="#清空整个Map" class="headerlink" title="清空整个Map"></a>清空整个Map</h3><p>我们使用<code>clea()r</code>直接将这个Map清空。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">clear</span>();</span><br><span class="line"><span class="keyword">var</span> i = p.<span class="property">size</span>; <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取整个Map的长度"><a href="#获取整个Map的长度" class="headerlink" title="获取整个Map的长度"></a>获取整个Map的长度</h3><p>我们使用<code>size</code>属性来获取Map的数据长度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = p.<span class="property">size</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map迭代"><a href="#Map迭代" class="headerlink" title="Map迭代"></a>Map迭代</h2><p>在Map中，我们可以直接使用for   of变量，但是这样遍历的结果是数组形式的。</p>
+<p>如果我们需要一些其他的遍历。</p>
+<p>这里有三种方法：</p>
+<ul>
+<li>map.keys():返回一个包含所有键的可遍历对象</li>
+<li>map.value():返回一个包含所有值（value）的可遍历对象</li>
+<li>map.enties():返回一个包含所有实体（[key:value]）的可遍历对象</li>
+</ul>
+<p>我们举一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mp = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">mp.<span class="title function_">set</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;q&quot;</span>)</span><br><span class="line">    .<span class="title function_">set</span>(<span class="string">&quot;2&quot;</span>,<span class="string">&quot;w&quot;</span>)</span><br><span class="line">    .<span class="title function_">set</span>(<span class="string">&quot;3&quot;</span>,<span class="string">&quot;e&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> x1 = mp.<span class="title function_">keys</span>();</span><br><span class="line"><span class="keyword">let</span> x2 = mp.<span class="title function_">values</span>();</span><br><span class="line"><span class="keyword">let</span> x3 = mp.<span class="title function_">entries</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> x1) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;--------------&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> x2) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;--------------&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> x3) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">--------------</span><br><span class="line">q</span><br><span class="line">w</span><br><span class="line">e</span><br><span class="line">--------------</span><br><span class="line">[ &#x27;1&#x27;, &#x27;q&#x27; ]</span><br><span class="line">[ &#x27;2&#x27;, &#x27;w&#x27; ]</span><br><span class="line">[ &#x27;3&#x27;, &#x27;e&#x27; ]</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>在Map中，遍历的顺序适合我们插入值的顺序是有关的，也就是说遍历Map是按照插入顺序进行遍历的。这一点也与Object不同。</p>
+<h2 id="从对象创建Map"><a href="#从对象创建Map" class="headerlink" title="从对象创建Map"></a>从对象创建Map</h2><p>在创建Map的时候，我们可以给Map传入一个数组的参数，里面包含一些键值对的数组。就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mp = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">	[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;q&quot;</span>],</span><br><span class="line">	[<span class="string">&quot;2&quot;</span>,<span class="string">&quot;w&quot;</span>]</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>这样创建出来的Map就已经初始化了。</p>
+<p>在对象中有这样一个方法：<code>Object.entries(对象)</code>这个方法可以将对象里面的每一个元素都转换为键值对的数组，并且返回一个数组，我们可以利用这个方法将对象转换为Map。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="string">&quot;1&quot;</span>: <span class="string">&quot;q&quot;</span>,</span><br><span class="line">    <span class="string">&quot;2&quot;</span>: <span class="string">&quot;w&quot;</span>,</span><br><span class="line">    <span class="string">&quot;3&quot;</span>: <span class="string">&quot;e&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> m1 = <span class="keyword">new</span> <span class="title class_">Map</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(obj));</span><br><span class="line"><span class="keyword">let</span> x4 = m1.<span class="title function_">entries</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> x4) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// [ &#x27;1&#x27;, &#x27;q&#x27; ]</span></span><br><span class="line"><span class="comment">// [ &#x27;2&#x27;, &#x27;w&#x27; ]</span></span><br><span class="line"><span class="comment">// [ &#x27;3&#x27;, &#x27;e&#x27; ]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="从Map创建对象"><a href="#从Map创建对象" class="headerlink" title="从Map创建对象"></a>从Map创建对象</h2><p>前面我们使用<code>Object.entries(obj)</code>的方法创建了对象，我们现在可以使用<code>Object.fromEntries(arr)</code>来创建对象。</p>
+<p><code>Object.fromEntries(arr)</code>需要传入的参数是一个键值对的数组。就类似于这样的：<code>[[q:w],[e:r],[t:y]]</code>。</p>
+<p>这样的格式是不是很眼熟，是的，我们在Map中使用<code>map.entries()</code>得到的结果就是这样的。</p>
+<p>所以从Map创建对象，我们可以这样做：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mp1 = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">mp1.<span class="title function_">set</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;q&quot;</span>)</span><br><span class="line">    .<span class="title function_">set</span>(<span class="string">&quot;2&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">    .<span class="title function_">set</span>(<span class="string">&quot;3&quot;</span>, <span class="string">&quot;e&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(mp1.<span class="title function_">entries</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line">&#123; <span class="string">&#x27;1&#x27;</span>: <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;2&#x27;</span>: <span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;3&#x27;</span>: <span class="string">&#x27;e&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/03/14/ES6/map/" title="Map数据类型" target="_blank" rel="external">http://example.com/2023/03/14/ES6/map/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/03/15/ES6/Set/" title="Set的基本使用"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/03/13/Vue3/Vue3%E4%B8%AD%E7%9A%84%E5%8A%A8%E7%94%BB/" title="Vue3中的过渡动画"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
