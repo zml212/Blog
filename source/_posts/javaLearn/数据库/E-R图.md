@@ -1,6 +1,6 @@
 ---
 title: E-R图
-data: [2023-3-21]
+date: [2023-3-21]
 tags: [后端]
 categroies: [数据库]
 ---
