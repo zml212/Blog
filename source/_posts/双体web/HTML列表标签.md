@@ -1,3 +1,10 @@
+---
+title: HTML基础2
+date: [2023-4-3]
+tags: [前端]
+categories: [HTML]
+---
+
 # 列表标签
 
 ## 无序列表
@@ -63,3 +70,86 @@
 单元列合并需要用到`colspan`属性，在要跨列的哪一行上设置`colspan`属性，值为要跨的列数。
 
 单元行合并需要用到`rowspan`属性，在要跨列的哪一列上设置`rowspan`属性，值为要跨的行数。
+
+## 表单标签
+
+使用`form`标签。
+
+其中`form`有两个属性：
+
+- action： 值为一个URL，表示表单内容提交到的位置。
+- method： 值为几种提交方式，POST、GET。表示提交的方式。
+	- get ： 信息在URL中，安全性不高，并且会导致URL过长。
+	- post:  表单里面的信息在地址栏看不见，对URL长度没有影响。
+
+### 常见的输入框类型
+
+- 输入框
+- 密码框
+- 下拉框
+- 单选框
+- 复选框
+- 提交按钮
+- 上传文件
+- 多行文本
+
+单行输入框：
+
+```HTML
+	<input type="text">
+```
+
+密码框：
+
+```HTML
+	<input type="password">
+```
+
+下拉框：
+
+```HTML
+	<select> // 开始标签
+		<option></option> // 选项标签
+		<option></option>
+	</select>
+```
+
+单选按钮：
+
+```HTML
+	<input type="radio" name="sex">
+	<input type="radio" name="sex">
+```
+
+注意：name属性值相同的为一组。
+
+提交按钮：
+
+```HTML
+	<input type="submit">
+```
+
+上传文件：
+
+```HTML
+	<input type="file">
+```
+
+多选框：
+
+```HTML
+	<input type="checkbox">
+	<input type="checkbox">
+```
+
+多行文本：
+
+```HTML
+	<textarea></textarea>
+```
+
+重置按钮：
+
+```HTML
+	<input type="reset">
+```
