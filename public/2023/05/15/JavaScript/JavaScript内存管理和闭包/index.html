@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JavaScript内存管理和闭包 | 海绵宝宝个人博客</title>
+  <meta name="description" content="JavaScript内存管理和闭包 JavaScript内存管理 立即回收机制算法 闭包的概念理解 闭包的形成过程 闭包的内存泄露  1.认识内存管理1.1不管什么编程语法，都会占用内存，比如变量，对象。某些编程语言需要手动管理内存（手动声明某个变量占用多大内存，手动释放内存），有的编程语言也可以自动管理内存。 不管什么方式管理内存，内存管理都会有如下生命周期：  分配申请内存 使用分配的内存 不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript内存管理和闭包">
+<meta property="og:url" content="http://example.com/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="JavaScript内存管理和闭包 JavaScript内存管理 立即回收机制算法 闭包的概念理解 闭包的形成过程 闭包的内存泄露  1.认识内存管理1.1不管什么编程语法，都会占用内存，比如变量，对象。某些编程语言需要手动管理内存（手动声明某个变量占用多大内存，手动释放内存），有的编程语言也可以自动管理内存。 不管什么方式管理内存，内存管理都会有如下生命周期：  分配申请内存 使用分配的内存 不">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-15T02:50:42.231Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">95</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.67px;">后端</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 13.33px;">计算机</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13.33px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/" class="title">JavaScript内存管理和闭包</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-14T16:00:00.000Z" itemprop="datePublished">2023-05-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/11/JavaScript/%E6%B7%B1%E5%85%A5%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" class="title">深入浏览器渲染原理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-10T16:00:00.000Z" itemprop="datePublished">2023-05-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/09/JavaScript/%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this/" class="title">函数中的this</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-09T02:32:13.339Z" itemprop="datePublished">2023-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/08/JavaScript/%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90/" class="title">事件对象详细解析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-08T13:22:15.953Z" itemprop="datePublished">2023-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/CSS/">CSS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/04/%E5%8F%8C%E4%BD%93web/CSS/" class="title">CSS中的盒子模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-03T16:00:00.000Z" itemprop="datePublished">2023-04-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JavaScript/JavaScript内存管理和闭包" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript内存管理和闭包
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/" class="article-date">
+	  <time datetime="2023-05-14T16:00:00.000Z" itemprop="datePublished">2023-05-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="JavaScript内存管理和闭包"><a href="#JavaScript内存管理和闭包" class="headerlink" title="JavaScript内存管理和闭包"></a>JavaScript内存管理和闭包</h1><ul>
+<li>JavaScript内存管理</li>
+<li>立即回收机制算法</li>
+<li>闭包的概念理解</li>
+<li>闭包的形成过程</li>
+<li>闭包的内存泄露</li>
+</ul>
+<h1 id="1-认识内存管理"><a href="#1-认识内存管理" class="headerlink" title="1.认识内存管理"></a>1.认识内存管理</h1><h1 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h1><p>不管什么编程语法，都会占用内存，比如变量，对象。某些编程语言需要手动管理内存（手动声明某个变量占用多大内存，手动释放内存），有的编程语言也可以自动管理内存。</p>
+<p>不管什么方式管理内存，内存管理都会有如下生命周期：</p>
+<ol>
+<li>分配申请内存</li>
+<li>使用分配的内存</li>
+<li>不需要使用的时候，对其进行释放</li>
+</ol>
+<p>JavaScript是自动管理内存的。</p>
+<p>内存我们分为两种：</p>
+<ul>
+<li>栈内存</li>
+<li>堆内存</li>
+</ul>
+<p>在JavaScript中，原始数据一般放在栈内存中；复杂数据类型（引用数据类型）存放在堆内存中，栈内存的变量名放的是该复杂类型在堆内存里面的引用。</p>
+<h2 id="1-2-JavaScript的垃圾回收"><a href="#1-2-JavaScript的垃圾回收" class="headerlink" title="1.2 JavaScript的垃圾回收"></a>1.2 JavaScript的垃圾回收</h2><p>什么是垃圾回收：</p>
+<p>因为内存是有限的的，当一些内存不需要的时候，就需要对其进行释放，以便腾出更多内存。</p>
+<p>手动管理内存比较麻烦，并且容易产生内存泄露。</p>
+<p>垃圾回收的英文：Garbage Collection,简称GC。</p>
+<p>垃圾就是在运行环境中不会被使用的变量、对象等等。</p>
+<p>JavaScript的运行环境js引擎负责垃圾回收。</p>
+<p>如何知道某些东西不再使用呢？这就需要GC算法了。</p>
+<h2 id="1-3常见的GC算法"><a href="#1-3常见的GC算法" class="headerlink" title="1.3常见的GC算法"></a>1.3常见的GC算法</h2><ol>
+<li>引用计数算法（JavaScript没有用这个算法）</li>
+</ol>
+<p>我们创建一个对象之后，它会放在堆内存里面，里面会有一个属性<code>retainCount</code>，在栈内存有一个变量存放了这个对象的内存地址，那么<code>retainCount</code>就会加一，反之则减一，如果当这个<code>retainCount</code>变为0的时候，这个对象就会被垃圾回收机制回收释放掉。</p>
+<ul>
+<li>这个算法有一个弊端，如果存在相互引用，如果不手动处理，那么<code>retainCount</code>永远不可能为0，那么永远不会被回收。</li>
+</ul>
+<ol>
+<li>标记清除法</li>
+</ol>
+<p>标记清除的核心思想：可达性</p>
+<p>这个算法会设置一个根对象（root object ），垃圾回收器会定期从这个根对象开始查找能引用到的对象，如果存在没有引用到的对象，它就会认为这是一个不可用对象，这个不可达的对象就会被清除。</p>
+<p>这个算法可以有效的解决相互引用的问题。</p>
+<p>JavaScript中主要采用标记清除法，V8引擎还用了一些其他的算法。</p>
+<p><strong>补充：</strong></p>
+<ul>
+<li>标记整理：与标记清理有点区别，他会将保留下来的一些对象放到连续的存储空间，整合空闲空间。并且可以减少内存碎片，提高内存利用率。</li>
+<li>分代收集：对象被分为新的与旧的，长期存在的对象，会变得老旧，被检查的次数就会减少。</li>
+<li>增量收集：可能对象会很多，全部遍历一遍的话，可能比较耗时，出现延迟，所以会将垃圾收集工作分为几部分来处理，每一部分逐一处理。</li>
+<li>闲时收集：在CPU空闲的时候运行，以便减少对代码执行的影响。</li>
+</ul>
+<h1 id="2-闭包的概念理解"><a href="#2-闭包的概念理解" class="headerlink" title="2. 闭包的概念理解"></a>2. 闭包的概念理解</h1><h2 id="2-1-JavaScript的函数式编程"><a href="#2-1-JavaScript的函数式编程" class="headerlink" title="2.1 JavaScript的函数式编程"></a>2.1 JavaScript的函数式编程</h2><p>JavaScript是支持函数式编程的，在JavaScript中函数式非常重要的。</p>
+<h2 id="2-2-闭包的定义"><a href="#2-2-闭包的定义" class="headerlink" title="2.2 闭包的定义"></a>2.2 闭包的定义</h2><ul>
+<li>计算机科学中的闭包<ul>
+<li>这是在支持头等函数的编程语言中，实现词法绑定的一种技术；它是一种结构，它存储了一个函数和一个关联的环境，在捕获闭包的时候，它的自由变量会在捕获时确定，即使脱离了捕获时的上下文，它也可以正常运行。</li>
+</ul>
+</li>
+<li>MDN对JavaScript闭包的解释：一个内层函数访问到其外层函数的作用域，在JavaScript中，每当创建一个函数，闭包就会在函数创建的同时创建出来。</li>
+</ul>
+<p>在函数体内部可以访问到外部的变量，就是因为js内部用闭包为我们做了一些事情。</p>
+<ul>
+<li><p>总结：</p>
+<ul>
+<li>一个普通的函数，如果它可以访问外层作用域的自由变量，那么这个函数和周围环境就是一个闭包</li>
+<li>广义：JavaScript中的函数都是闭包</li>
+</ul>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">	</span><br><span class="line">&#125; <span class="comment">//这就是一个闭包</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>狭义：JavaScript中一个函数，如果访问了外层作用域的变量，那么它就是一个闭包。</li>
+</ul>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;asd&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>,<span class="title function_">log</span>(name); <span class="comment">// 引用外部的变量</span></span><br><span class="line">&#125; <span class="comment">// 这就是一个狭义上的闭包</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-3-闭包的形成访问过程"><a href="#2-3-闭包的形成访问过程" class="headerlink" title="2.3 闭包的形成访问过程"></a>2.3 闭包的形成访问过程</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">adderCreate</span>(<span class="params">count</span>)&#123;</span><br><span class="line">	<span class="keyword">function</span> <span class="title function_">adder</span>(<span class="params">num</span>)&#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(count+num);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> adder;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder5 = <span class="title function_">adderCreate</span>(<span class="number">5</span>);</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">4</span>); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的代码形成了闭包。</p>
+<ol>
+<li>执行所有代码之前，创建一个全局对象（GO），里面包含adderCreate函数，以及adder5，此时adder5为undefined。</li>
+<li>全局作用域中的adderCreate函数，也有自己的一个作用域，里面有adder函数的地址，并且还有一个参数count，此时参数为undefined。并且这个adderCreate还有一个作用域链，里面只有一个值，为GO（全局对象）。</li>
+<li>接着就是adder函数，它有自己的作用域（AO），在这个作用域里面有num,此时为undefined，也有自己的作用域链:（0：adderCreate,1:GO）</li>
+<li>执行创建函数代码，此时返回一个函数，返回的是adder函数的地址，所以此时GO里面adder5的值就变为返回的这个地址。</li>
+<li>此时GO里面的adder5就指向adderCreate里面的adder函数，此时在这个函数里面可以访问到adderCreate的变量count（因为作用域链可以向上查找），这就形成了闭包。</li>
+</ol>
+<p>并且上面创建的每一个函数，都可以从GO找到，所以都不会被垃圾回收机制回收，所以可能会造成内存泄露。</p>
+<h2 id="2-4-闭包的内存泄露"><a href="#2-4-闭包的内存泄露" class="headerlink" title="2.4 闭包的内存泄露"></a>2.4 闭包的内存泄露</h2><p>对于闭包不再使用的函数，垃圾回收机制不会自动回收，会一直存在，就会造成内存泄露。</p>
+<p>这个时候就需我们手动进行内存释放。</p>
+<p>比如<code>adder5 = null;</code></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/05/15/JavaScript/JavaScript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E9%97%AD%E5%8C%85/" title="JavaScript内存管理和闭包" target="_blank" rel="external">http://example.com/2023/05/15/JavaScript/JavaScript内存管理和闭包/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/05/11/JavaScript/%E6%B7%B1%E5%85%A5%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" title="深入浏览器渲染原理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
