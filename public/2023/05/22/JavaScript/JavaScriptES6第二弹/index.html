@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JavaScript中ES6第二弹 | 海绵宝宝个人博客</title>
+  <meta name="description" content="JavaScript中ES6第二弹 模板字符串 ES6函数增强用法 展开运算符使用 Symbol类型 数据结构-Set 数据结构-Map  1.模板字符串1.1 模板字符串基本使用我们使用模板字符串可以将一些动态的数据与字符串组合在一起。 1const info &#x3D; &#96;this is my name:$&amp;#123;name&amp;#125;&#96;;  使用反引号来编写字符串，使用$&amp;#123;&amp;#125;编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中ES6第二弹">
+<meta property="og:url" content="http://example.com/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="JavaScript中ES6第二弹 模板字符串 ES6函数增强用法 展开运算符使用 Symbol类型 数据结构-Set 数据结构-Map  1.模板字符串1.1 模板字符串基本使用我们使用模板字符串可以将一些动态的数据与字符串组合在一起。 1const info &#x3D; &#96;this is my name:$&amp;#123;name&amp;#125;&#96;;  使用反引号来编写字符串，使用$&amp;#123;&amp;#125;编">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-23T08:36:17.244Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">43</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">101</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.67px;">后端</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 13.33px;">计算机</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13.33px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/20223/05/">五月 20223</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/20223/05/16/JavaScript/JavaScript%E5%87%BD%E6%95%B0%E7%9A%84%E5%A2%9E%E5%BC%BA%E7%9F%A5%E8%AF%86/" class="title">JavaScript函数的增强知识</a>
+              </p>
+              <p class="item-date">
+                <time datetime="+020223-05-15T16:00:00.000Z" itemprop="datePublished">20223-05-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" class="title">JavaScript中ES6第二弹</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/22/JavaScript/JavaScript%E4%B8%AD%E7%9A%84%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="title">JavaScript中的块级作用域</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/19/JavaScript/JavaScriptES6%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/" class="title">JavaScript ES6中的继承</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-18T16:00:00.000Z" itemprop="datePublished">2023-05-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/18/JavaScript/JavaScriptES5%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/" class="title">JavaScript  ES5中的继承</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-17T16:00:00.000Z" itemprop="datePublished">2023-05-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JavaScript/JavaScriptES6第二弹" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中ES6第二弹
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" class="article-date">
+	  <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="JavaScript中ES6第二弹"><a href="#JavaScript中ES6第二弹" class="headerlink" title="JavaScript中ES6第二弹"></a>JavaScript中ES6第二弹</h1><ul>
+<li>模板字符串</li>
+<li>ES6函数增强用法</li>
+<li>展开运算符使用</li>
+<li>Symbol类型</li>
+<li>数据结构-Set</li>
+<li>数据结构-Map</li>
+</ul>
+<h1 id="1-模板字符串"><a href="#1-模板字符串" class="headerlink" title="1.模板字符串"></a>1.模板字符串</h1><h2 id="1-1-模板字符串基本使用"><a href="#1-1-模板字符串基本使用" class="headerlink" title="1.1 模板字符串基本使用"></a>1.1 模板字符串基本使用</h2><p>我们使用模板字符串可以将一些动态的数据与字符串组合在一起。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> info = <span class="string">`this is my name:<span class="subst">$&#123;name&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用反引号来编写字符串，使用<code>$&#123;&#125;</code>编写动态数据</p>
+<h1 id="2-ES6的函数增强"><a href="#2-ES6的函数增强" class="headerlink" title="2. ES6的函数增强"></a>2. ES6的函数增强</h1><h2 id="2-1-函数的默认参数"><a href="#2-1-函数的默认参数" class="headerlink" title="2.1 函数的默认参数"></a>2.1 函数的默认参数</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1 = <span class="string">&quot;默认值1&quot;</span>,arg2 = <span class="string">&quot;默认值2&quot;</span></span>)&#123;</span><br><span class="line">	<span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当调用函数的时候，没有给对应参数传递参数的时候，JS就会使用默认值。</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>有默认参数的形参尽量写在后面</li>
+<li>有默认参数的形参，不会计算在length之内的（并且后面的所有参数都不会计算在length之内）。比如一个函数全有默认参数，那么参数长度就为0。</li>
+<li>如果参数还有剩余参数，那么剩余参数放在最后面。（默认参数的位置放在剩余参数前面）</li>
+</ul>
+<p>默认参数也可以和解构一起使用：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;as&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">12</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">&#123;name,age&#125; = obj</span>)&#123;</span><br><span class="line">	<span class="comment">// 方法体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果传入的是一个空对象</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo1</span>(<span class="params">&#123;name = <span class="string">&quot;asd&quot;</span>,age = <span class="number">12</span>&#125; = &#123;&#125;</span>)&#123;</span><br><span class="line">	<span class="comment">// 方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-箭头函数"><a href="#2-2-箭头函数" class="headerlink" title="2.2 箭头函数"></a>2.2 箭头函数</h2><p>箭头函数没有显式原型，不可以将箭头函数作为构造函数，不可以使用new来构造新的对象。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">foo</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">	<span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property"><span class="keyword">prototype</span></span>); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-展开语法"><a href="#3-展开语法" class="headerlink" title="3. 展开语法"></a>3. 展开语法</h1><ul>
+<li>可以函数调用&#x2F;数组构造时，将数组表达式或者String在语法层面展开</li>
+<li>在构造字面量的时候，将对象表达式以key-value的方式展开</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = [<span class="string">&quot;as&quot;</span>,<span class="string">&quot;qw&quot;</span>,<span class="string">&quot;sf&quot;</span>]</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...name); <span class="comment">// as qw sf</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;zmlzmlz&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...str); <span class="comment">// z m l z m l z</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES9之后还可以展开对象(在构建字面量时)</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;qwe&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> info = &#123;</span><br><span class="line">	...obj,</span><br><span class="line">	<span class="attr">height</span>:<span class="number">1.99</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">//&#123;name: &#x27;qwe&#x27;, age: 18, height: 1.99&#125;</span></span><br><span class="line"><span class="comment">//age</span></span><br><span class="line"><span class="comment">//: </span></span><br><span class="line"><span class="comment">//18</span></span><br><span class="line"><span class="comment">//height</span></span><br><span class="line"><span class="comment">//: </span></span><br><span class="line"><span class="comment">//1.99</span></span><br><span class="line"><span class="comment">//name</span></span><br><span class="line"><span class="comment">//: </span></span><br><span class="line"><span class="comment">//&quot;qwe&quot;</span></span><br><span class="line"><span class="comment">//[[Prototype]]</span></span><br><span class="line"><span class="comment">//: </span></span><br><span class="line"><span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-引用类型拷贝"><a href="#3-2-引用类型拷贝" class="headerlink" title="3.2 引用类型拷贝"></a>3.2 引用类型拷贝</h2><p>赋值引用类型：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;qwe&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> info = obj;</span><br><span class="line">info.<span class="property">name</span> = <span class="string">&quot;asd&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>); <span class="comment">// &quot;asd&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>引用赋值存在的问题，多个变量操作的都是同一个对象，一个改编，全部改变。</p>
+<p><strong>浅拷贝：</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;qwe&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">	<span class="attr">firend</span>:&#123;</span><br><span class="line">		<span class="attr">name</span>:<span class="string">&quot;zmlzml&quot;</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> info = &#123;</span><br><span class="line">	...obj,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">info.<span class="property">name</span> = <span class="string">&quot;hmbb&quot;</span>;</span><br><span class="line">info.<span class="property">firend</span>.<span class="property">name</span> = <span class="string">&quot;pai&quot;</span>,</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="property">name</span>); <span class="comment">// hmbb</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>); <span class="comment">// qwe</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="property">firend</span>.<span class="property">name</span>); <span class="comment">// pai</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">firend</span>.<span class="property">name</span>);  <span class="comment">// pai</span></span><br></pre></td></tr></table></figure>
+
+<p>之前的操作同一对象的问题有所改善，但是还没有完全解决。</p>
+<p><strong>深拷贝：</strong></p>
+<p>方法一：第三方库</p>
+<p>方法二：自己实现</p>
+<p>方式三：利用现有的js机制，实现深拷贝JSON</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;qwe&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">	<span class="attr">firend</span>:&#123;</span><br><span class="line">		<span class="attr">name</span>:<span class="string">&quot;zmlzml&quot;</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> info = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj));</span><br><span class="line"></span><br><span class="line">info.<span class="property">firend</span>.<span class="property">name</span> = <span class="string">&quot;hmbb&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="property">firend</span>.<span class="property">name</span>); <span class="comment">// &quot;hmbb&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">firend</span>.<span class="property">name</span>); <span class="comment">// &quot;zmlzml&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-数值表示"><a href="#3-数值表示" class="headerlink" title="3. 数值表示"></a>3. 数值表示</h1><ul>
+<li>二进制：0b</li>
+<li>八进制：0o</li>
+<li>十六进制：0x</li>
+</ul>
+<p>ES2021新增特性：当数字过长时，可以使用<code>_</code>作为连接符。</p>
+<h1 id="4-Symbol基本使用"><a href="#4-Symbol基本使用" class="headerlink" title="4.Symbol基本使用"></a>4.Symbol基本使用</h1><p>解决了对象属性名的命名冲突。</p>
+<p>Symbol用于生成一个独一无二的值。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	[s1]:<span class="string">&quot;asda&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<p>在Symbol创建的时候，可以传入一个描述。ES2019新增。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>();</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>()<span class="string">&#x27;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 加入对象中</span></span><br><span class="line"><span class="string">const obj = &#123;</span></span><br><span class="line"><span class="string">	[s1]:&quot;asd&quot;,</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Object.defineProperty(obj,si,&#123;</span></span><br><span class="line"><span class="string">	value :&quot;aaa&quot;,</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 或者Symbol对应的key</span></span><br><span class="line"><span class="string">console.log(Object.keys(obj)); // 获取不到Symbol</span></span><br><span class="line"><span class="string">console.log(Object.getOwnPropetySymbols(obj));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// Symbol的描述(创建的时候传入)</span></span><br><span class="line"><span class="string">const s3 = Symbol(&quot;描述&quot;);</span></span><br><span class="line"><span class="string">console.log(s3.description);</span></span><br></pre></td></tr></table></figure>
+
+<p>即使创建的时候，传入的描述是一样的，但是创建出来的Symbol还是不一样。</p>
+<p>生成相同的Symbol：</p>
+<ul>
+<li>使用Symbol.for方法创建相同的Symbol<ul>
+<li>如果有相同的key(传入的描述)，通过Symbol.for可以生成相同的Symbol值</li>
+</ul>
+</li>
+<li>使用Symbol.keyFor方法获取对象的key</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>(<span class="string">&quot;aaa&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(s1.<span class="property">description</span>);</span><br><span class="line"><span class="keyword">const</span> s3 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(s1.<span class="property">description</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s3 === s2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-Set与WeakSet的基本使用"><a href="#5-Set与WeakSet的基本使用" class="headerlink" title="5. Set与WeakSet的基本使用"></a>5. Set与WeakSet的基本使用</h1><p><strong>SET</strong></p>
+<p>set里面存放的数据是不会重复的，所以我们可以利用这个特性给数组去重。</p>
+<p>创建一个空set:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = <span class="keyword">new</span> <span class="title function_">set</span>();</span><br></pre></td></tr></table></figure>
+
+<p>给set添加元素：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;asd&quot;</span>,</span><br><span class="line">	<span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr.<span class="title function_">add</span>(<span class="string">&quot;str&quot;</span>);</span><br><span class="line">arr.<span class="title function_">add</span>(<span class="number">12</span>);</span><br><span class="line">arr.<span class="title function_">add</span>(obj);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<p>用处：给数组去重</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">9</span>];</span><br><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    set.<span class="title function_">add</span>(i);</span><br><span class="line">&#125;</span><br><span class="line">arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(set);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<p>set常见的属性以及方法：</p>
+<ul>
+<li>size：获取set里面的元素个数</li>
+<li>add()：添加元素</li>
+<li>delete(value):从set删除指定与元素</li>
+<li>has(value)：是否包含某个元素</li>
+<li>clean():清空整个Set</li>
+<li>for  each遍历</li>
+<li>for  of遍历</li>
+</ul>
+<p><strong>WEAKSET</strong></p>
+<p>与Set类似，也是不能存放重复的数据。</p>
+<p>与Set的区别：</p>
+<ul>
+<li>WeakSet只能存放对象类型，不可以存放基本数据类型</li>
+<li>WeakSet对元素的引用是弱引用，若没有其他引用对其某个元素的一弄，那么GC（垃圾回收机制）就会对该对象进行回收。</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认情况下，都为强引用</span></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;qw&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;asd&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj3 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;er&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> arr = [obj1, obj2, obj3];</span><br><span class="line">obj1 = <span class="literal">null</span>;</span><br><span class="line">obj2 = <span class="literal">null</span>;</span><br><span class="line">obj3 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 对象赋值为空之后，arr依然对其有引用，所以不会被GC回收</span></span><br></pre></td></tr></table></figure>
+
+<p>只能存放对象：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;qw&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;asd&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj3 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;er&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 区别一：WeakSet只能存放对象</span></span><br><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WeakSet</span>();</span><br><span class="line">ws.<span class="title function_">add</span>(obj1);</span><br><span class="line">ws.<span class="title function_">add</span>(obj2);</span><br><span class="line"><span class="comment">// ws.add(12);  报错</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ws);</span><br></pre></td></tr></table></figure>
+
+<p>常见的方法：</p>
+<ul>
+<li>add():添加元素</li>
+<li>delete（value）：删除指定元素</li>
+<li>has（value）：是否包含某个元素</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>WeakSet不能被遍历，因为里面的元素可能下一秒就被GC回收了，所以存放在WeakSet的元素是没有办法获取的。</p>
+<h1 id="6-Map与WeakMap的基本使用"><a href="#6-Map与WeakMap的基本使用" class="headerlink" title="6. Map与WeakMap的基本使用"></a>6. Map与WeakMap的基本使用</h1><p><strong>Map</strong></p>
+<p>Map与对象有点类似，都是以键值对存储。用于存储映射关系。</p>
+<p>但是对象Key只能用字符串或者Symbol，而Map可以用任何数据形式作为Key。 </p>
+<ul>
+<li><p>对象使用对象作为Key，会导致Key值为Object，最后一个为Object的键值对会覆盖之前的数据。</p>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;q&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;s&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = &#123;</span><br><span class="line">	[obj]:<span class="string">&quot;12&quot;</span>,</span><br><span class="line">	[obj2]:<span class="string">&quot;zml&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(test); <span class="comment">// [object Object]: &quot;zml&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>Map常见的属性及其方法：</p>
+<ul>
+<li>size：获取Map中元素的个数</li>
+<li>set(key,value)：添加元素，返回整个Map对象</li>
+<li>get(key)：根据key获取Map中的value</li>
+<li>has（key）:根据key判断该元素是否在Map中</li>
+<li>delete（key）:根据key删除指定元素</li>
+<li>clear():清空所有元素</li>
+<li>forEach（callback,[,thisArg]）：遍历元素</li>
+</ul>
+<p><strong>WeakMap:</strong></p>
+<p>WeakMap的key只能使用对象，不接受其他的类型作为key。</p>
+<p>WeakMap对对象的引用是弱引用，如果没有其他引用指向该对象，该对象就会被GC回收。</p>
+<p>WeakMap常见方法：</p>
+<ul>
+<li>set(key,value)：添加元素，返回整个WeakMap对象</li>
+<li>get(key)：根据key获取WeakMap中的value</li>
+<li>has（key）:根据key判断该元素是否在Weak Map中</li>
+<li>delete（key）:根据key删除指定元素</li>
+</ul>
+<p>WeakMap不支持遍历。</p>
+<h1 id="7-ES7-ES13新特性"><a href="#7-ES7-ES13新特性" class="headerlink" title="7. ES7~ES13新特性"></a>7. ES7~ES13新特性</h1><h2 id="7-1-字符串填充方法"><a href="#7-1-字符串填充方法" class="headerlink" title="7.1 字符串填充方法"></a>7.1 字符串填充方法</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str1 = <span class="string">&quot;5&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> str2 = <span class="string">&quot;5&quot;</span>;</span><br><span class="line"></span><br><span class="line">str1.<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&quot;0&quot;</span>);</span><br><span class="line">str2.<span class="title function_">padEnd</span>(<span class="number">2</span>, <span class="string">&quot;0&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;str1&#125;</span>, <span class="subst">$&#123;str2&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通常用于时间的格式化。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" title="JavaScript中ES6第二弹" target="_blank" rel="external">http://example.com/2023/05/22/JavaScript/JavaScriptES6第二弹/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/20223/05/16/JavaScript/JavaScript%E5%87%BD%E6%95%B0%E7%9A%84%E5%A2%9E%E5%BC%BA%E7%9F%A5%E8%AF%86/" title="JavaScript函数的增强知识"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/05/22/JavaScript/JavaScript%E4%B8%AD%E7%9A%84%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F/" title="JavaScript中的块级作用域"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
