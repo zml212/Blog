@@ -1,6 +1,6 @@
 ---
 title: JavaScript函数的增强知识
-date: 20223-5-16
+date: 2023-5-16
 tags: [前端]
 categories: [JavaScript]
 ---
