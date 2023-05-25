@@ -25,15 +25,15 @@
 <meta property="og:site_name" content="海绵宝宝">
 <meta property="og:description" content="Proxy-Promise使用 Proxy-Reflect使用 监听对象的操作 Proxy类基本使用 Proxy常见捕获器 Reflect介绍和作用 Reflect的基本使用 Reflect的receiver   Promise使用（重要） 异步代码的困境 认识Promise作用 Promise基本使用 Promise状态变化 Promise实例方法 Promise的类方法    1. Proxy">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?">
-<meta property="og:image" content="http://example.com/%5Bhttps:/p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Proxy%E6%89%80%E6%9C%89%E6%8D%95%E8%8E%B7%E5%99%A8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Reflect%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202305251422972.png">
 <meta property="article:published_time" content="2023-05-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-05-25T07:27:27.911Z">
+<meta property="article:modified_time" content="2023-05-25T07:32:42.685Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Proxy%E6%89%80%E6%9C%89%E6%8D%95%E8%8E%B7%E5%99%A8.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://example.com/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html">
   
@@ -439,7 +439,8 @@
 </ul>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;as&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">1.99</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个Proxy对象</span></span><br><span class="line"><span class="keyword">const</span> objProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// 捕获器</span></span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`监听：设置<span class="subst">$&#123;key&#125;</span>的值:<span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">        target[key] = value;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`监听：监听<span class="subst">$&#123;key&#125;</span>的获取`</span>);</span><br><span class="line">        <span class="keyword">return</span> target[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对obj的所有操作应该去操作objProxy</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objProxy.<span class="property">name</span>);</span><br><span class="line">objProxy.<span class="property">name</span> = <span class="string">&quot;jmbb&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objProxy.<span class="property">name</span>);</span><br><span class="line"></span><br><span class="line">objProxy.<span class="property">address</span> = <span class="string">&quot;重庆&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">//监听：监听name的获取</span></span><br><span class="line"><span class="comment">//as</span></span><br><span class="line"><span class="comment">//监听：设置name的值:jmbb</span></span><br><span class="line"><span class="comment">//监听：监听name的获取</span></span><br><span class="line"><span class="comment">//jmbb</span></span><br><span class="line"><span class="comment">//监听：设置address的值:重庆</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-Proxy所有的捕获器"><a href="#2-2-Proxy所有的捕获器" class="headerlink" title="2.2 Proxy所有的捕获器"></a>2.2 Proxy所有的捕获器</h2><p><img src="/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?" alt="image.png">](<a target="_blank" rel="noopener" href="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image">https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image</a>?))</p>
+<h2 id="2-2-Proxy所有的捕获器"><a href="#2-2-Proxy所有的捕获器" class="headerlink" title="2.2 Proxy所有的捕获器"></a>2.2 Proxy所有的捕获器</h2><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Proxy%E6%89%80%E6%9C%89%E6%8D%95%E8%8E%B7%E5%99%A8.png"/>
+
 <ul>
 <li>Proxy的construct与apply。</li>
 </ul>
@@ -453,7 +454,8 @@
 </ul>
 <p><strong>Reflect常见的方法：</strong></p>
 <p>Reflect方法与Proxy是一一对应的。</p>
-<p><img src="/%5Bhttps:/p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?" alt="image.png">](<a target="_blank" rel="noopener" href="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image">https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image</a>?))</p>
+<img src="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Reflect%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95.png"/>
+
 <p>Reflect的好处：</p>
 <ol>
 <li>操作代理对象，不直接操作原对象</li>

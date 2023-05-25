@@ -112,7 +112,7 @@ objProxy.address = "重庆";
 
 ## 2.2 Proxy所有的捕获器
 
-![image.png]([https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?)](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?))
+<img src="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Proxy%E6%89%80%E6%9C%89%E6%8D%95%E8%8E%B7%E5%99%A8.png"/>
 
 - Proxy的construct与apply。
 
@@ -133,7 +133,7 @@ Reflect是一个对象，不能通过new创建。直接调用对象里面的一�
 
 Reflect方法与Proxy是一一对应的。
 
-![image.png]([https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?)](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?))
+<img src="https://raw.githubusercontent.com/zml212/FigureBed/main/20230525Reflect%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95.png"/>
 
 Reflect的好处：
 
