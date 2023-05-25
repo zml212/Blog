@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Proxy-Promise使用 | 海绵宝宝个人博客</title>
+  <meta name="description" content="Proxy-Promise使用 Proxy-Reflect使用 监听对象的操作 Proxy类基本使用 Proxy常见捕获器 Reflect介绍和作用 Reflect的基本使用 Reflect的receiver   Promise使用（重要） 异步代码的困境 认识Promise作用 Promise基本使用 Promise状态变化 Promise实例方法 Promise的类方法    1. Proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxy-Promise使用">
+<meta property="og:url" content="http://example.com/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="Proxy-Promise使用 Proxy-Reflect使用 监听对象的操作 Proxy类基本使用 Proxy常见捕获器 Reflect介绍和作用 Reflect的基本使用 Reflect的receiver   Promise使用（重要） 异步代码的困境 认识Promise作用 Promise基本使用 Promise状态变化 Promise实例方法 Promise的类方法    1. Proxy">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?">
+<meta property="og:image" content="http://example.com/%5Bhttps:/p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202305251422972.png">
+<meta property="article:published_time" content="2023-05-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-25T07:27:27.911Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">44</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">102</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.67px;">后端</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 13.33px;">计算机</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13.33px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" class="title">Proxy-Promise使用</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-24T16:00:00.000Z" itemprop="datePublished">2023-05-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" class="title">JavaScript中ES6第二弹</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/22/JavaScript/JavaScript%E4%B8%AD%E7%9A%84%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="title">JavaScript中的块级作用域</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/19/JavaScript/JavaScriptES6%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/" class="title">JavaScript ES6中的继承</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-18T16:00:00.000Z" itemprop="datePublished">2023-05-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/18/JavaScript/JavaScriptES5%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/" class="title">JavaScript  ES5中的继承</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-17T16:00:00.000Z" itemprop="datePublished">2023-05-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JavaScript/Proxy与Promise使用详解" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Proxy-Promise使用
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" class="article-date">
+	  <time datetime="2023-05-24T16:00:00.000Z" itemprop="datePublished">2023-05-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="Proxy-Promise使用"><a href="#Proxy-Promise使用" class="headerlink" title="Proxy-Promise使用"></a>Proxy-Promise使用</h1><ul>
+<li>Proxy-Reflect使用<ul>
+<li>监听对象的操作</li>
+<li>Proxy类基本使用</li>
+<li>Proxy常见捕获器</li>
+<li>Reflect介绍和作用</li>
+<li>Reflect的基本使用</li>
+<li>Reflect的receiver</li>
+</ul>
+</li>
+<li>Promise使用（重要）<ul>
+<li>异步代码的困境</li>
+<li>认识Promise作用</li>
+<li>Promise基本使用</li>
+<li>Promise状态变化</li>
+<li>Promise实例方法</li>
+<li>Promise的类方法</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-Proxy-Reflect使用详解"><a href="#1-Proxy-Reflect使用详解" class="headerlink" title="1. Proxy-Reflect使用详解"></a>1. Proxy-Reflect使用详解</h1><h2 id="1-1-监听对象的操作"><a href="#1-1-监听对象的操作" class="headerlink" title="1.1 监听对象的操作"></a>1.1 监听对象的操作</h2><p>什么叫对对象属性的操作？</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">mame</span>: <span class="string">&quot;zml&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">1.88</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br><span class="line">obj.<span class="property">name</span> = <span class="string">&quot;hmbb&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>对对象属性的获取以及修改，添加删除等等操作，就是对对象属性的操作。</p>
+<p>在Vue中，就是监听对象中每一个属性的所有操作，但是我们在对象中单独写getter与setter太过于麻烦。</p>
+<p>我们可以使用遍历来进行设置。</p>
+<p><code>Object.definedProperty</code>主要是用于设置某个属性的监听，而<code>Proxy</code>更适合监听整个对象。</p>
+<h2 id="2-1-Proxy基本使用"><a href="#2-1-Proxy基本使用" class="headerlink" title="2.1 Proxy基本使用"></a>2.1 Proxy基本使用</h2><p>Proxy是ES6新增的一个类，我们可以先创建一个代理对象，对该对象的所有操作，都由代理对象来完成。</p>
+<ul>
+<li><p>首先，<code>new Proxy</code>对象，并且传入要监听的对象以及一个处理对象，称之为<code>handler</code>。</p>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target,handler);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其次，我们之后的操作都是直接对Proxy的操作，不是原有的对象，因此我们需要在handler进行监听。</p>
+</li>
+</ul>
+<p>在handler里面编写的每一个函数，都是一个捕获器。</p>
+<p>get与set</p>
+<p><strong>分别对象的是函数模型：</strong></p>
+<ul>
+<li>set函数有四个参数<ul>
+<li>target：目标对象（被监听的对象）</li>
+<li>property：将被设置的属性key</li>
+<li>value：新的属性值</li>
+<li>receiver：调用的代理对象</li>
+</ul>
+</li>
+<li>get函数有三个参数<ul>
+<li>target：目标对象（被监听的对象）</li>
+<li>property：将被设置的属性key</li>
+<li>receiver：调用的代理对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;as&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">1.99</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个Proxy对象</span></span><br><span class="line"><span class="keyword">const</span> objProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// 捕获器</span></span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> (<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`监听：设置<span class="subst">$&#123;key&#125;</span>的值:<span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">        target[key] = value;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> (<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`监听：监听<span class="subst">$&#123;key&#125;</span>的获取`</span>);</span><br><span class="line">        <span class="keyword">return</span> target[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对obj的所有操作应该去操作objProxy</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objProxy.<span class="property">name</span>);</span><br><span class="line">objProxy.<span class="property">name</span> = <span class="string">&quot;jmbb&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objProxy.<span class="property">name</span>);</span><br><span class="line"></span><br><span class="line">objProxy.<span class="property">address</span> = <span class="string">&quot;重庆&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">//监听：监听name的获取</span></span><br><span class="line"><span class="comment">//as</span></span><br><span class="line"><span class="comment">//监听：设置name的值:jmbb</span></span><br><span class="line"><span class="comment">//监听：监听name的获取</span></span><br><span class="line"><span class="comment">//jmbb</span></span><br><span class="line"><span class="comment">//监听：设置address的值:重庆</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Proxy所有的捕获器"><a href="#2-2-Proxy所有的捕获器" class="headerlink" title="2.2 Proxy所有的捕获器"></a>2.2 Proxy所有的捕获器</h2><p><img src="/%5Bhttps:/p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image?" alt="image.png">](<a target="_blank" rel="noopener" href="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image">https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbe8f6b8c7964bcfbe26ed57d976c824~tplv-k3u1fbpfcp-watermark.image</a>?))</p>
+<ul>
+<li>Proxy的construct与apply。</li>
+</ul>
+<p>监听对象的new操作与apply操作。</p>
+<h1 id="3-Reflect基本使用"><a href="#3-Reflect基本使用" class="headerlink" title="3. Reflect基本使用"></a>3. Reflect基本使用</h1><p>Reflect是一个对象，不能通过new创建。直接调用对象里面的一些方法。</p>
+<p>提供了操作JavaScript对象的一些方法。</p>
+<p>出现Reflect的原因：</p>
+<ul>
+<li>早期JS的设计没有考虑到对象本身操作的规范，将这些方法放到Object，但是Object是一个构造函数，这些操作放在Object不合适。还有一个方法使用时感觉不对劲。</li>
+<li>另外使用Proxy时，可以做到不操作原对象。</li>
+</ul>
+<p><strong>Reflect常见的方法：</strong></p>
+<p>Reflect方法与Proxy是一一对应的。</p>
+<p><img src="/%5Bhttps:/p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image?" alt="image.png">](<a target="_blank" rel="noopener" href="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image">https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a290c3d8df14a1b98c56592c09b564d~tplv-k3u1fbpfcp-watermark.image</a>?))</p>
+<p>Reflect的好处：</p>
+<ol>
+<li>操作代理对象，不直接操作原对象</li>
+<li>Reflect.set方法有返回Boolean值，可以判断本次操作是否成功</li>
+</ol>
+<p>Reflect中Reciver中的作用：</p>
+<ul>
+<li>Reflect使用setter与getter中，有一个参数为reciver，这个参数的作用就是改变setter或者getter中的this指向。</li>
+</ul>
+<h1 id="4-Promise基本使用"><a href="#4-Promise基本使用" class="headerlink" title="4. Promise基本使用"></a>4. Promise基本使用</h1><ul>
+<li>Promise是一个类。</li>
+<li>通过new创建Promise的时候，需要传入一个回调函数，称之为executor.<ul>
+<li>这个executor函数会被立即执行，并且这个回调函数还会传入两个回调函数，作为失败&#x2F;成功调用的回调函数(resolve,reject)。</li>
+<li>调用resolve回调函数时，执行Promise对象的then方法传入的回调函数。</li>
+<li>调用reject回调函数时，执行Promise对象的catch方法传入的回调函数。</li>
+</ul>
+</li>
+</ul>
+<p>大致结构：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 执行异步任务</span></span><br><span class="line">    <span class="comment">// 异步任务代码</span></span><br><span class="line">    <span class="comment">// 异步任务完成，调用回调函数</span></span><br><span class="line">    <span class="comment">// 调用成功回调函数</span></span><br><span class="line">    <span class="keyword">if</span> (success) &#123;</span><br><span class="line">        <span class="title function_">resolve</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 调用失败回调函数</span></span><br><span class="line">        <span class="title function_">reject</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 外部的回调函数</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行成功&quot;</span>);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行失败&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-1-Promise状态的解析"><a href="#4-1-Promise状态的解析" class="headerlink" title="4.1 Promise状态的解析"></a>4.1 Promise状态的解析</h2><p>Promise有三种状态：</p>
+<ul>
+<li>待定状态（padding）：此时没有调用reslove或者reject.</li>
+<li>成功状态(fulfilled)：调用reslove函数，此时为成功状态</li>
+<li>失败状态(rejected)：调用reject函数，此时为失败状态</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>promise的状态只能从待定状态转向成功状态或者失败状态。并且这个过程不可逆，并且 不能从其他方式进行转换。</p>
+<ul>
+<li>转换方式一： padding —&gt; fulfilled</li>
+<li>转换方式二：padding —&gt; rejected</li>
+</ul>
+<h2 id="4-2-Reslove的值"><a href="#4-2-Reslove的值" class="headerlink" title="4.2 Reslove的值"></a>4.2 Reslove的值</h2><ul>
+<li>普通值</li>
+</ul>
+<p>reslove里面可以返回任何的数据类型，比如字符串，数组，对象等等。</p>
+<ul>
+<li>resolve(promise)</li>
+</ul>
+<p>如果reslove回调函数返回的值是一个Promise,那么当前resolve的Promise的状态由resolve函数所返回的Promise来决定。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">reslove, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">reslove</span>(<span class="string">&quot;2秒之后成功&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">reslove, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">reslove</span>(promise);</span><br><span class="line">&#125;)</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;成功:&quot;</span>, res);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码2秒之后输出：<code>成功: 2秒之后成功</code>.</p>
+<ul>
+<li>reslove(thenable对象)</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">reslove, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">reslove</span>(&#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;azml&quot;</span>,</span><br><span class="line">        <span class="attr">then</span>: <span class="keyword">function</span> (<span class="params">resolve</span>) &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="number">111</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;成功:&quot;</span>, res);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>输出<code>成功：111</code>.</p>
+<h2 id="4-3then的返回值"><a href="#4-3then的返回值" class="headerlink" title="4.3then的返回值"></a>4.3then的返回值</h2><p>Promise本身支持链式：then方法本身是由返回值的，它的返回值是一个Promise。</p>
+<ul>
+<li>当then方法中的回调函数本身在执行的时候，那么它处于p ending状态</li>
+<li>当then方法中的回调函数返回一个结果的时候，那么它处于fulfilled状态，并且会将结果作为reslove的参数：<ul>
+<li>情况一： 返回一个普通的值</li>
+<li>情况二：返回一个Promise</li>
+<li>情况三：返回一个thenable值</li>
+</ul>
+</li>
+<li>当then抛出异常的时候，它处于reject状态</li>
+</ul>
+<p>then方法传入的回调函数的返回值类型：</p>
+<h2 id="4-4-catch方法的返回值"><a href="#4-4-catch方法的返回值" class="headerlink" title="4.4 catch方法的返回值"></a>4.4 catch方法的返回值</h2><p>catch方法返回的也是一个promise值。</p>
+<p>在catch方法之后也可以正常使用then方法或者catch方法。</p>
+<p>同样catch之后的一些方法也是等待catch决议之后再执行。</p>
+<p>如果在链式调用的时候，比如多个then调用，出现reject的时候，会直接跳到最近的一个catch方法。</p>
+<img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202305251422972.png"/>
+
+<h2 id="4-5-finally方法"><a href="#4-5-finally方法" class="headerlink" title="4.5 finally方法"></a>4.5 finally方法</h2><p>不论Promise最后是fulfilled还是rejected状态，都会执行finally方法。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>()</span><br><span class="line">    .<span class="title function_">catch</span>()</span><br><span class="line">    .<span class="title function_">finally</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-6-Promise的类方法"><a href="#4-6-Promise的类方法" class="headerlink" title="4.6 Promise的类方法"></a>4.6 Promise的类方法</h2><ul>
+<li>resolve方法：</li>
+</ul>
+<p>一般用于已经有一个值，我们想将其转换为Promise使用。</p>
+<p><code>Promise.resolve(”Hello”);</code></p>
+<p>相当于：（new一个Promise并且立即执行resolve）</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123; <span class="title function_">resolve</span>(<span class="string">&quot;Hello&quot;</span>) &#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>reject方法：</li>
+</ul>
+<p><code>Promise.reject(”err”);</code></p>
+<p>相当于：(new一个Promise并且立即执行reject)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">reject</span> =&gt;</span> &#123; <span class="title function_">reject</span>(<span class="string">&quot;err&quot;</span>) &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>下面几个方法传入多个Promise，要用可迭代的对象包裹起来。</p>
+<ul>
+<li>all方法</li>
+</ul>
+<p>它的作用就是将多个Promise包裹在一起形成一个新的Promise。</p>
+<p>新的Promise状态由被包裹的所有Promise决定：</p>
+<ul>
+<li>当所有的Promise状态变为fulfilled时，新的Promise状态为fulfilled，并且会把所有Promise的返回值组成一个数组。</li>
+<li>当有一个Promise状态为reject，新的Promise状态为reject，并且会将第一个reject的返回值作为参数</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p1&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p2&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p3&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">4000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>([p1, p2, p3])</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p1</span><br><span class="line">p2</span><br><span class="line">p3</span><br><span class="line">所有<span class="title class_">Promise</span>结果: [ <span class="string">&#x27;p1&#x27;</span>, <span class="string">&#x27;p2&#x27;</span>, <span class="string">&#x27;p3&#x27;</span> ]</span><br></pre></td></tr></table></figure>
+
+<p>当有reject的Promise：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p1&quot;</span>);</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;p1&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p2&quot;</span>);</span><br><span class="line">        <span class="comment">// resolve(&quot;p2&quot;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&quot;p2&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p3&quot;</span>);</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;p3&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">4000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>([p1, p2, p3]).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;所有Promise结果:&quot;</span>, res);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;出错了：&quot;</span>, err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p1</span><br><span class="line">p2</span><br><span class="line">出错了： p2</span><br><span class="line">p3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>allSettled方法：</li>
+</ul>
+<p>该方法会在所有的Promise都有结果（settled），无论是fulfilled还是rejected，才会有最终的状态。</p>
+<p>这个Promise的结果一定是fulfilled。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p1&quot;</span>);</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;p1&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p2&quot;</span>);</span><br><span class="line">        <span class="comment">// resolve(&quot;p2&quot;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&quot;p2&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;p3&quot;</span>);</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;p3&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">4000</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">allSettled</span>([p1, p2, p3]).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p1</span><br><span class="line">p2</span><br><span class="line">p3</span><br><span class="line">[</span><br><span class="line">  &#123; <span class="attr">status</span>: <span class="string">&#x27;fulfilled&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;p1&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">status</span>: <span class="string">&#x27;rejected&#x27;</span>, <span class="attr">reason</span>: <span class="string">&#x27;p2&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">status</span>: <span class="string">&#x27;fulfilled&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;p3&#x27;</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>最后输出的是一个对象，这个对象包含status状态，以及对应的value值。</p>
+<ul>
+<li>race方法：</li>
+</ul>
+<p>多个Promise互相竞争，谁先出结果，就用谁的结果。（不论fulfilled还是rejected）</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="Proxy-Promise使用" target="_blank" rel="external">http://example.com/2023/05/25/JavaScript/Proxy与Promise使用详解/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" title="JavaScript中ES6第二弹"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
