@@ -110,9 +110,8 @@ console.log(newStr);
 
 正则表达式的常用方法：
 
-![]([https://raw.githubusercontent.com/zml212/FigureBed/main/正则的常用方法.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.png))
+![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.png)
 
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/正则的常用方法.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.png)"/>
 
 上面两个方法为正则对象的方法，下面的都是字符串的方法。
 
@@ -120,12 +119,11 @@ console.log(newStr);
 
 - 常见的修饰符
 
-![]([https://raw.githubusercontent.com/zml212/FigureBed/main/修饰符的使用.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8.png))
+![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8.png)
 
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/修饰符的使用.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8.png)"/>
 
 - 匹配规则字符类：
 
-![]([https://raw.githubusercontent.com/zml212/FigureBed/main/正则匹配字符类.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E7%B1%BB.png))
+![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E7%B1%BB.png)
 
 <img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/正则匹配字符类.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E7%B1%BB.png)"/>
