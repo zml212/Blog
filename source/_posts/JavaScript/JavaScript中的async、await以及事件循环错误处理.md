@@ -273,6 +273,6 @@ try {
 
 最后错误被捕获：
 
-![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)
+![](https://github.com/zml212/FigureBed/blob/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)
 
 如果代码中有一些必须要执行的代码，我们可以在catch中添加一个finally，finally里面的代码无论如何都会执行。
