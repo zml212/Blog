@@ -25,14 +25,14 @@
 <meta property="og:site_name" content="海绵宝宝">
 <meta property="og:description" content="await、async、事件循环 async、await 浏览器进程、线程 宏任务、微任务队列 Promise面试题解析 throw、try、catch 浏览器存储Storage  1. 异步函数async、await 在函数定义的时候前面添加一个async。 123async function foo()&amp;#123;	&#x2F;&#x2F; 函数体&amp;#125;  异步函数内部的代码与普通函数一样，默认情况下是同步">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/06/05/JavaScript/JavaScript%E4%B8%AD%E7%9A%84async%E3%80%81await%E4%BB%A5%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/[https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)">
-<meta property="og:image" content="http://example.com/2023/06/05/JavaScript/JavaScript%E4%B8%AD%E7%9A%84async%E3%80%81await%E4%BB%A5%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/[https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png">
 <meta property="article:published_time" content="2023-06-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-05T08:28:42.429Z">
+<meta property="article:modified_time" content="2023-06-05T09:09:55.898Z">
 <meta property="article:author" content="赵明亮">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/06/05/JavaScript/JavaScript%E4%B8%AD%E7%9A%84async%E3%80%81await%E4%BB%A5%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/[https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://example.com/2023/06/05/JavaScript/JavaScript%E4%B8%AD%E7%9A%84async%E3%80%81await%E4%BB%A5%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/index.html">
   
@@ -439,8 +439,7 @@
 <h2 id="2-1-浏览器中的JavaScript线程"><a href="#2-1-浏览器中的JavaScript线程" class="headerlink" title="2.1 浏览器中的JavaScript线程"></a>2.1 浏览器中的JavaScript线程</h2><p>JavaScript运行是有自己的容器：浏览器和node.js。</p>
 <p>JavaScript代码在执行的过程之中都是在一个单独的线程之中执行的，也就是JavaScript在同一时刻内，只能做一件事。</p>
 <h2 id="2-2-浏览器的事件循环"><a href="#2-2-浏览器的事件循环" class="headerlink" title="2.2 浏览器的事件循环"></a>2.2 浏览器的事件循环</h2><p>JavaScript代码中的一些异步任务 ，并不会直接放在上下文执行栈中，而是会被方法哦浏览器中，将这些事件放到一个事件队列当中，执行到哪一个事件的时候再将该事件放到上下文执行栈中。</p>
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/事件循环.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)"/>
-
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png"></p>
 <h2 id="2-3-微任务和宏任务"><a href="#2-3-微任务和宏任务" class="headerlink" title="2.3 微任务和宏任务"></a>2.3 微任务和宏任务</h2><p>在事件队列中，又分为微任务和宏任务。</p>
 <p>为什么要进行区分呢？</p>
 <p>事件循环中并非只维护着一个队列，事实上是有两个队列：</p>
@@ -482,8 +481,7 @@
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;错误信息&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="title function_">foo</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>最后错误被捕获：</p>
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/异常的捕获.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)"/>
-
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png"></p>
 <p>如果代码中有一些必须要执行的代码，我们可以在catch中添加一个finally，finally里面的代码无论如何都会执行。</p>
 
       

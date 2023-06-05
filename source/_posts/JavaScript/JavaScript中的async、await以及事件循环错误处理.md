@@ -196,7 +196,7 @@ JavaScript代码在执行的过程之中都是在一个单独的线程之中执�
 
 JavaScript代码中的一些异步任务 ，并不会直接放在上下文执行栈中，而是会被方法哦浏览器中，将这些事件放到一个事件队列当中，执行到哪一个事件的时候再将该事件放到上下文执行栈中。
 
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/事件循环.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)"/>
+![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)
 
 ## 2.3 微任务和宏任务
 
@@ -273,6 +273,6 @@ try {
 
 最后错误被捕获：
 
-<img src="[https://raw.githubusercontent.com/zml212/FigureBed/main/异常的捕获.png](https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)"/>
+![](https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E8%8E%B7.png)
 
 如果代码中有一些必须要执行的代码，我们可以在catch中添加一个finally，finally里面的代码无论如何都会执行。
