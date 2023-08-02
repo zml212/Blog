@@ -17,21 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>什么是path路径模块 | 海绵宝宝个人博客</title>
-  <meta name="description" content="path路径模块什么是path路径模块path路径模块是node.js官方提供的用来处理路径的模块。 比如：  path.join():将多个路径片段拼接成为一个完整的路径片段 path.basename():可以从文件的路径字符串里面，将文件的名字解析出来  引入模块： const path &#x3D; require(&#39;path&#39;); 路径拼接path.join()语法格式： path">
+  <title>海绵宝宝个人博客</title>
+  <meta name="description" content="Vue3路由守卫 在vue路由中，有三种路由守卫，分别是前置守卫、解析守卫、后置守卫。  路由跳转是一个大的过程，其中包括路由跳转前（前置守卫），跳转中（解析守卫），跳转后（后置守卫）等时间节点，路由守卫就是这些时间节点内的函数钩子。 前置守卫beforeEach: 123router.beforeEach((to,from[,next]) &#x3D;&gt; &amp;#123;	内部操作&amp;#125;)  参数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="什么是path路径模块">
-<meta property="og:url" content="http://example.com/2022/12/17/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:title" content="海绵宝宝">
+<meta property="og:url" content="http://example.com/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/index.html">
 <meta property="og:site_name" content="海绵宝宝">
-<meta property="og:description" content="path路径模块什么是path路径模块path路径模块是node.js官方提供的用来处理路径的模块。 比如：  path.join():将多个路径片段拼接成为一个完整的路径片段 path.basename():可以从文件的路径字符串里面，将文件的名字解析出来  引入模块： const path &#x3D; require(&#39;path&#39;); 路径拼接path.join()语法格式： path">
+<meta property="og:description" content="Vue3路由守卫 在vue路由中，有三种路由守卫，分别是前置守卫、解析守卫、后置守卫。  路由跳转是一个大的过程，其中包括路由跳转前（前置守卫），跳转中（解析守卫），跳转后（后置守卫）等时间节点，路由守卫就是这些时间节点内的函数钩子。 前置守卫beforeEach: 123router.beforeEach((to,from[,next]) &#x3D;&gt; &amp;#123;	内部操作&amp;#125;)  参数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-10T02:23:13.919Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%89%8D%E7%BD%AE%E8%B7%AF%E7%94%B1.png">
+<meta property="article:published_time" content="2023-07-27T01:45:52.141Z">
+<meta property="article:modified_time" content="2023-07-27T02:21:33.076Z">
 <meta property="article:author" content="赵明亮">
-<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%89%8D%E7%BD%AE%E8%B7%AF%E7%94%B1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/2022/12/17/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/index.html">
+  <link rel="canonical" href="http://example.com/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/index.html">
   
     <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
   
@@ -211,7 +212,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">46</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">46</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -221,7 +222,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">104</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">105</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -240,7 +241,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -256,13 +257,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+                <a class="category-link" href="/categories/TypeScript/">TypeScript</a>
               </p>
               <p class="item-title">
-                <a href="/2023/06/06/JavaScript/JavaScript%E4%B8%AD%E7%9A%84Storage%E4%B8%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">Storage、正则表达式</a>
+                <a href="/2023/08/02/TS/typescript/" class="title">TypeScript笔记</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-06-05T16:00:00.000Z" itemprop="datePublished">2023-06-06</time>
+                <time datetime="2023-08-01T16:00:00.000Z" itemprop="datePublished">2023-08-02</time>
               </p>
             </div>
           </li>
@@ -271,13 +272,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+                
               </p>
               <p class="item-title">
-                <a href="/2023/06/05/JavaScript/JavaScript%E4%B8%AD%E7%9A%84async%E3%80%81await%E4%BB%A5%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" class="title">await、async、事件循环、错误</a>
+                <a href="/2023/07/28/ES6/Promise/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-06-04T16:00:00.000Z" itemprop="datePublished">2023-06-05</time>
+                <time datetime="2023-07-28T06:56:11.674Z" itemprop="datePublished">2023-07-28</time>
               </p>
             </div>
           </li>
@@ -286,13 +287,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+                
               </p>
               <p class="item-title">
-                <a href="/2023/05/25/JavaScript/Proxy%E4%B8%8EPromise%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" class="title">Proxy-Promise使用</a>
+                <a href="/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-05-24T16:00:00.000Z" itemprop="datePublished">2023-05-25</time>
+                <time datetime="2023-07-27T01:45:52.141Z" itemprop="datePublished">2023-07-27</time>
               </p>
             </div>
           </li>
@@ -301,13 +302,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+                
               </p>
               <p class="item-title">
-                <a href="/2023/05/22/JavaScript/JavaScriptES6%E7%AC%AC%E4%BA%8C%E5%BC%B9/" class="title">JavaScript中ES6第二弹</a>
+                <a href="/2023/06/15/node%E5%AD%A6%E4%B9%A0/6.express/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+                <time datetime="2023-06-15T09:26:02.201Z" itemprop="datePublished">2023-06-15</time>
               </p>
             </div>
           </li>
@@ -316,13 +317,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+                
               </p>
               <p class="item-title">
-                <a href="/2023/05/22/JavaScript/JavaScript%E4%B8%AD%E7%9A%84%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="title">JavaScript中的块级作用域</a>
+                <a href="/2023/06/14/node%E5%AD%A6%E4%B9%A0/5.Node,js%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+                <time datetime="2023-06-14T08:46:52.294Z" itemprop="datePublished">2023-06-14</time>
               </p>
             </div>
           </li>
@@ -340,57 +341,63 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-node学习/path路径模块" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Vue3/路由/路由守卫" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      什么是path路径模块
-    </h1>
-  
-
       
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/12/17/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/" class="article-date">
-	  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">2022-12-17</time>
+	<a href="/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" class="article-date">
+	  <time datetime="2023-07-27T01:45:52.141Z" itemprop="datePublished">2023-07-27</time>
 	</a>
 </span>
         
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/node/">node</a>
-  </span>
-
         
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
-  </span>
-
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/17/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="path路径模块"><a href="#path路径模块" class="headerlink" title="path路径模块"></a>path路径模块</h1><h2 id="什么是path路径模块"><a href="#什么是path路径模块" class="headerlink" title="什么是path路径模块"></a>什么是path路径模块</h2><p><code>path路径模块</code>是<code>node.js</code>官方提供的用来处理路径的模块。</p>
-<p>比如：</p>
-<ul>
-<li><code>path.join()</code>:将多个路径片段拼接成为一个完整的路径片段</li>
-<li><code>path.basename()</code>:可以从文件的路径字符串里面，将文件的名字解析出来</li>
-</ul>
-<p>引入模块：</p>
-<p><code>const path = require(&#39;path&#39;);</code></p>
-<h2 id="路径拼接"><a href="#路径拼接" class="headerlink" title="路径拼接"></a>路径拼接</h2><p><code>path.join()</code>语法格式：</p>
-<p><code>path.join([...paths])</code>:</p>
+        <h1 id="Vue3路由守卫"><a href="#Vue3路由守卫" class="headerlink" title="Vue3路由守卫"></a>Vue3路由守卫</h1><blockquote>
+<p>在vue路由中，有三种路由守卫，分别是前置守卫、解析守卫、后置守卫。</p>
+</blockquote>
+<p>路由跳转是一个大的过程，其中包括路由跳转前（前置守卫），跳转中（解析守卫），跳转后（后置守卫）等时间节点，路由守卫就是这些时间节点内的函数钩子。</p>
+<h2 id="前置守卫"><a href="#前置守卫" class="headerlink" title="前置守卫"></a>前置守卫</h2><p><code>beforeEach</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to,from[,next]) =&gt; &#123;</span><br><span class="line">	内部操作</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
+<p><strong>参数说明：</strong></p>
+<ol>
+<li>to:表示要跳转到的路由对象（目标路由）。<ul>
+<li>a. to.path:目标路由的路径</li>
+<li>b. to.name:目标路由的名称</li>
+<li>c. to.params:目标路由中的动态参数</li>
+<li>d. to.query:目标路由中的查询参数</li>
+</ul>
+</li>
+<li>from:表示从哪个路由开始跳转（来源&#x2F;起始路由）。<ul>
+<li>a. from.path:来源路由的路径</li>
+<li>b. from.name:来源路由的名称</li>
+<li>c. from.params:来源路由中的动态参数</li>
+<li>d. from.query:来源路由中的查询参数</li>
+</ul>
+</li>
+<li>next:这是一个函数，用来控制路由导航行为，释放路由出口的。如果写上了该参数，那么：<blockquote>
+<p>确保 next 在任何给定的导航守卫中都被严格调用一次。它可以出现多于一次，但是只能在所有的逻辑路径都不重叠的情况下，否则钩子永远都不会被解析或报错。</p>
+</blockquote>
+</li>
+</ol>
+<p>也就是如果路由守卫内部有分支语句，那么不管怎样，next()函数必须被调用一次。</p>
+<blockquote>
+<p>next函数可能出现的情况：<br>a. 不带参数：next(),代表跳转到目标路由，也就是to那个路由。<br>b. 带上路径参数：next(‘&#x2F;login’),跳转到指定路由，这里也就是跳转到指定的<code>/login</code>路由。<br>c. 带上<code>false</code>参数：next(false),取消这次导航，阻止这次导航的跳转。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/%E5%89%8D%E7%BD%AE%E8%B7%AF%E7%94%B1.png"></p>
+<p>其中from是来源路由，to是目标路由。</p>
+<h2 id="解析守卫"><a href="#解析守卫" class="headerlink" title="解析守卫"></a>解析守卫</h2>
       
     </div>
     <div class="article-footer">
@@ -399,7 +406,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2022/12/17/node%E5%AD%A6%E4%B9%A0/path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97/" title="什么是path路径模块" target="_blank" rel="external">http://example.com/2022/12/17/node学习/path路径模块/</a>
+      <a href="http://example.com/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" title="" target="_blank" rel="external">http://example.com/2023/07/27/Vue3/路由/路由守卫/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -446,12 +453,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/12/17/node%E5%AD%A6%E4%B9%A0/fs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97/" title="fs文件系统模块"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2023/07/28/ES6/Promise/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2022/12/16/JavaScript/eventEmitter/" title="EventEmitter类"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2023/06/15/node%E5%AD%A6%E4%B9%A0/6.express/" title="(no title)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
