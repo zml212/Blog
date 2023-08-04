@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>React1 | 海绵宝宝个人博客</title>
+  <meta name="description" content="React1[TOC] 1.三个API React.createElement(): 创建React元素  React.createElement(type,[props],[…children])  第一个参数：元素的名称（小写：div） 第二个参数：元素的属性（{id:’btn’}）,使用对象形式 ​	在设置事件的时候，属性名需要修改为驼峰命名法，并且在后面不能写方法，只能写函数名，React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React1">
+<meta property="og:url" content="http://example.com/2023/08/03/React/React1/index.html">
+<meta property="og:site_name" content="海绵宝宝">
+<meta property="og:description" content="React1[TOC] 1.三个API React.createElement(): 创建React元素  React.createElement(type,[props],[…children])  第一个参数：元素的名称（小写：div） 第二个参数：元素的属性（{id:’btn’}）,使用对象形式 ​	在设置事件的时候，属性名需要修改为驼峰命名法，并且在后面不能写方法，只能写函数名，React">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031434526.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031655513.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031658674.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031708984.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308040907506.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308040932368.png">
+<meta property="article:published_time" content="2023-08-03T02:27:39.471Z">
+<meta property="article:modified_time" content="2023-08-04T09:43:30.322Z">
+<meta property="article:author" content="赵明亮">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031434526.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2023/08/03/React/React1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="海绵宝宝" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zml212" target="_blank">
+          <img class="img-circle img-rotate" src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">海绵宝宝</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 重庆, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/JavaScript/">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>不积跬步，无以至千里。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX/">AJAX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BOM/">BOM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/DOM/">DOM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">46</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/DOM/">DOM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/html/">html</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">107</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 13.67px;">后端</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 13.33px;">计算机</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 13.33px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/03/React/State/" class="title">React中的State</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-03T07:18:12.903Z" itemprop="datePublished">2023-08-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/03/React/React1/" class="title">React1</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-03T02:27:39.471Z" itemprop="datePublished">2023-08-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/TypeScript/">TypeScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/02/TS/typescript/" class="title">TypeScript笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-01T16:00:00.000Z" itemprop="datePublished">2023-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/28/ES6/Promise/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-28T06:56:11.674Z" itemprop="datePublished">2023-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/27/Vue3/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-27T01:45:52.141Z" itemprop="datePublished">2023-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-React/React1" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React1
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/08/03/React/React1/" class="article-date">
+	  <time datetime="2023-08-03T02:27:39.471Z" itemprop="datePublished">2023-08-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/08/03/React/React1/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="React1"><a href="#React1" class="headerlink" title="React1"></a>React1</h1><p>[TOC]</p>
+<h2 id="1-三个API"><a href="#1-三个API" class="headerlink" title="1.三个API"></a>1.三个API</h2><ul>
+<li><p>React.createElement(): 创建React元素</p>
+<blockquote>
+<p>React.createElement(type,[props],[…children])</p>
+<blockquote>
+<p>第一个参数：元素的名称（小写：div）</p>
+<p>第二个参数：元素的属性（{id:’btn’}）,使用对象形式</p>
+<p>​	在设置事件的时候，属性名需要修改为驼峰命名法，并且在后面不能写方法，只能写函数名，React帮你调方法。</p>
+<p>​	class需求使用className来代替。</p>
+<p>第三个参数：元素内容</p>
+</blockquote>
+<p>用来创建React元素<br>React元素无法更改，使用新创建的元素进行替换。</p>
+</blockquote>
+</li>
+<li><p>ReactDOM.createRoot()：获取React根元素</p>
+<blockquote>
+<p>createRoot(container[,options])<br>用来 创建React根容器，放置React元素。</p>
+</blockquote>
+</li>
+<li><p>root.render()</p>
+<blockquote>
+<p>root.render(element)<br>当首次调用时，容器节点的所有DOM元素都会被替换，后续调用就会进行比较，只修改有变化的DOM。<br>不会修改容器节点，只会修改容器子节点。可以在不覆盖现有子节点情况下，将组件插入已有的DOM节点。</p>
+<p>当后续调用render渲染页面的时候，React会比较两次渲染的元素，只有在真是DOM发生变化的才会更新，没有变化的保持不变。</p>
+</blockquote>
+</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建React 元素</span></span><br><span class="line"><span class="keyword">const</span> btn = <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;button&quot;</span>,&#123;&#125;,<span class="string">&quot;点击&quot;</span>)；</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取根元素</span></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;root&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将新建的React元素放到根元素里面去</span></span><br><span class="line">root.<span class="title function_">render</span>(btn);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-JSX"><a href="#2-JSX" class="headerlink" title="2. JSX"></a>2. JSX</h2><blockquote>
+<p>在React中可以通过JSX来创建React元素。</p>
+</blockquote>
+<p>JSX需要被React翻译为JS，才能被React执行。（使用Babel来翻译）</p>
+<p>JSX其实就是React.createElement()的语法糖。</p>
+<h3 id="2-1-JSX注意事项"><a href="#2-1-JSX注意事项" class="headerlink" title="2.1 JSX注意事项"></a>2.1 JSX注意事项</h3><ol>
+<li><p>不要加引号，错误：“<div>12</div>&gt;”</p>
+</li>
+<li><p>有且只有一个根标签，必须有一个根标签。</p>
+</li>
+<li><p>html标签小写开头，React组件标签大写开。</p>
+</li>
+<li><p>可以使用<code>&#123;&#125;</code>插入js表达式。</p>
+</li>
+<li><p>属性正常写（class –&gt; className;style –&gt; {};事件名大驼峰）。</p>
+</li>
+<li><p>标签必须闭合。</p>
+</li>
+<li><p>{}中的布尔类型，null，undefined会被忽略。</p>
+</li>
+</ol>
+<h3 id="2-2-JSX中列表渲染"><a href="#2-2-JSX中列表渲染" class="headerlink" title="2.2 JSX中列表渲染"></a>2.2 JSX中列表渲染</h3><blockquote>
+<p>使用map</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">const</span> arr = [</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;凯瑟琳·约翰逊: 数学家&#x27;</span>, <span class="attr">key</span>: <span class="number">1</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;马里奥·莫利纳: 化学家&#x27;</span>, <span class="attr">key</span>: <span class="number">2</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;穆罕默德·阿卜杜勒·萨拉姆: 物理学家&#x27;</span>, <span class="attr">key</span>: <span class="number">3</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;珀西·莱温·朱利亚: 化学家&#x27;</span>, <span class="attr">key</span>: <span class="number">4</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;苏布拉马尼扬·钱德拉塞卡: 天体物理学家&#x27;</span>, <span class="attr">key</span>: <span class="number">5</span> &#125;,</span><br><span class="line">    ];</span><br><span class="line">    </span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &#123;arr.map((item) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">    return <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.key&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &#125;)&#125;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031434526.png" alt="image-20230803143441470"></p>
+<h2 id="3-虚拟DOM"><a href="#3-虚拟DOM" class="headerlink" title="3.虚拟DOM"></a>3.虚拟DOM</h2><p>在React中操作的元素叫做React元素，并不是真正的原生DOM。</p>
+<p>React通过虚拟DOM将React元素与真实DOM进行映射。</p>
+<p>好处：</p>
+<blockquote>
+<ol>
+<li>降低API复杂度</li>
+<li>解决兼容问题</li>
+<li>提升性能（减少不必要的DOM操作）</li>
+</ol>
+</blockquote>
+<p>React使用diffing算法，将新旧DOM进行比较，替换更改的DOM，保留不变的DOM。</p>
+<p>比较时，React会先比较父元素，如果父元素发生了改变，就直接替换该元素，不再比较子元素。如果父元素一致，则往下比较，直到发现不一样的节点。</p>
+<h2 id="4-组件"><a href="#4-组件" class="headerlink" title="4. 组件"></a>4. 组件</h2><h3 id="4-1-函数式组件"><a href="#4-1-函数式组件" class="headerlink" title="4.1 函数式组件"></a>4.1 函数式组件</h3><blockquote>
+<p>适用于简单组件</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Hello</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello React!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在父组件引入挂载。</p>
+<blockquote>
+<p>函数式组件，在没有hooks之前：</p>
+<ol>
+<li>没有生命周期，但是会被更新并挂载</li>
+<li>没有this(组件实例)</li>
+<li>没有内部状态</li>
+</ol>
+</blockquote>
+<h3 id="4-2-类式组件"><a href="#4-2-类式组件" class="headerlink" title="4.2 类式组件"></a>4.2 类式组件</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassCom</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>类组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中render函数位于类实例上。</p>
+<p>当这个类组件被root.render解析的时候,发现这个组件是一个类组件，所以就帮你创建了一个当前组件的实例，随后调用该组件上的render方法。</p>
+<p>最后将root.render返回的虚拟DOM转为真实DOM，展现到网页上。</p>
+<h3 id="4-3-补充"><a href="#4-3-补充" class="headerlink" title="4.3 补充"></a>4.3 补充</h3><p>render函数可以：</p>
+<ul>
+<li>返回React元素：</li>
+</ul>
+<blockquote>
+<p>通过JSX创建 </p>
+</blockquote>
+<ul>
+<li>数组或者fragments、</li>
+</ul>
+<blockquote>
+<p>使得render返回多个元素</p>
+</blockquote>
+<ul>
+<li>Portals：</li>
+</ul>
+<blockquote>
+<p>渲染子节点到不同的DOM字树中 </p>
+</blockquote>
+<ul>
+<li>字符串或者数值类型：</li>
+</ul>
+<blockquote>
+<p>在DOM中被渲染为文本节点</p>
+</blockquote>
+<ul>
+<li>布尔类型或者null：</li>
+</ul>
+<blockquote>
+<p>什么都不渲染</p>
+</blockquote>
+<h2 id="5-React中的生命周期"><a href="#5-React中的生命周期" class="headerlink" title="5. React中的生命周期"></a>5. React中的生命周期</h2><p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031655513.png" alt="image-20230803165508423"></p>
+<h3 id="5-1-生命周期解析"><a href="#5-1-生命周期解析" class="headerlink" title="5.1 生命周期解析"></a>5.1 生命周期解析</h3><p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031658674.png" alt="image-20230803165803615"></p>
+<ul>
+<li>Mounting：挂载阶段</li>
+<li>Updating：更新阶段</li>
+<li>Unmounting：卸载阶段</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassCom</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行组件constructor&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行组件的render函数&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>类组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;执行组件的componentDidMount&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308031708984.png" alt="image-20230803170826951"></p>
+<p>在组件更新的时候，会调用componentDidUpdate生命周期函数；当组件卸载的时候，会调用componentWillUnmount方法。 </p>
+<ol>
+<li><p>Constructor：</p>
+<p> ​	通过this.state赋值对象来初始化内部的state</p>
+<p> ​	为事件绑定this。</p>
+</li>
+<li><p>componentDidMount：</p>
+<p> ​	依赖DOM的操作在这里执行</p>
+<p> ​	在此处发送网络请求</p>
+<p> ​	添加订阅</p>
+</li>
+<li><p>componentDidUpdate:</p>
+<p> ​	当组件更新后，在此处对DOM进行操作</p>
+<p> ​	如果更新前后props进行了比较，可以在此处网络请求</p>
+</li>
+<li><p>componentWillUnmount：</p>
+<p> ​	在此方法中执行必要清理操作</p>
+<p> ​	比如：timer,网络请求，创建的订阅</p>
+</li>
+</ol>
+<h2 id="6-组件间的通信"><a href="#6-组件间的通信" class="headerlink" title="6. 组件间的通信"></a>6. 组件间的通信</h2><h3 id="6-1-父子组件之间的通信"><a href="#6-1-父子组件之间的通信" class="headerlink" title="6.1 父子组件之间的通信"></a>6.1 父子组件之间的通信</h3><h4 id="6-1-1-父传子"><a href="#6-1-1-父传子" class="headerlink" title="6.1.1 父传子"></a>6.1.1 父传子</h4><blockquote>
+<p>使用props</p>
+</blockquote>
+<ul>
+<li>类式组件</li>
+</ul>
+<p>父组件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ClassSon</span> <span class="keyword">from</span> <span class="string">&#x27;./ClassSon&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassCom</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = &#123;</span><br><span class="line">            <span class="attr">age</span>: <span class="number">12.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>类组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">ClassSon</span> <span class="attr">age</span>=<span class="string">&#123;this.state.age&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ClassSon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子组件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassSon</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; age &#125; = <span class="variable language_">this</span>.<span class="property">props</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是类式组件的子组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;age&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308040907506.png" alt="image-20230804090700448"></p>
+<ul>
+<li>函数式组件</li>
+</ul>
+<p>父组件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">FunSon</span> <span class="keyword">from</span> <span class="string">&quot;./FunSon&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">FunF</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>函数式组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">FunSon</span> <span class="attr">name</span>=<span class="string">&#123;</span>&quot;<span class="attr">hmbb</span>&quot;&#125;&gt;</span><span class="tag">&lt;/<span class="name">FunSon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子组件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">FunSon</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name &#125; = props;</span><br><span class="line">    <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>子组件&#123;name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/zml212/FigureBed/main/202308040932368.png" alt="image-20230804093205321"></p>
+<ul>
+<li>对传递过来的属性进行验证：</li>
+</ul>
+<p>当传过来的数据类型与期望类型不一致的时候，就会报错，这个时候就需要对传递的数据类型进行验证。</p>
+<blockquote>
+<p>使用PropTypes进行验证。</p>
+</blockquote>
+<blockquote>
+<p>从React15.5开始，这个功能被移入了prop-types库。(使用时需要单独引入)</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">PropTypes</span> <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">FunSon</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; name &#125; = props;</span><br><span class="line">    <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>子组件&#123;name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">FunSon</span>.<span class="property">PropTypes</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="title class_">PropTypes</span>.<span class="property">string</span>.<span class="property">isRequired</span>, <span class="comment">// 表示必传且数据类型为字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以设置属性的默认值，当父组件没有传递任何值的时候，子组件就会使用默认值进行渲染。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">FunSon</span>.<span class="property">defaultProps</span> = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&#x27;pdx&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的属性验证写法，类组件同样使用，使用组件名<code>.</code>方法。</p>
+<p>在类组件中还有另外一种写法：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Class</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span>&#123;</span><br><span class="line">	<span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-1-2-字传父"><a href="#6-1-2-字传父" class="headerlink" title="6.1.2 字传父"></a>6.1.2 字传父</h4><blockquote>
+<p>在React中通过Props传递消息，父组件给子组件传递一个回调函数，子组件调用。</p>
+</blockquote>
+<p>父组件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ClassSon</span> <span class="keyword">from</span> <span class="string">&quot;./ClassSon&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassF</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = &#123;</span><br><span class="line">            <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>当前计数&#123;this.state.count&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">ClassSon</span> <span class="attr">click</span>=<span class="string">&#123;this.add.bind(this)&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ClassSon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">state</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;</span><br><span class="line">            <span class="attr">count</span>: <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">count</span> + <span class="number">1</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子组件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ClassSon</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; click &#125; = <span class="variable language_">this</span>.<span class="property">props</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;click&#125;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/&gt;</span></span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>父组件定义方法，并且通过props的方法将事件传递给子组件，子组件再进行调用。</p>
+<h3 id="6-2-如何在React中实现Vue中的slot"><a href="#6-2-如何在React中实现Vue中的slot" class="headerlink" title="6.2 如何在React中实现Vue中的slot"></a>6.2 如何在React中实现Vue中的slot</h3>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/08/03/React/React1/" title="React1" target="_blank" rel="external">http://example.com/2023/08/03/React/React1/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zml212" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://p3-passport.byteimg.com/img/user-avatar/dbac6a301272ab7ccf08a974a630316d~100x100.awebp" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zml212" target="_blank"><span class="text-dark">海绵宝宝</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>大三切图仔一枚</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/08/03/React/State/" title="React中的State"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/08/02/TS/typescript/" title="TypeScript笔记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/null" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/zml212" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 赵明亮
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

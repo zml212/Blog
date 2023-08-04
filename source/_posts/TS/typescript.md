@@ -7,6 +7,8 @@ categories: [TypeScript]
 
 # TypeScript 
 
+[TOC]
+
 ## 1.基本数据类型
 
 ### 1.1js中基本数据类型
@@ -171,12 +173,12 @@ import {Student} from "./interface.ts"
 ```typescript
 // 这里将空间命名为P
 namespace P {
-    export interface Person {
+    interface Person {
         name: string,
         readonly age: number,
     }
 
-    export interface Student extends Person {
+    interface Student extends Person {
         score: number,
     }
 
@@ -200,4 +202,234 @@ const student: P.Student = {
     age: 0
 }
 ```
+
+推荐使用第一种方法。
+
+## 3. 对象类型
+
+在TypeScript中，对象类型并不是单单指object.
+
+### 3.1 原始数据类型中的对象
+
+在原始值类型中，有下面几种对象类型：
+
+| 原始数据类型 | 对应的对象 |
+| :----------: | :--------: |
+|    number    |   Number   |
+|   boolean    |  Boolean   |
+|     null     |    Null    |
+|    string    |   String   |
+|  undefined   | Undefined  |
+
+原始数据类型与其对象有下面几个区别：
+
+1. 存储位置不同：原始数据类型直接存放在栈内存当中，但是对象存放在堆内存中。
+
+2. 传值方式不同：原始数据类型按值传递，对象是按引用传递。
+
+所以定义变量类型的时候，使用原始数据类型或者对象类型都是可以的，只是有上面的两点区别。
+
+### 3.2 Object类型
+
+Object类型是所有Object类的实例，如果使用Object来限制变量类型，那么值类型（原始数据类型）和引用类型（原始数据的对象类型）都会指向Object。
+
+```typescript
+let a:Object = 12;
+let b:Object = "hmbb";
+let c:Object = [1,2];
+let d:Object = {name:"hmbb",age:12};
+let e:Object = () => {};
+```
+
+### 3.3 object类型
+
+object 代表所有非值类型(非原始类型)的类型，例如 数组 对象 函数等，常用于泛型约束。
+
+它只支持引用数据类型，对于原始数据类型不支持。
+
+```typescript
+let a:object = 12; // 报错
+let o:object = {name:'hmbb'}; // 合法，不报错
+```
+
+![image-20230803084523895](https://raw.githubusercontent.com/zml212/FigureBed/main/202308030845954.png)
+
+对于引用数据类型就不会报错。
+
+## 4. 数组类型
+
+### 4.1 普通声明方式
+
+使用`数据类型[]`方式来声明。
+
+```typescript
+let arr1: number[] = [1, 2, 3, 4];
+```
+
+使用这种方法定义时，前面的数据类型是什么，后面数组里面的数据类型也只能是这种或者是这种的子类。
+
+否则就会报错：
+
+```typescript
+let arr1: number[] = [1, 2, 3, "q",4]; // 不能将类型“string”分配给类型“number”。
+```
+
+### 4.2 使用泛型来声明
+
+> Array<类型名>
+
+```typescript
+let arr2:Array<boolean> = [false,true,false];
+```
+
+同样数组里面只能存放定义时的数据类型或者它的子类型。
+
+### 4.3 类数组 -- arguments
+
+> 类数组就是所有参数的集合
+
+在TS中，有一个内置的类型：IArguments
+
+```typescript
+function getArr(a: number, b: number, ...arg: any[]): void {
+    let arr: IArguments = arguments;
+    console.log(arr);
+}
+
+getArr(1, 2, [33, 4, 5, 6, 7]);  // [Arguments] { '0': 1, '1': 2, '2': [ 33, 4, 5, 6, 7 ] }
+```
+
+IArguments类型其实就是：
+
+```typescript
+interface IArguments{
+	[index:number]:any,
+    length:number,
+    callee:Function,
+}
+```
+
+### 4.4 使用接口来声明
+
+> 使用接口来定义
+
+```typescript
+interface Person {
+		name: string;
+  		age: number;
+ 		 email: string;
+}
+
+const people:Person[] = [
+    {
+        name:"zzz",
+        age:12,
+        email:"1111@qq.com"
+    }
+]
+```
+
+## 5.函数
+
+### 5.1 普通方式定义
+
+> TS可以限制函数的参数类型，以及函数的返回值类型
+
+比如:
+
+```typescript
+function fn(name:string,age:number):string{
+	return name+age;
+}
+```
+
+上面的函数第一个参数只能传入一个字符串类型，第二个参数只能传入number类型，并且返回值只能是字符串类型。
+
+如果调用函数时，传入的参数或者返回的数据类型与定义类型不符，就会报错。
+
+![image-20230803094025380](https://raw.githubusercontent.com/zml212/FigureBed/main/202308030940435.png)
+
+### 5.2 对象形式定义
+
+> 使用接口或者type 的方式
+
+```typescript
+interface User{
+	name:string,
+	age:12,
+	address?: string,
+}
+
+function fn1(user:User) :string{
+    return user.name+user.age;
+}
+
+console.log(fn1({ name: "hmbb", age: 12 })); //hmbb12
+```
+
+### 5.3 函数重载
+
+> 函数重载就是：方法名相同，参数类型不同，返回值类型也可以不相同。
+>
+> 执行重载函数的时候，会从上往下执行，所以需要把最精确的类型放在最前面。
+
+```typescript
+function fn(params:number):void//第一套规则
+function fn(params:string,params2:number):void//第二套规则
+function fn(params:any,params2?:any):void{
+    console.log(params)
+    console.log(params2)
+}
+```
+
+执行器从上往下执行，一旦匹配到合适的函数规则，就不再往下继续匹配，直接开始执行函数体里面的内容。
+
+## 6.联合类型|交叉类型|类型断言
+
+### 6.1 联合类型
+
+> 当我们一个变量可能会存放两种及其以上的数据类型，这个时候我们可以使用联合类型。
+
+```typescript
+let a:number|string = 12;
+a = "hmbb";
+```
+
+同理这个方法在函数的参数一样可以使用。
+
+### 6.2 交叉类型
+
+> 前面的联合类型是对基础的单个数据类型进行了扩充，交叉数据类型就是将多种数据类型的集合(比如接口)进行扩充。
+
+```typescript
+interface Per1{
+	name:string,
+	age:number,
+}
+interface Stu1{
+	score:number,
+}
+
+const p: Per1 & Stu1 = {
+        name: "hmbb",
+        age: 12,
+        score: 90,
+    }
+```
+
+### 6.3 类型断言
+
+> 类型断言可以使用: 值 as 类型 或者 <类型>值
+>
+> 推荐前面那一种写法，因为在TSX中，<>可能会引起误会。
+
+- 类型断言的用途
+
+（1）将一个联合类型推断为其中一个类型
+
+（2）将一个父类断言为更加具体的子类
+
+（3）将任何一个类型断言为 any
+
+（4）将 any 断言为一个具体的类型
 
