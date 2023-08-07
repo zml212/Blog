@@ -440,13 +440,338 @@ export default class ClassSon extends React.Component {
 
 ### 6.2 如何在React中实现Vue中的slot
 
+- 方式一
+
+使用props.children给子组件传递组件数据。
+
+父组件：
+
+```jsx
+export default class Slot extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (<>
+            <NavBar>
+                <div>1212</div>
+                <div>center</div>
+                <div>right</div>
+            </NavBar>
+        </>)
+    }
+}
+```
+
+使用类式组件，将子组件引入，并且在子组件内部写上要传递的数据，这里有三个部分，到时候props.children中也会有三个数据。
+
+子组件：
+
+```jsx
+export default class NavBar extends React.Component {
+    constructor(props) {
+        super(props)
+        console.log(this.props);
+    }
+    render() {
+        return (<>
+            <div className="nav-bar">
+                <div className="nav-left">
+                    {this.props.children[0]}
+                </div>
+                <div className="nav-center">
+                    {this.props.children[1]}
+                </div>
+                <div className="nav-right">
+                    {this.props.children[2]}
+                </div>
+            </div>
+        </>)
+    }
+}
+```
+
+控制台输出子组件中的props为：
+
+![image-20230807104525285](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071045373.png)
+
+可以看到确实children中有我们组件的数据。
+
+- 方式二
+
+将父组件中子组件内部的数据通过props传递：
+
+![image-20230807105633832](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071056895.png)
+
+在子组件中使用对象解构，将对应的插槽给解构出来：
+
+![image-20230807105739216](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071057319.png)
+
+实现的效果是一样的。
+
+### 6.3 跨组件通信
+
+#### 6.3.1 使用props进行祖先组件通信
+
+```jsx
+import React from 'react';
+// 父组件
+export default class TxProps extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: "海绵宝宝",
+            age: 12,
+        }
+    }
+    render() {
+        return (<>
+            <Son1 name={this.state.name} age={this.state.age}></Son1>
+        </>)
+    }
+}
+// 子组件
+class Son1 extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("son1:", this.props);
+    }
+    render() {
+        const { name, age } = this.props;
+        return (<>
+            <Son2 name={name} age={age}></Son2>
+        </>)
+    }
+}
+// 孙组件
+class Son2 extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("son2:", this.props);
+    }
+    render() {
+        const { name, age } = this.props
+        return (<>
+            <div>name:{name}</div>
+            <div>age:{age}</div>
+        </>)
+    }
+}
+```
+
+使用props逐层传递。
+
+ 这种方法对于中间层（Son1）它根本不需要这些数据，这样就会造成性能的浪费以及后期维护成本的增加。
+
+所以第二种方法：
+
+#### 6.3.2 Context实现非父子组件数据通信
+
+> Context相关API
+
+- 创建Context对象
+
+React.createContext()
+
+​	创建一个需要共享的Context对象，如果某个组件订阅了Context，那么该组件就会寻找离自身最近的那个Provider并且读取到当前context的值。
+
+​	defaultValue是组件在顶层查找中没有找到对应的Provider，那么就使用默认值。
+
+```jsx
+const MyContext = React.createContext(defaultValue);
+```
+
+- Context.Provider
+
+​	每个Context对象都会返回Provider 组件，这个组件允许消费组件（使用该数据的组件）订阅Context组件的变化。
+
+​	Provider接受一个value属性，并且将这个值传递给消费组件
+
+​	一个Provider组件允许被多个消费组件使用
+
+​	Provider组件可以被嵌套使用，里层的数据会覆盖外层的数据
+
+​	当Provider中value发生变化，所以依赖该Provider组件的消费组件都会被重新渲染（更新）。
+
+```jsx
+<MyContext.Provider value={"value"}/>
+```
+
+- Class.contextType
+
+​	挂载在class上的contextType属性会被重新赋值为一个由React.createContext()创建的Context对象。
+
+​	在该类组件可以使用this.context来消费最近的Context那个值
+
+​	可以在任何声明周期内方法，包括render函数
+
+```jsx
+MyClass.contextType = MyContext;
+```
+
+- Context.Consumer
+
+​	React订阅组件的变更
+
+​	将函数作为子元素
+
+​	该函数接受当前context的值，返回react节点
+
+```jsx
+import React from 'react';
+
+// 创建Context对象,并且设置默认值
+const UserContext = React.createContext({
+    name: "defaultName",
+    age: "undefaultAge"
+})
+
+export default class ContextProps extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: "海绵宝宝",
+            age: 12,
+        }
+    }
+    render() {
+        return (<>
+            {/* 使用Context.Provider */}
+            <UserContext.Provider value={this.state}>
+                <Son1></Son1>
+            </UserContext.Provider>
+        </>)
+    }
+}
+
+class Son1 extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (<>
+            <Son2></Son2>
+        </>)
+    }
+}
 
 
+class Son2 extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        console.log(this.context);
+        return (<UserContext.Consumer>
+            {
+                value => {
+                    return (<>
+                        <div>name:{value.name}</div>
+                        <div>age:{value.age}</div>
+                    </>)
+                }
+            }
+        </UserContext.Consumer>)
+    }
+}
 
+// 一定要放在组件之后
+Son2.contextType = UserContext;
+```
 
+## 7. setState
 
+在上面的代码中，我们使用`this.state={}`的方式在类式组件里面定义了数据，如果我们直接修改里面的数据：
 
+```jsx
+this.state = {
+    name:"12",
+}
 
+this.state.name = "海绵宝宝";
+```
 
- 
+这样的操作确实把数据给更改了，但是页面不会更新，因为React察觉不到数据是否发生了改变。
 
+### 7.1 setState是异步更新
+
+也就是我们通过setState将数据更改之后，数据并不会立即发生改变，而是等到所有的数据都更新之后，才会将数据传递给页面，页面重新渲染，如果我们在setState之后立即输出该数据，我们会发现数据是没有变化的。
+
+```jsx
+import React from 'react';
+
+export default class SetState extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "121212",
+        }
+    }
+
+    change() {
+        this.setState({
+            name: "海绵宝宝"
+        })
+        console.log(this.state.name);
+    }
+
+    render() {
+        return (<>
+            <div>当前数据：{this.state.name}</div>
+            <button onClick={e => this.change()}>更改数据</button>
+        </>)
+    }
+}
+```
+
+点击之后，页面更新：
+
+![image-20230807150454145](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071504220.png)
+
+但是控制台输出的结果确实更新之前的数据：
+![image-20230807150522490](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071505524.png)
+
+- 获取更新之后的数据
+
+> 方式一：在setState回调函数中获取
+
+在setState方法里面有两个参数，`setState(更新的state,回调函数)`
+
+```jsx
+ change() {
+        this.setState({
+            name: "海绵宝宝"
+        },() => {
+            console.log(this.state.name)
+        })
+    }
+```
+
+此时拿到的数据就是更新之后的数据：
+
+![image-20230807151434215](https://raw.githubusercontent.com/zml212/FigureBed/main/202308071514257.png)
+
+> 方拾二：通过生命周期获取componentDidUpdate
+
+```jsx
+componentDidUpdate() {
+        console.log(this.state.name);
+    }
+```
+
+同样可以拿到更新之后的数据。
+
+相较于方法一，方法二比方法一更早执行，也就是先执行生命周期，后面再执行setState的回调函数。
+
+**注意：**
+
+setState在以下两种情况时同步的：
+
+1. setTimeout事件中
+2. 原生的DOM事件中
+
+## 8.React的更新机制
+
+- React 的渲染流程: JSX → 虚拟 DOM → 真实 DOM
+
+- React 的更新流程: props/state 改变 → render 函数重新执行→产生新的 DOM 树→新旧 DOM 树进行 diff→ 计算出差异进行更新→更新到真实的 DOM 
