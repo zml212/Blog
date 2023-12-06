@@ -35,6 +35,8 @@ categories: [TypeScript]
 
 当给一个变量设置为any类型，那这个变量就没有任何限制，任何数据类型都可以赋值给这个变量。
 
+当你没有指定类型的时候，并且TypeScript也不能推断出它的类型的时候，这个时候编译器就会将这个变量设置为`any`类型。
+
 不要滥用any类型，这会导致TypeScript的类型检查功能失效。
 
 ### 1.3 unknown类型
@@ -43,7 +45,13 @@ unknown类型比any类型更加安全，所有的数据类型都可以赋值给u
 
 只是unknown类型不可以调用属性和函数。
 
-## 2.接口类型
+
+
+## 2.接口类型和类型兼容性
+
+TypeScript中的接口：用于约束类、对象、函数的契约（标准）
+
+如何进行类型的约束：仅需要在变量、函数的参数、函数的返回值位置写上`:类型`。
 
 ### 2.1 接口基本使用
 
@@ -349,6 +357,32 @@ function fn(name:string,age:number):string{
 
 ![image-20230803094025380](https://raw.githubusercontent.com/zml212/FigureBed/main/202308030940435.png)
 
+- 参数类型注解
+
+声明一个函数的时候，我们可以在定义函数参数的时候，就给这个函数添加一个类型注解，用于表示函数可以接受什么类型的参数：
+
+```typescript
+function fn1(x:number,y:string){
+    console.log(x+y);
+}
+```
+
+当你设置了参数类型限制之后，之后调用该函数的时候，就会进行参数类型判断。
+
+- 返回值类型注解
+
+前面既然有参数类型注解，那么必然就会有函数返回值类型注解，返回值类型注解跟在参数列表的后面，也就是这样：
+
+```typescript
+function fn1(x:number,y:number): number{
+    return x+y;
+}
+```
+
+- 匿名函数
+
+对于匿名函数，TypeScript会自动推断并且指定类型。这个过程就是上下文推断，因为正式从函数出现的上下文中推断出了它应该有的类型。
+
 ### 5.2 对象形式定义
 
 > 使用接口或者type 的方式
@@ -397,6 +431,20 @@ a = "hmbb";
 
 同理这个方法在函数的参数一样可以使用。
 
+在使用联合类型的时候，我们使用这个变量的时候，只能使用这两种类型都有的方法，并入有一个类型是`string|number`，那么使用这个变量的时候，只能使用number和string共有的属性方法。
+
+如果我们想用某个类型的特有属性或者方法，那么我们就需要做类型收窄：
+
+```typescript
+function fn1(x:string|number){
+    if(typeof x === "string"){
+        console.log(x.toUpperCase());
+    }else{
+        console.log(x);
+    }
+}
+```
+
 ### 6.2 交叉类型
 
 > 前面的联合类型是对基础的单个数据类型进行了扩充，交叉数据类型就是将多种数据类型的集合(比如接口)进行扩充。
@@ -419,6 +467,14 @@ const p: Per1 & Stu1 = {
 
 ### 6.3 类型断言
 
+有时候程序员知道某个变量的类型，但是对于TypeScript来说，所以就需要使用类型断言将其指定为一个具体的类型。
+
+```typescript
+const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
+```
+
+
+
 > 类型断言可以使用: 值 as 类型 或者 <类型>值
 >
 > 推荐前面那一种写法，因为在TSX中，<>可能会引起误会。
@@ -433,3 +489,107 @@ const p: Per1 & Stu1 = {
 
 （4）将 any 断言为一个具体的类型
 
+但是在使用断言进行类型转换的时候，类型断言仅允许类型转换为一个更为具体或者更不具体的类型。这样可以防止一些不太正确的转换：
+
+比如将一个数字类型转换为字符串：
+
+```typescript
+let x = 12 as string; // 错误
+```
+
+但是我们需要这种转换，我们可以使用双重断言来解决：
+
+```typescript
+let x = (12 as any) as string;
+```
+
+我们先将其转换为一个更具不具体的类型，然后再转换为一个具体的类型。
+
+## 7. 类型别名|接口
+
+### 7.1 类型别名
+
+对于一些规则，我们可能需要多次使用，这个时候我们就可以使用一个单独的名字来引用它。
+
+这个就是类型别名，就是一个指代任意类型的名字：
+
+```typescript
+type test = {
+    x:number;
+    y:number;
+}
+
+function fn1(p:test){
+    console.log(p.x);
+    console.log(p.y);
+}
+
+fn1({x:100,y:200});
+```
+
+### 7.2 接口
+
+接口是命名对象类型的另一种格式。
+
+比如：
+
+```typescript
+interface Test {
+    x:number;
+    y:number;
+}
+
+function fn1(p:Test){
+    console.log(p.x);
+    console.log(p.y);
+}
+
+fn1({x:100,y:200});
+```
+
+这样看起来类型别名和接口十分相似，在大部分时间，可以任意选择使用，但是他们中间也有着区别：
+
+- 接口的几乎所有特性都可以在`type`中使用，但是类型别名中无法添加新的属性，但是接口是可以扩展的。
+
+接口可以通过继承实现扩展。
+
+## 8. 类型收窄
+
+类型收窄就是对于一个比较宽泛的类型变量，我们经过一些操作，将其判断为一个更加具体的类型。
+
+比如我们有一个函数，这个函数的参数为字符串和数字的联合类型，在函数体里面我们参数的不同数据类型而做出不同的操作。
+
+```typescript
+functionfn1(x:string|number){
+    if(typeof x ==='string'){
+        console.log(x.toUpperCase());
+    }else{
+        console.log(x);
+    }
+}
+```
+
+### 8.1 使用typeof类型保护收窄
+
+在JavaScript中，提供了一种可以判断类型的操作符：`typeof`。
+
+对于一些变量，可能返回以下信息：
+
+- string
+- number
+- bigInt
+- boolean
+- symbol
+- undefined
+- object
+- function
+
+这个操作符对于null返回的并不是`null`而是`object`，这是因为JavaScript历史遗留的问题导致的。
+
+### 8.2 使用boolean收窄
+
+在If判断语句中，我们需要使用Boolean值来进行判断，我们就可以使用`&&`、`||`、`!`来将表达式转换为boolean值。
+
+### 8.3 使用等值收窄
+
+我们可以使用`===`、`!==`、`==`、`!=`来进行判断。
