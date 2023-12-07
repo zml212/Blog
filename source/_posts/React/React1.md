@@ -1503,7 +1503,23 @@ CSS Modules解决了局部作用域的问题。
 
 CSS in JS是一种模式，其中CSS由JavaScript生成而不是在外部定义。
 
-CSS in JS由第三方库提供。
+÷CSS in JS由第三方库提供。
+
+
+目前比较流行的CSS in JS的库有：
+
+- styled-components
+- emption
+- glamorous
 
 通过style-components这个库来实现。
 
+## 12.Ant-Design组件库
+
+ Ant-Design是蚂蚁金服开源的一套React组件库。
+
+在我们使用这个组件库之前，我们需要进行安装：
+
+`npm install antd`注意这里不是ant-design，而是antd。
+
+并且这个组件库的图标是没有继承在Ant-Design这个组件库里面的，所以如果想要使用图标的话，我们需要另外再下载一个库：`ant-design/icon`，使用命令进行安装：`npm insatll @ant-design/icon`。
