@@ -1523,3 +1523,113 @@ CSS in JS是一种模式，其中CSS由JavaScript生成而不是在外部定义�
 `npm install antd`注意这里不是ant-design，而是antd。
 
 并且这个组件库的图标是没有继承在Ant-Design这个组件库里面的，所以如果想要使用图标的话，我们需要另外再下载一个库：`ant-design/icon`，使用命令进行安装：`npm insatll @ant-design/icon`。
+
+## 13.在React中使用axios
+
+### 13.1 axios的基本使用
+
+- axios(config) 
+- axios.request(config)
+- axios.get(url[,config])
+- axios.post(url[,config])
+- axios.put(url[,data[,config]])
+- axios.delete(url[,config])
+- axios.head(url[,config])
+- Axios.patch(url[,data[,config]])
+
+上面的这些请求，其实本质上都是调用的`axios.request(config)`。
+
+例子：
+
+```javascript
+import axios from "axios";
+
+axios({
+  url:"请求的地址",
+  // 如果是get请求，传递的参数
+  parms:{
+		data:"test",
+  }
+  method:"get",// 默认为get请求
+}).then(res => {
+  // 成功结果处理
+}).catch(err => {
+  // 失败处理 
+})
+```
+
+如果想要将这种异步代码，写成同步的形式，我们可以使用async和await的方式来实现。
+
+```javascript
+import axios from "axios";
+
+request = async function (){
+  let result = "";
+  try{
+    result = await axios({
+      url:"请求地址",
+      // 请求方法为post，传递的数据
+      data:{
+        id:12,
+      },
+      method:"post",
+    })
+  }catch(err){
+    // 错误处理
+  }
+  console.log(result);
+}
+```
+
+### 13.2 axios的配置信息
+
+1. 请求配置信息
+
+ 在请求配置信息中，只有url是必须要传的。其他的都是按需配置。
+
+常见的一些配置项：
+
+```javascript
+url:"请求地址", // 配置请求地址
+method:"请求方法",// 配置请求方法
+baseUrl:"", //baseURL会自动加载url的前面，是一个绝对的url
+transformRequest:[function(data,headers) {
+  return data;
+}] // 该配置项主要应用与post，put,patch这几个方法，因为只有这几个方法有data，这个配置项用于在发送请求之前对请求参数做修改
+transformResponse:[function (res){
+  return data;
+}]// 这个方法主要用作对响应的数据进行修改操作
+headers:{}, //主要用于设置请求头相关数据
+params:{}, // get请求的一些参数
+data:{}, //post请求的一些参数
+timeout:1000,// 设置请求超时的时间
+```
+
+### 13.3 响应结构信息
+
+```javascript
+{
+  data:{}, //响应的结果
+  status:200,// 来自服务器的http代码
+  statusText:"OK",// 来自服务器的http状态信息描述
+  headers:{},// 服务器响应的请求头
+  config:{}, // 请求的配置信息
+  request:{}, //请求对象
+}
+```
+
+### 13.4 全局默认配置
+
+在实际的开发中，可能多个请求中，有一些配置是相同的，比如baseUrl,headers。这个时候我们就可以在全局配置中，将这些配置给配置好。
+
+```javascript
+import axios from "axios";
+
+axios.defaults.baseUrl = "https://httpbin.org"; // 全局配置baseUrl
+axios.defaults.timeout = 10000; // 全局配置请求超时时间
+axios.defaults.headers.common["token"] = "token"; // 配置所有请求携带token
+axios.defaults.headers.post["token"] = "token"; // 配置post请求携带token
+```
+
+### 13.5 创建axios新的实例
+
