@@ -2029,3 +2029,78 @@ Redux要求我们在更新数据的时候，需要通过action来更新数据
 所有的数据操作，都必须通过派发(dispatch)action来进行更新
 
 action只是一个普通的JavaScript对象，用来描述更新的类型(type)和内容(content)
+
+在真实的开发中，我们通过定义一个函数来返回一个action
+
+3. reducer
+
+这个函数将action和state联系到一起
+
+reducer是一个纯函数，这个函数做的事情就是将state和action结合起来生成一个新的state。
+
+这个函数接受两个参数，第一个参数就是原来的state，第二个参数就是action。
+
+在函数里面，拿到这个action，并且根据不同的type，来对state做出不同的处理（在这里千万不能修改原来的state），返回一个新的state对象。
+
+### 15.4 Redux三大原则
+
+- 单一数据源：
+
+整个应用程序的state都被存放在一个object tree中，并且这个object tree只存放在Store中
+
+Redux虽然可以创建多个store，但是这样操作的话，会导致后面不利于维护
+
+单一数据源可以让整个应用的state更方便的维护追踪修改
+
+- State只能是只读的
+
+唯一可以修改State的方法就是通过action，不要通过其他方式来修改State
+
+这样可以确保所有的修改都会被几种处理，并且严格按照顺序来执行。
+
+- 使用纯函数来执行修改操作
+
+通过reducer这个纯函数将state和action联系到一起，并返回一个新的state
+
+如果一个应用的reducer过于庞大，我们可以将reducer拆分成多个小的reducers，但是所有的reducer必须为一个纯函数
+
+### 15.5 Redux基本使用
+
+```js
+import { legacy_createStore as createStore } from "redux";
+
+const init = {
+    count: 0,
+}
+
+//  store
+const store = createStore(reducer);
+
+// action
+const action1 = { type: "ADD", num: 12 };
+const action2 = { type: "SUB", num: 2 };
+
+// reducer
+function reducer(state = init, action) {
+    switch (action.type) {
+        case "ADD":
+            let add = action.num;
+            return { ...state, count: state.count + add }
+        case "SUB":
+            let sub = action.num;
+            return { ...state, count: state.count + sub }
+        default:
+            return state;
+    }
+}
+
+// 派发action
+store.dispatch(action1);
+store.dispatch(action2);
+```
+
+上面的代码有几个问题：
+
+1. 所有的东西在都写一个页面里面，在实际的开发中，可能后期不方便维护
+2. action此时是固定的，并不是动态的
+3. action中的type单词容易拼错，我们可以定义为常量
