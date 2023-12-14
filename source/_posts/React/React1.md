@@ -1633,3 +1633,399 @@ axios.defaults.headers.post["token"] = "token"; // 配置post请求携带token
 
 ### 13.5 创建axios新的实例
 
+我们可以使用`axios.create()`来创建多个实例。
+
+并且我们可以在创建实例的时候，进行一些配置初始化。
+
+```javascript
+let request = axios.create({
+  baseUrl:"XXX",
+  timeout:10000,
+  headers:{
+    XX:XX,
+  }
+});
+```
+
+在上面我们在很多地方都进行了配置，那么他们的优先级是怎么样的呢？
+
+- 一级： 请求中的config配置
+- 二级：实例中的defaults配置 
+- 三级：创建实例时的配置
+
+### 13.6 axios拦截器
+
+在axios中，我们可以对网络请求进行拦截：发送请求前可以拦截，得到响应体之后可以拦截。
+
+- 请求拦截
+
+```javascript
+import axios from "axios";
+
+// 传入两个回调函数 第一个回调函数，传入目前发送网络请求的配置信息；第二个回调函数，发送网络请求失败的函数
+axios.interceptors.request.use(config => {
+  // 进行操作（可以对配置信息进行操作），操作完毕之后，记得将最后的config返回
+  return config;
+},err => {
+  // 这里可以做一些网络请求发送失败的操作(很少)
+})
+```
+
+- 响应拦截
+
+```javascript
+import axios from "axios";
+
+// 这个函数一般传入两个回调函数，第一个回调函数，传入网络请求的结果，第二个回调函数，当网络请求发生错误的时候，或者服务器返回错误码
+axios.interceptors.response.use(res => {
+  // 可以在这里对响应体进行一些操作
+  return res.data;
+},err => {
+  if(err && err.response){
+    switch(err.response.status){
+      case 404:
+        console.log("Not Found!");
+        break;
+      case 401:
+        console.log("未授权！");
+        break;
+      default:
+        console.log("请求错误");
+        break;
+    } 
+  }
+  return err;
+})
+```
+
+### 13.7 二次封装
+
+在真实的开发中，一般都会对这种网络请求的库，进行二次封装。
+
+在一个单独的文件(request.js)中，进行封装：
+
+```javascript
+import axios from "axios";
+
+let instance = axios.create({
+  baseUrl:"https://httpbin.org";
+  timeout:10000;
+});
+
+// 请求拦截
+instance.interceptors.request.use(config => {
+  // 进行操作（可以对配置信息进行操作），操作完毕之后，记得将最后的config返回
+  return config;
+},err => {
+  // 这里可以做一些网络请求发送失败的操作(很少)
+});
+
+// 响应拦截
+instance.interceptors.response.use(res => {
+  // 可以在这里对响应体进行一些操作
+  return res.data;
+},err => {
+  if(err && err.response){
+    switch(err.response.status){
+      case 404:
+        console.log("Not Found!");
+        break;
+      case 401:
+        console.log("未授权！");
+        break;
+      default:
+        console.log("请求错误");
+        break;
+    } 
+  }
+  return err;
+})；
+
+// 向外导出这个axios实例
+export default instance;
+```
+
+ ## 14. React-transition-group
+
+在我们开发中，想要给某个组件添加显示和消失的过渡动画，可以增加更好的用户体验。
+
+在React中，为我们提供了一个库来实现这些动画：React-Transition-Group
+
+这个库可以帮助我们方便的实现组件的入场和离场的动画，使用时需要进行额外的安装。
+
+```shell
+npm install react-transition-group -s
+```
+
+### 14.1 React-transition-group主要的四个组件
+
+- Transition（不经常使用）
+
+这个组件是一个与平台无关的组件，它不一定要结合CSS
+
+- CSSTransition
+
+我们通常使用这个组件来实现过渡的动画效果
+
+- SwitchTransition
+
+当两个组件显示与隐藏切换的时候，使用这个组件
+
+- TransitionGroup
+
+将多个组件包裹在这里面，一般用于列表中的元素动画
+
+### 14.2 CSSTransition基本使用
+
+CssTransition在执行的过程中，有三种状态：appear(初次加载)、enter（进入/显示动画）、exit（退出/隐藏动画）
+
+这三种状态再不同时期，有不同的样式;
+
+- 开始时期：-appear、-enter、-exit
+- 执行动画时期：-appear-active、-enter-active、-exit-active
+- 执行结束：-appear-done、-enter-done、-exit-done
+
+使用：
+
+```jsx
+import {PureComponet} from "react";
+import {CSSTransition} from "react-transition-group";
+
+export default class CssTransitionDemo extends PureComponent{
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      isShow:true, 
+    }
+  }
+  render(){
+    const {isShow} = this.state;
+    return (
+    	<div>
+        <button onClick={e => this.setState({isShow:!isShow})}>切换</button>
+      	<CSSTransition in={isShow} classNames="demo" timeout={300} unmountOnExit={true} appear
+          onEnter={el => console.log("开始进入状态") }
+          onEntering={el => console.log("正在进入状态") }
+          onEntered={el => console.log("进入完成状态") }
+          onExit={el => console.log("开始退出状态") }
+          onExiting={el => console.log("正在退出状态") }
+          onExited={el => console.log("退出完成状态") }
+          >
+  				<h2>这里放的是需要显示与隐藏的组件</h2>
+				</CSSTransition>
+      </div>
+    )
+  }
+}
+```
+
+CSSTransition中有几个常见属性：
+
+- `in`我们这里通过设置一个布尔值，来控制被包裹组件的显示与隐藏（true:显示，flase:隐藏）。
+
+- `classNames`通过这个属性我们可以为这个组件设置一个别名，方便我们在后续的CSS中，书写有关于和这个组件的一些样式
+
+```css
+// 进入之前
+.demo-enter,demo-appear{
+  opacity:0;
+}
+
+// 正在进入
+.demo-enter-active,demo-appear{
+  opacity:1;
+  transition:opacity 300ms;
+}
+
+// 进入完成之后
+.demo-enter-done,demo-appear-done{
+  
+}
+
+// 退出动画之前
+.demo-exit{
+  opacity:1;
+}
+
+// 退出动画执行
+.demo-exit-active{
+  opacity:0;
+  transition:opacity 300ms;
+}
+
+// 退出动画完成之后
+.demo-exit-done{
+  
+}
+
+// 最后将这个文件在全局文件中引入即可
+```
+
+- `timeout`：该属性设置class的添加删除时间
+
+- `unmountOnExit`：这个属性的值是一个布尔值，用来控制动画退出完成之后是否将组件卸载掉（true:卸载,false:不卸载），默认情况为false，也就是不卸载。
+
+- `appear`：设置组件初次加载的动画
+
+CSSTransition中有几个常见声明周期钩子：
+
+这几个生命周期钩子都会传过来一个元素，这个元素就是被CSSTransition包裹的元素。
+
+- `onEnter`：此时钩子在进入动画快要开始执行时执行。
+- `onEntering`：此时钩子在进入动画在开始执行的那一瞬间开始执行
+- `onEntered`：此时钩子在进入动画结束之后执行
+- `onExit`：此时钩子在退出动画快要开始执行时执行。
+- `onExiting`：此时钩子在退出动画在开始执行的那一瞬间开始执行
+- `onExited`：此时钩子在退出动画结束之后执行
+
+### 14.3 SwitchTransition基本使用
+
+这个组件用于实现两个组件之间的动画切换效果。
+
+SwitchTransition中有一个重要的属性：mode
+
+- 值1：`in-out`：表示组件先进入，旧组件再移除
+- 值2：`out-in`：表示旧组件先移除，新组件再进入(默认值)
+
+使用：
+
+```jsx
+import {PureComponet} from "react";
+import {CSSTransition,SwitchTransition} from "react-transition-group";
+
+export default class SwitchTransitionDemo extends PureComponent{
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      isOn:true,
+    }
+  }
+  
+  render(){
+    const {isOn} = this.state;
+    return(
+    	<div>
+      	<SwitchTransition mode="in-out">
+        	<CSSTransition key={isOn?"on":"off"} classNames="switch" >
+          	<button onClick={e => this.setState({isOn:!isOn,})} timeout={300}>{isOn?"on":"off"}</button>
+          </CSSTransition>
+        </SwitchTransition>
+      </div>
+    )
+  }
+}
+```
+
+此时我们在CSSTransition中添加的就不是`in`了，而是一个`key`，我们根据不同情况将其设置为不同的值。
+
+书写CSS样式：
+
+```css
+.switch-enter{
+	opacity:0;
+}
+
+.switch-enter-active{
+	opacity:1;
+  transition:opacity 300ms;
+}
+
+.switch-exit{
+	opacity:1;
+}
+
+.switch-exit-active{
+  opacity:0;
+  transition:opacity 300ms;
+} 
+```
+
+### 14.4 TransitionGroup基本使用
+
+使用：
+
+```jsx
+import {PureComponent} from "react";
+import {CSSTransition,TransitionGroup} from "react-transition-group";
+
+export default class TransitionGroupDemo extends PureComponet{
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      names:["hmbb","pdx","xlb"]
+    }
+  }
+  
+  render(){
+    return (
+    	<TransitionGroup>
+      	{this.state.names.map((item,index) = {
+          return (
+          	<CSSTransition  key={index} timeout={500} classNames="item">
+            	<div>{item }</div>
+            </CSSTransition>
+          )
+        })}
+        <button onClick={e => this.handleClick(e)}>添加数据</button>
+      </TransitionGroup>
+    )
+  }
+  
+  handleClick = () => {
+    this.setState = ({
+      names:[...this.state.names,"qwe"],
+    })
+	}
+}
+```
+
+设置CSS样式：
+
+```css
+.item-enter{
+  opacity:0;
+}
+
+.item-enter-active{
+  opacity:1;
+  transition:opacity 500ms;
+}
+```
+
+## 15. Redux
+
+### 15.1 JavaScript纯函数
+
+只要是函数式编程（JavaScript），就会有这样一个概念：纯函数。
+
+一个函数只要符合下面的情况，那他就是纯函数：
+
+- 对于确定的输入，输出的值是固定的。（比如输入1，输出的值只有一个固定的值2，不会有其他值输出）
+- 在这个函数的执行过程中，不会产生影响外部的副作用，比如改变外部变量的值，或者触发外部什么事件。
+
+在React中，我们不论是使用函数还是class来声明组件的时候，都必须要像纯函数一样，保证它们的props不被改变。
+
+### 15.2 为什么需要Redux
+
+在React中，它帮我们解决了DOM填充的问题，也就是页面渲染，但是在开发中的state还是交给开发者自己来维护的。
+
+而Redux就是一个帮助我们管理state的容器，提供了一种可预测的状态管理。
+
+并且Redux不仅可以在React中使用，在其他的页面框架中也可以使用，比如Vue或者jQuery。
+
+### 15.3 Redux的核心理念
+
+1. Store:
+
+对于Redux中存放的数据，我们一般放在Store中
+
+2. action
+
+Redux要求我们在更新数据的时候，需要通过action来更新数据
+
+所有的数据操作，都必须通过派发(dispatch)action来进行更新
+
+action只是一个普通的JavaScript对象，用来描述更新的类型(type)和内容(content)
