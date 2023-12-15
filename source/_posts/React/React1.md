@@ -2104,3 +2104,356 @@ store.dispatch(action2);
 1. 所有的东西在都写一个页面里面，在实际的开发中，可能后期不方便维护
 2. action此时是固定的，并不是动态的
 3. action中的type单词容易拼错，我们可以定义为常量
+
+### 15.6 React中使用Redux
+
+在实际的开发中，我们通常会将上面的代码拆分为几个页面：
+
+- actionCreateors：负责action函数
+- constants：负责对action中的type进行导出
+- index：store的主文件
+- reducers：负责reducer
+
+其中index.js文件：
+
+```javascript
+import { legacy_createStore as createStore } from "redux";
+import reducer from "./reducer"
+
+//  store
+const store = createStore(reducer);
+
+// 导出store
+export default store;
+```
+
+在这里引入了render:
+
+```javascript
+import * as c from "./constants"
+
+// initState
+const initState = {
+    count: 0,
+}
+
+
+// reducer
+export default function reducer(state = initState, action) {
+    switch (action.type) {
+        case c.ADD:
+            let add = action.num;
+            return { ...state, count: state.count + add }
+        case c.SUB:
+            let sub = action.num;
+            return { ...state, count: state.count - sub }
+        case c.RESET:
+            return { ...state, count: 0 }
+        default:
+            return state;
+    }
+}
+```
+
+在reducer中，有一个默认的state，这就是单一数据源，store操作的数据都是在store里面的数据。
+
+其中这里引入了constants:
+
+```javascript
+const ADD = "ADD";
+const SUB = "SUB";
+const RESET = "RESET";
+
+export {
+    ADD,
+    SUB,
+    RESET,
+}
+```
+
+这里面定义了一些关于action中type的变量，方便后期书写，以防写错。
+
+页面代码：
+
+```jsx
+import { PureComponent } from "react";
+// 引入redux
+import store from "../../store/index";
+import { addAction, subAction, resetAction } from "../../store/actionCreators";
+
+export default class LearnRedux extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: store.getState().count,
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <div>值：{this.state.count}</div>
+                <button onClick={e => this.handleAdd(5)}>+5操作</button>
+                <button onClick={e => this.handleSub(1)}>-1操作</button>
+                <button onClick={e => this.handleReset()}>重置操作</button>
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        // 监听store变化
+        this.unsubscribe = store.subscribe(() => {
+            // console.log(store.getState());
+            this.setState({
+                count: store.getState().count,
+            })
+        })
+    }
+
+    componentWillUnmount() {
+        // 取消订阅监听store
+        this.unsubscribe();
+    }
+
+    handleAdd(num) {
+        let action = addAction(num);
+        store.dispatch(action);
+    }
+
+    handleSub(num) {
+        let action = subAction(num);
+        store.dispatch(action);
+    }
+
+    handleReset() {
+        let action = resetAction();
+        store.dispatch(action);
+    }
+} 
+```
+
+在上面的index.js文件，我们将store导出，在页面文件中，我们将store导入，并且在事件处理函数中，通过store.dispatch使用。在这个页面中，我们还引入了一个actionCreatetors文件：
+
+```javascript
+import * as c from "./constants";
+
+function addAction(num) {
+    return {
+        type: c.ADD,
+        num,
+    }
+}
+
+function subAction(num) {
+    return {
+        type: c.SUB,
+        num,
+    }
+}
+
+function resetAction() {
+    return {
+        type: c.RESET,
+    }
+}
+
+export {
+    addAction,
+    subAction,
+    resetAction,
+}
+```
+
+这个文件中的函数，就负责返回响应的action。
+
+所以在页面文件中，我们调用这些方法，然后得到一个返回值，调用store.dispatch，并且在`componentDidMount`这个生命周期里面，监听store的变化，将值动态赋值给state。然后渲染到页面上。
+
+### 15.7 react-redux库
+
+安装react-redux库：
+
+```shell
+npm install react-redux
+```
+
+在React中使用：
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import store from "./store/index";
+import { Provider } from "react-redux";
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+```
+
+在index.js中，我们在这里引入store和react-redux中的Provider，并且施一公Provider将App组件包裹起来，然后在Provider中传入一个store。这个store将会在后面被使用。
+
+在组件代码中：
+
+```jsx
+import React from "react";
+import { connect } from "react-redux"
+import {
+    addAction,
+    subAction,
+    resetAction,
+} from "../../store/actionCreators"
+
+function LearnRedux(props) {
+    return (
+        <div>
+            <div>值：{props.count}</div>
+            <button onClick={e => props.handleSub(5)}>-5操作</button>
+            <button onClick={e => props.handleAdd(1)}>+1操作</button>
+            <button onClick={e => props.handleReset()}>重置操作</button>
+        </div>
+    )
+}
+
+const mapStateToProps = state => {
+    return {
+        count: state.count,
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        handleAdd: function (num) {
+            dispatch(addAction(num));
+        },
+        handleSub: function (num) {
+            dispatch(subAction(num));
+        },
+        handleReset: function () {
+            dispatch(resetAction());
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearnRedux);
+```
+
+在这里我们引入React-redux中的connect，这个就相当于之前我们自己封装的content。
+
+### 15.8 Redux中的异步操作
+
+在Redux中，我们应该将网络请求的数据其实也是属于状态管理的一部分，比较好的一种方式就是交给redux来处理。
+
+平时我们发送网络请求，一般是在componentDidMount中进行，但是我们要将这个数据交给Redux进行管理，所以我们一般将网络请求放在dispatch action中进行请求。
+
+但是在Redux中如何进行异步的请求呢，这个时候就需要使用Redux中间件。
+
+这个中间件可以在dispatch的action和reducer之间，扩展一下自己的代码。
+
+官网推荐使用redux-thunk来实现异步网络请求。
+
+在之前我们的代码中，action一直都只能是一个对象，但是在redux-thunk中，action可以是一个函数
+
+代码：
+
+在组件中：
+
+```jsx
+import React, { PureComponent } from "react";
+import { connect } from "react-redux"
+import {
+    getDataAction
+} from "../../store/actionCreators"
+
+class LearnRedux extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: {},
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <div>thunk：{JSON.stringify(this.props.data)}</div>
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        this.props.getData();
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        data: state.data,
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        getData() {
+            dispatch(getDataAction)
+        }
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearnRedux);
+```
+
+这里我们在使用dispatch的时候，我们传入的是一个函数，并不是一个函数的调用，并不是传入的一个对象。
+
+然后actionCreators中：
+
+```javascript
+function setDataAction(data) {
+    return {
+        type: c.SETDATA,
+        data,
+    }
+}
+
+// redux-thunk
+function getDataAction(dispatch, getState) {
+    console.log(dispatch, getState);
+    axios({
+        url: "https://httpbin.org/post",
+        method: 'post'
+    }).then(res => {
+        console.log(res.data)
+        dispatch(setDataAction(res.data))
+    })
+}
+
+export {
+    getDataAction,
+}
+```
+
+我们最后导出的是getDataAction，在getDataAction中，我们通过axios进行网络请求，然后拿到结果之后再调用dispatch，此时我们传入的就是一个函数的调用，也就是这个函数返回的对象。
+
+然后我们在reducer中进行相关操作:
+
+```javascript
+// reducer
+export default function reducer(state = initState, action) {
+    switch (action.type) {
+        case c.SETDATA:
+            return { ...state, data: action.data }
+        default:
+            return state;
+    }
+}
+```
+
+这就是redux-thunk的基本用法。
+
+### 15.9 redux devtools
+
+这个插件可以帮助我们在开发的过程中，更方便的对redux进行调试。
